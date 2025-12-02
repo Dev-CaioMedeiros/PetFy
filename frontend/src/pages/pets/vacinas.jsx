@@ -60,12 +60,6 @@ export default function Vacinas() {
          onClick={() => alert("Pacote aplicado!")}>
           Aplicar Pacote</button>
         </div>
-
-        <img
-          src="src/assets/pet_vacina.png"
-          alt="promo"
-          className="promo-img"
-        />
       </div>
 
       {/* Busca */}
