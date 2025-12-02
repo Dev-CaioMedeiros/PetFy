@@ -50,18 +50,11 @@ app.register_blueprint(passeio_routes, url_prefix="/api")
 
 
 
-# 🚀 start
+
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
         print("📦 Tabelas criadas/verificadas!")
+    app.run(host="0.0.0.0", port=int(os.getenv("PORT", 5000)))
 
-        # inserir clínica default, se não existir
-        if not Clinica.query.first():
-            nova = Clinica(nome="Clínica Petfy")
-            db.session.add(nova)
-            db.session.commit()
-            print("🏥 Clínica padrão criada!")
-
-app.run(host="0.0.0.0", port=int(os.getenv("PORT", 5000)))
 
