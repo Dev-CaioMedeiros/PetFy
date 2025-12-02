@@ -1,0 +1,84 @@
+.ph-page {
+  min-height: 100vh;
+  background: #fff7ec;
+  padding: 20px;
+  font-family: "Poppins", sans-serif;
+  color: #3d2c2c;
+}
+
+.ph-back {
+  border: none;
+  background: transparent;
+  color: #c0841c;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: .25s;
+}
+
+.ph-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.ph-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ph-card {
+  background: white;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ph-card h3 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.ph-card p {
+  margin: 2px 0 4px;
+  font-size: 14px;
+  color: #6a5747;
+}
+
+.ph-card span {
+  font-size: 13px;
+  color: #8a6e3c;
+}
+
+.ph-del {
+  color: #d65d5d;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.ph-del:hover {
+  transform: scale(1.2);
+}
+
+.ph-empty {
+  text-align: center;
+  margin-top: 20px;
+  color: #8a6e3c;
+  font-weight: 500;
+}
+
+.ph-passeador {
+  margin: 2px 0 4px;
+  font-size: 14px;
+  color: #3d2c2c;
+}
+

@@ -1,0 +1,129 @@
+.h-page {
+  min-height: 100vh;
+  background: #fff7ec;
+  padding: 20px;
+  font-family: "Poppins", sans-serif;
+  color: #4e2c00;
+}
+
+/* back */
+.h-back {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  color: #c0841c;
+  cursor: pointer;
+}
+
+/* title */
+.h-title {
+  text-align: center;
+  font-weight: 700;
+  font-size: 28px;
+  margin: 18px 0 24px;
+}
+
+/* list wrapper */
+.h-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* card */
+.h-card {
+  background: white;
+  border-radius: 16px;
+  padding: 18px 20px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+  border: 1px solid #ffe9c8;
+  transition: .25s;
+}
+
+.h-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 28px rgba(0,0,0,0.1);
+}
+
+/* header row */
+.h-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.h-card-top h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* excluir */
+.h-trash {
+  cursor: pointer;
+  color: #bd3030;
+  transition: .2s;
+}
+
+.h-trash:hover {
+  transform: scale(1.2);
+  color: red;
+}
+
+/* data */
+.h-date {
+  margin: 4px 0 2px;
+  color: #7a5d3b;
+  font-size: 15px;
+}
+
+/* pet */
+.h-pet {
+  margin-top: 3px;
+  font-size: 15px;
+}
+
+.h-pet b {
+  color: #c0841c;
+}
+
+/* vazio */
+.h-empty {
+  text-align: center;
+  margin-top: 40px;
+  color: #967b59;
+}
+
+/* botão inicio */
+.h-center {
+  display: flex;
+  justify-content: center;
+  margin-top: 26px;
+}
+
+.h-home-btn {
+  background: #ffb84c;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 12px;
+  font-weight: 700;
+  color: white;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.h-home-btn:hover {
+  background: #ff9907;
+  transform: translateY(-2px);
+}
+
+/* erro */
+.h-erro {
+  text-align: center;
+  color: #c93434;
+  font-weight: 600;
+  margin-bottom: 14px;
+}

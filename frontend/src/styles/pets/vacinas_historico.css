@@ -1,0 +1,123 @@
+.vh-page {
+  min-height: 100vh;
+  background: #fff7ec;
+  padding: 20px;
+  font-family: "Poppins", sans-serif;
+  color: #3d2c2c;
+}
+
+/* back */
+.vh-back {
+  background: transparent;
+  border: none;
+  color: #c0841c;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+/* title */
+.vh-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 22px;
+}
+
+/* CARD */
+.vh-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 18px 20px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+  border: 1px solid #f1e7d8;
+  transition: .25s ease;
+  width: 100%;
+  min-height: 130px;
+  margin-bottom: 16px;
+}
+
+.vh-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+/* header */
+.vh-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* title */
+.vh-top h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #423329;
+  flex: 1;
+}
+
+/* trash */
+.vh-trash {
+  color: #cc4a4a;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.vh-trash:hover {
+  color: #ff0000;
+  transform: scale(1.2);
+}
+
+/* date */
+.vh-date {
+  font-size: 14px;
+  color: #ab8e70;
+  margin-top: 4px;
+}
+
+/* pet */
+.vh-pet {
+  margin-top: 8px;
+  font-size: 15px;
+  color: #4c3b2e;
+}
+
+/* empty */
+.vh-empty {
+  text-align: center;
+  color: #a1876b;
+  margin-top: 30px;
+}
+
+/* voltar inicio */
+.vh-home {
+  display: block;
+  margin: 25px auto 10px;
+  padding: 14px 28px;
+  background: #ffb84c;
+  border: none;
+  border-radius: 14px;
+  font-weight: 600;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.vh-home:hover {
+  background: #ff9907;
+  transform: translateY(-2px);
+}
+
+/* footer */
+.home-footer-text {
+  text-align: center;
+  font-size: 13px;
+  margin-top: 30px;
+  color: #a1876b;
+}

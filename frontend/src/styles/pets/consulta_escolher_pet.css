@@ -1,0 +1,90 @@
+.cep-page {
+  min-height: 100vh;
+  background: #fff7ec;
+  padding: 22px;
+  font-family: "Poppins", sans-serif;
+  color: #4e2c00;
+}
+
+/* back button */
+.cep-back {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  color: #c0841c;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+/* title */
+.cep-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  margin: 18px 0 26px;
+}
+
+/* grid */
+.cep-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  align-items: center;
+}
+
+/* card */
+.cep-card {
+  width: 90%;
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+  text-align: center;
+  cursor: pointer;
+  transition: .25s ease;
+}
+
+.cep-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+}
+
+/* empty */
+.cep-empty {
+  text-align: center;
+  margin-top: 20px;
+  color: #7e5e3b;
+  font-weight: 600;
+}
+
+.cep-card {
+  background: #fff;
+  border-radius: 18px;
+  padding: 22px 14px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+  transition: .25s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.cep-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ffe1b2;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.cep-name {
+  font-weight: 600;
+  font-size: 16px;
+  text-align: center;
+}

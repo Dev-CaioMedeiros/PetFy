@@ -1,0 +1,115 @@
+.pa-page {
+  min-height: 100vh;
+  background: #fff7ec;
+  padding: 20px;
+  font-family: "Poppins", sans-serif;
+  color: #3d2c2c;
+}
+
+.pa-back {
+  border: none;
+  background: transparent;
+  color: #c0841c;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: .25s;
+}
+
+.pa-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.pa-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 22px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.07);
+  margin-bottom: 30px;
+} 
+
+.pa-row:last-child {
+  margin-bottom: 0;
+}
+
+.pa-row {
+  margin-bottom: 16px;
+}
+
+.pa-info-box {
+  background: white;
+  border-radius: 16px;
+  padding: 22px;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.pa-info-box p {
+    margin: 0;
+    font-size: 13px;
+    color: #7a6346;
+}
+
+.pa-info-box h3 {
+    margin: 4px 0 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #3d2c2c;
+}
+
+.pa-label {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.pa-input {
+  background: #fff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 14px;
+  padding: 12px 14px;
+  border: 1.8px solid  #ff9e9e;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+  margin-bottom: 18px;
+}
+
+.pa-input input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 15px;
+  background: transparent;
+}
+
+.pa-btn {
+  background: #ffa600;
+  color: white;
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 14px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: .25s;
+}
+
+.pa-btn:hover {
+  opacity: .85;
+}
+
+.pa-erro {
+  text-align: center;
+  margin-top: 14px;
+  font-size: 15px;
+  color: #c92a2a;
+  font-weight: 500;
+}

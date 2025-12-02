@@ -1,0 +1,151 @@
+.agendar-container {
+  min-height: 100vh;
+  background: #fff7ec;
+  padding: 22px;
+  font-family: "Poppins", sans-serif;
+  color: #4e2c00;
+}
+
+/* botão voltar */
+.agendar-back {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  color: #c0841c;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+/* título */
+.agendar-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  margin: 18px 0 26px;
+}
+
+/* card principal */
+.agendar-card {
+  background: #fffbf3;
+  border-radius: 18px;
+  padding: 18px 20px;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.06);
+  margin-bottom: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.agendar-row p {
+  margin: 0;
+  font-size: 13px;
+  color: #7b6345;
+}
+
+.agendar-row h3 {
+  margin: 2px 0 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #3c260a;
+}
+
+/* label input */
+.agendar-label {
+  font-size: 14px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* input box */
+.agendar-input-box {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1.8px solid #ff9e9e;
+  padding: 12px 14px;
+  margin-bottom: 22px;
+  transition: 0.2s ease;
+}
+
+.agendar-input-box:focus-within {
+  border-color: #ff4c4c;
+  box-shadow: 0 0 0 3px rgba(255, 184, 76, 0.25);
+}
+
+/* erro na borda */
+.agendar-input-error {
+  border-color: #ff4c4c !important;
+  box-shadow: 0 0 0 3px rgba(255, 100, 100, 0.25) !important;
+}
+
+.agendar-icon {
+  margin-right: 10px;
+  color: #c0841c;
+}
+
+.agendar-input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 15px;
+  background: none;
+  color: #4e2c00;
+}
+
+/* placeholder */
+.agendar-input::placeholder {
+  color: #b8a08a;
+  opacity: 1;
+}
+
+/* botão */
+.agendar-btn {
+  width: 100%;
+  padding: 16px;
+  background: #ffb84c;
+  border: none;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 16px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: 0.25s ease;
+  margin-bottom: 12px;
+  letter-spacing: 0.5px;
+}
+
+.agendar-btn:hover {
+  background: #ff9907;
+  transform: translateY(-2px);
+}
+
+.agendar-btn.disabled {
+  background: #ffd9a3;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* mensagens */
+.agendar-msg {
+  text-align: center;
+  font-weight: 600;
+  font-size: 15px;
+  margin-top: 6px;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+/* estados de mensagem */
+.agendar-msg.sucesso {
+  color: #256f00;
+  background: #e9ffd9;
+}
+
+.agendar-msg.erro {
+  color: #7a0000;
+  background: #ffdede;
+}

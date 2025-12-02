@@ -1,0 +1,204 @@
+/* ===== Página ===== */
+.vac-page {
+  min-height: 100vh;
+  background: #fff7ec;
+  padding: 20px;
+  font-family: "Poppins", sans-serif;
+  color: #3d2c2c;
+}
+
+/* ===== Voltar ===== */
+.vac-back {
+  border: none;
+  background: transparent;
+  color: #c0841c;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: .25s;
+}
+
+.vac-back:hover {
+  transform: translateX(-4px);
+  opacity: .85;
+}
+
+/* ===== Título ===== */
+.vac-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+/* ===== Promo Box ===== */
+.vac-promo-box {
+  background: #fccfb6;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 10px 25px rgba(255, 193, 70, 0.25);
+}
+
+.promo-text h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.promo-text p {
+  margin: 3px 0 12px;
+  font-size: 14px;
+}
+
+.promo-btn {
+  background: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: .25s;
+}
+
+.promo-btn:hover {
+  transform: translateY(-3px);
+}
+
+.promo-img {
+  width: 95px;
+  mix-blend-mode: multiply;
+}
+
+/* ===== Busca ===== */
+.vac-search-box {
+  background: #fff;
+  display: flex;
+  align-items: center;
+  border-radius: 14px;
+  padding: 12px 14px;
+  border: 1.5px solid #f0e0c0;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+  margin-bottom: 18px;
+}
+
+.vac-search-box input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 15px;
+  background: transparent;
+}
+
+.search-icon {
+  margin-right: 8px;
+  color: #c5a878;
+}
+
+/* ===== Subtítulo ===== */
+.vac-subtitle {
+  margin: 10px 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* ===== Cards Grid ===== */
+.vac-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+/* ===== Card ===== */
+.vac-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 18px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  box-shadow: 0 5px 14px rgba(0,0,0,0.06);
+  cursor: pointer;
+  transition: .25s ease;
+}
+
+.vac-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.vac-icon {
+  font-size: 32px;
+}
+
+.vac-card-title {
+  font-weight: 600;
+  text-align: center;
+}
+
+.vac-arrow {
+  color: #bfa37a;
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+}
+
+/* ===== Empty ===== */
+.vac-empty {
+  text-align: center;
+  margin-top: 18px;
+  color: #8f745b;
+  font-weight: 500;
+}
+
+/* ===== Histórico ===== */
+.vac-historico-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  justify-content: space-between;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  margin-bottom: 18px;
+  transition: .2s ease;
+  justify-content: center;
+  text-align: center;
+  position: relative
+}
+
+.vac-historico-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+.vac-historico-card h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #3b2d22;
+}
+
+.vac-historico-card p {
+  margin: 2px 0 0 0;
+  font-size: 14px;
+  color: #6a5747;
+}
+
+.vac-historico-icon {
+    color: #c0841c;
+}
+
+.vac-historico-arrow {
+   color: #c0841c;
+}

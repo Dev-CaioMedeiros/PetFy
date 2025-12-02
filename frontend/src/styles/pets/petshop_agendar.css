@@ -1,0 +1,141 @@
+/* ===== PAGE ===== */
+.psa-container {
+  min-height: 100vh;
+  background: #fff7ec;
+  padding: 22px;
+  font-family: "Poppins", sans-serif;
+  color: #4e2c00;
+}
+
+/* ===== BACK BTN ===== */
+.psa-back {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  color: #c0841c;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+/* ===== TITLE ===== */
+.psa-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 800;
+  margin: 18px 0 26px;
+  color: #3d2c2c;
+}
+
+/* ===== CARD ===== */
+.psa-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 22px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.07);
+  margin-bottom: 30px;
+}
+
+.psa-row {
+  margin-bottom: 16px;
+}
+
+.psa-row:last-child {
+  margin-bottom: 0;
+}
+
+.psa-card p {
+  margin: 0;
+  font-size: 13px;
+  color: #7a6346;
+}
+
+.psa-card h3 {
+  margin: 4px 0 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #3d2c2c;
+}
+
+/* ===== LABEL ===== */
+.psa-label {
+  font-size: 15px;
+  margin-bottom: 10px;
+  display: block;
+  font-weight: 600;
+}
+
+/* ===== INPUT BOX ===== */
+.psa-input-box {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 16px;
+  border: 1.8px solid  #ff9e9e;
+  padding: 12px 16px;
+  margin-bottom: 22px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.05);
+  transition: .2s;
+}
+
+.psa-input-box.psa-empty {
+  border-color: #ff9e9e;
+}
+
+/* ===== ICON ===== */
+.psa-icon {
+  margin-right: 12px;
+  color: #c0841c;
+}
+
+/* ===== INPUT ===== */
+.psa-input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 15px;
+  background: none;
+  color: #3d2c2c;
+}
+
+/* ===== BUTTON ===== */
+.psa-btn {
+  width: 100%;
+  padding: 16px;
+  background: #ffb84c;
+  border: none;
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 17px;
+  color: #fff;
+  cursor: pointer;
+  transition: .25s ease;
+  box-shadow: 0 8px 18px rgba(255, 184, 76, 0.35);
+}
+
+.psa-btn:hover {
+  background: #ff9907;
+  transform: translateY(-2px);
+}
+
+.psa-btn.disabled {
+  background: #ffc785;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ===== MESSAGE ===== */
+.psa-msg {
+  text-align: center;
+  font-weight: 600;
+  font-size: 15px;
+  margin-top: 14px;
+  color: #2f6f00;
+}
+
+/* ERRO STYLE */
+.psa-msg:has(> span) {
+  color: #b43a3a;
+}

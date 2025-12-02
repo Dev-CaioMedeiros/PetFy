@@ -1,0 +1,127 @@
+.login-container {
+  min-height: 100vh;
+  background: #fff7ed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+  padding: 20px;
+  text-align: center;
+}
+ 
+.login-illustration {
+  width: 300px;
+  margin-bottom: 1.5rem;
+}
+
+.login-title {
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: #1f1f1f;
+}
+
+.login-subtitle {
+  color: #5c5c5c;
+  margin-bottom: 25px;
+  font-size: 0.95rem;
+}
+
+.login-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 30px;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  background: #fff9f3;
+  border: 1px solid #f8d48b;
+  border-radius: 9999px;
+  padding: 10px 15px;
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+}
+
+.input-group:focus-within {
+  box-shadow: 0 0 0 3px #f9b94a40;
+}
+
+.input-icon {
+  color: #a1a1a1;
+}
+
+.input-group input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  margin-left: 8px;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.toggle-password {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #9b9b9b;
+  transition: color 0.2s;
+}
+
+.toggle-password:hover {
+  color: #f9b94a;
+}
+
+.login-button {
+  background: linear-gradient(90deg, #f9b94a, #f7a930);
+  color: white;
+  font-weight: 600;
+  border: none;
+  width: 100%;
+  padding: 10px;
+  border-radius: 9999px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(249, 185, 74, 0.4);
+  transition: all 0.3s ease;
+}
+
+.login-button:hover {
+  background: linear-gradient(90deg, #f7a930, #f9b94a);
+}
+
+.login-footer {
+  margin-top: 15px;
+  font-size: 0.9rem;
+  color: #5f5f5f;
+}
+
+.login-link {
+  color: #f9b94a;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.login-link:hover {
+  text-decoration: underline;
+}
+
+.login-footer-text {
+  margin-top: 1.5rem;
+  font-size: 0.75rem;
+  color: #999;
+}
+
+a.cadastro-link {
+  color: #d97706;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+a.cadastro-link:hover {
+  text-decoration: underline;
+}

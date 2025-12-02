@@ -1,0 +1,101 @@
+/* PAGE */
+.vacinas-page {
+  min-height: 100vh;
+  background: #fff7ec;
+  padding: 24px;
+  font-family: "Poppins", sans-serif;
+  color: #4e2c00;
+}
+
+/* BACK BUTTON */
+.v-back {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  color: #c0841c;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 15px;
+  margin-bottom: 10px;
+  transition: .25s;
+}
+
+.v-back:hover {
+  transform: translateX(-4px);
+  opacity: .85;
+}
+
+/* TITLE */
+.v-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  margin: 20px 0 30px;
+}
+
+/* GRID */
+.pet-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+/* CARD */
+.pet-card {
+  background: #fff;
+  border-radius: 18px;
+  padding: 22px 14px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+  transition: .25s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.pet-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 26px rgba(0,0,0,0.12);
+}
+
+/* IMAGE */
+.pet-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ffe1b2;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+/* NAME */
+.pet-name {
+   font-weight: 600;
+  font-size: 16px;
+  text-align: center;
+}
+
+/* EMPTY */
+.v-empty {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 15px;
+  color: #8a6e3c;
+}
+
+/* RESPONSIVE */
+@media (min-width: 600px) {
+  .pet-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 900px) {
+  .pet-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}

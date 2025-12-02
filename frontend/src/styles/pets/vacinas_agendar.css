@@ -1,0 +1,144 @@
+.vaga-container {
+  min-height: 100vh;
+  background: #fff7ec;
+  padding: 22px;
+  font-family: "Poppins", sans-serif;
+  color: #4e2c00;
+}
+
+.vaga-back {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  color: #c0841c;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.vaga-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  margin: 18px 0 26px;
+}
+
+/* CARD */
+.vaga-card {
+  background: #fffbf3;
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  margin-bottom: 24px;
+}
+
+.vaga-card p {
+  margin: 0;
+  font-size: 14px;
+  color: #6d563a;
+}
+
+.vaga-card h3 {
+  margin: 4px 0 12px 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* LABEL */
+.vaga-label {
+  font-size: 14px;
+  margin-bottom: 6px;
+  display: block;
+}
+
+/* INPUT */
+.vaga-input-box {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 14px;
+  border: 1.8px solid  #ff9e9e;
+  padding: 12px 14px;
+  margin-bottom: 18px;
+  transition: .2s ease;
+}
+
+.vaga-input-box:focus-within {
+  border-color: #ffb84c;
+  box-shadow: 0 0 0 3px rgba(255,184,76,0.25);
+}
+
+.vaga-icon {
+  margin-right: 10px;
+  color: #c0841c;
+}
+
+.vaga-input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 15px;
+  background: none;
+  color: #4e2c00;
+}
+
+.vaga-input::placeholder {
+  color: #b8a08a;
+}
+
+/* BUTTON */
+.vaga-btn {
+  width: 100%;
+  padding: 16px;
+  background: #ffb84c;
+  border: none;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+  transition: .25s ease;
+  margin-bottom: 12px;
+  letter-spacing: .5px;
+}
+
+.vaga-btn:hover {
+  background: #ff9907;
+  transform: translateY(-2px);
+}
+
+.vaga-btn.disabled {
+  background: #ffd9a3;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* MESSAGE */
+.vaga-msg {
+  text-align: center;
+  font-weight: 600;
+  font-size: 15px;
+  margin-top: 6px;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.vaga-msg.sucesso {
+  color: #256f00;
+  background: #e9ffd9;
+}
+
+.vaga-msg.erro {
+  color: #7a0000;
+  background: #ffdede;
+}
+
+/* FOOTER */
+.home-footer-text {
+  text-align: center;
+  font-size: 13px;
+  margin-top: 40px;
+  color: #a1876b;
+}

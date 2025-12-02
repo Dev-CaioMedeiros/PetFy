@@ -1,0 +1,122 @@
+.cadastro-container {
+  min-height: 100vh;
+  background: #fff7ed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+  color: #444;
+  padding: 1rem;
+}
+
+.cadastro-illustration {
+  width: 280px; 
+}
+
+.cadastro-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-align: center;
+  color: #222;
+  margin-bottom: 0.3rem;
+}
+
+.cadastro-subtitle {
+  color: #666;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.cadastro-card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 1.5rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+  width: 100%;
+  max-width: 380px;
+}
+
+.cadastro-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 50px;
+  padding: 0.6rem 1rem;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.input-icon {
+  color: #888;
+}
+
+.input-group input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.toggle-password {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #999;
+  transition: color 0.2s ease;
+}
+
+.toggle-password:hover {
+  color: #f59e0b; /* Amber 500 */
+}
+
+.cadastro-button {
+  background: linear-gradient(90deg, #f9b94a, #f7a930);
+  color: white;
+  font-weight: 600;
+  border: none;
+  width: 100%;
+  padding: 10px;
+  border-radius: 9999px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(249, 185, 74, 0.4);
+  transition: all 0.3s ease;
+}
+
+.cadastro-button:hover {
+  background: linear-gradient(90deg, #f7a930, #f9b94a);
+}
+
+.cadastro-footer {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 0.7rem;
+}
+
+.login-link {
+  color: #d97706;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.login-link:hover {
+  text-decoration: underline;
+}
+
+.cadastro-footer-text {
+  margin-top: 1.5rem;
+  font-size: 0.75rem;
+  color: #999;
+}

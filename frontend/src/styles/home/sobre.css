@@ -1,0 +1,81 @@
+.sobre-container {
+  min-height: 100vh;
+  background-color: #fff7ed;
+  font-family: "Poppins", sans-serif;
+  color: #444;
+  text-align: center;
+  padding: 2rem 1rem;
+  overflow-x: hidden;
+}
+
+/* ILUSTRAÇÃO */
+.sobre-illustration {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.8rem;
+}
+
+.sobre-illustration-bg {
+  position: absolute;
+  inset: 0;
+  background-color: #ffe7c0;
+  filter: blur(65px);
+  border-radius: 50%;
+  opacity: 0.75;
+}
+
+.sobre-img {
+  position: relative;
+  z-index: 10;
+  width: 400px;
+  max-width: 85vw;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.12));
+}
+
+/* TÍTULO E TEXTO */
+.sobre-title {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.sobre-title span {
+  color: #ffb84c;
+}
+
+.sobre-text {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.65;
+  max-width: 430px;
+  margin: 0.6rem auto;
+}
+
+/* BOTÃO */
+.sobre-button {
+  margin-top: 1.8rem;
+  background: linear-gradient(180deg, #ffca4d, #ffb022);
+  color: white;
+  border: none;
+  padding: 0.9rem 3rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 6px 16px rgba(255, 176, 36, 0.4);
+  transition: 0.25s ease;
+}
+
+.sobre-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 22px rgba(255, 176, 36, 0.55);
+}
+
+/* Rodapé */
+.sobre-footer {
+  margin-top: 2rem;
+  font-size: 0.75rem;
+  color: #999;
+}
