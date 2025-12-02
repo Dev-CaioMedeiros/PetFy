@@ -19,7 +19,6 @@ import os
 
 app = init_app()
 
-
 # 📂 uploads
 UPLOAD_FOLDER = os.path.join("uploads")
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -39,16 +38,20 @@ app.register_blueprint(petshop_routes, url_prefix="/api")
 app.register_blueprint(vacina_routes, url_prefix="/api")
 app.register_blueprint(passeio_routes, url_prefix="/api")
 
+
+
+with app.app_context():
+    db.create_all()
+
+    # cria clínica default 1 vez
+    if not Clinica.query.first():
+        nova = Clinica(nome="Clínica Petfy")
+        db.session.add(nova)
+        db.session.commit()
+        print("🏥 Clínica padrão criada!")
+
+
+# 🔥 development server (local)
 if __name__ == "__main__":
-    with app.app_context():
-        db.create_all()
-
-        if not Clinica.query.first():
-            nova = Clinica(nome="Clínica Petfy")
-            db.session.add(nova)
-            db.session.commit()
-
     app.run(host="0.0.0.0", port=int(os.getenv("PORT", 5000)))
-
-
 
