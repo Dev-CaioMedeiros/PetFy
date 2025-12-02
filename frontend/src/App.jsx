@@ -25,6 +25,7 @@ import Vacinas from "./pages/pets/vacinas";
 import VacinasEscolherPet from "./pages/pets/vacina_escolher_pet";
 import VacinasAgendar from "./pages/pets/vacina_agendar";
 import VacinasHistorico from "./pages/pets/vacina_historico";
+import Passeios from "./pages/pets/passeios";
 import PasseiosEscolherPet from "./pages/pets/passeio_escolher_pet";
 import PasseiosAgendar from "./pages/pets/passeio_agendar";
 import PasseiosHistorico from "./pages/pets/passeio_historico";
