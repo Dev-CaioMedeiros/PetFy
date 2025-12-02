@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getToken } from "../../services/auth";
 import "../../styles/pets/vacinas_escolher.css";
-import { API_URL } from "../../services/config";
+import { API_URL, BASE_URL } from "../../services/config";
 
 export default function VacinasEscolherPet() {
   const { state } = useLocation();
@@ -11,10 +11,11 @@ export default function VacinasEscolherPet() {
   const vacina = state?.vacina;
 
   const [pets, setPets] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   function getImg(pet) {
     if (pet.foto) return `${API_URL}/uploads/${pet.foto}`;
-    return "/placeholder_pet.png";
+    return "/placeholder_pet.png"; // imagem fallback
   }
 
   function escolherPet(pet) {
@@ -25,14 +26,26 @@ export default function VacinasEscolherPet() {
     async function load() {
       try {
         const token = getToken();
+
         const res = await fetch(`${BASE_URL}/pets`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
+        if (!res.ok) {
+          throw new Error("Erro ao buscar pets");
+        }
+
         const json = await res.json();
-        setPets(json);
+
+        // garante sempre um array
+        const lista = Array.isArray(json) ? json : json?.pets || [];
+
+        setPets(lista);
+
       } catch (err) {
-        console.error(err);
+        console.error("Erro:", err);
+      } finally {
+        setLoading(false);
       }
     }
 
@@ -50,6 +63,9 @@ export default function VacinasEscolherPet() {
       {/* TITULO */}
       <h1 className="v-title">Escolha o Pet</h1>
 
+      {/* LOADING */}
+      {loading && <p className="v-loading">Carregando pets...</p>}
+
       {/* GRID */}
       <div className="pet-grid">
         {pets.map((pet) => (
@@ -65,7 +81,7 @@ export default function VacinasEscolherPet() {
       </div>
 
       {/* EMPTY */}
-      {pets.length === 0 && (
+      {!loading && pets.length === 0 && (
         <p className="v-empty">Nenhum pet cadastrado 😿</p>
       )}
 
