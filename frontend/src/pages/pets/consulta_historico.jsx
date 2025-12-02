@@ -1,6 +1,6 @@
 import { ArrowLeft, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
-import { getToken } from "../../services/auth";
+import { getToken, clearToken } from "../../services/auth";
 import { BASE_URL } from "../../services/config";
 import { useNavigate } from "react-router-dom";
 import "../../styles/pets/consulta_historico.css";
@@ -19,25 +19,33 @@ export default function ConsultaHistorico() {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
-          }
+          },
         });
+
+        // se token expirou
+        if (res.status === 401) {
+          clearToken();
+          navigate("/login");
+          return;
+        }
 
         if (!res.ok) throw new Error("Erro ao buscar histórico");
 
         const json = await res.json();
 
-        // ordenar
+        // ordenar por data DESC
         json.sort((a, b) => new Date(b.data) - new Date(a.data));
 
         setHistorico(json);
 
       } catch (err) {
+        console.error(err);
         setErro("Erro ao carregar histórico.");
       }
     }
 
     load();
-  }, []);
+  }, [navigate]);
 
   function formatarData(iso) {
     try {
@@ -64,23 +72,26 @@ export default function ConsultaHistorico() {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
-        }
+        },
       });
 
-      if (!res.ok) throw new Error("Erro ao excluir");
-
-      setHistorico(prev => prev.filter(h => h.id !== id));
-
-    } catch {
-      alert("Erro ao excluir");
-    }
-  }
+      // token expirou durante exclusão?
       if (res.status === 401) {
         clearToken();
         navigate("/login");
         return;
       }
 
+      if (!res.ok) throw new Error("Erro ao excluir");
+
+      setHistorico((prev) =>
+        prev.filter((h) => h.id !== id)
+      );
+
+    } catch {
+      alert("Erro ao excluir");
+    }
+  }
 
   return (
     <div className="h-page">
