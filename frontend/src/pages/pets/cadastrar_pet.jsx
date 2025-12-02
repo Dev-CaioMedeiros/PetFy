@@ -30,34 +30,36 @@ export default function CadastrarPet() {
     }
   };
 
-  // SALVAR
-  const salvarPet = async (e) => {
-    e.preventDefault();
+ const salvarPet = async (e) => {
+  e.preventDefault();
 
-    const token = getToken();
-    const formData = new FormData();
+  if (!pet.nome || !pet.especie || !pet.sexo) {
+    alert("Preencha nome, espécie e sexo!");
+    return;
+  }
 
-    for (let key in pet) {
-      formData.append(key, pet[key]);
-    }
+  const token = getToken();
+  const formData = new FormData();
 
-    const res = await fetch(`${BASE_URL}/pets`, {
+  for (let key in pet) {
+    formData.append(key, pet[key]);
+  }
+
+  const res = await fetch(`${BASE_URL}/pets`, {
     method: "POST",
-    headers: { 
-      Authorization: `Bearer ${token}` 
-    },
-      body: formData
+    headers: { Authorization: `Bearer ${token}` },
+    body: formData,
   });
 
-    const data = await res.json();
+  const data = await res.json();
 
-    if (res.ok) {
-      alert("Pet cadastrado com sucesso!");
-      navigate("/meus_pets");
-    } else {
-      alert(data.mensagem || "Erro ao cadastrar pet");
-    }
-  };
+  if (res.ok) {
+    alert("Pet cadastrado com sucesso!");
+    navigate("/meus_pets");
+  } else {
+    alert(data.mensagem || "Erro ao cadastrar pet");
+  }
+};
 
   return (
     <motion.div

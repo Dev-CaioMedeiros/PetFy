@@ -26,19 +26,21 @@ export default function PasseiosHistorico() {
   }
 
   async function remover(id) {
-    try {
-      const token = getToken();
+  try {
+    const token = getToken();
 
-      await fetch(`${BASE_URL}/passeios/agendamentos/${id}`, {
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` }
-      });
+    await fetch(`${BASE_URL}/passeios/agendamentos/${id}`, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${token}` }
+    });
 
-      carregar();
-    } catch (err) {
-      console.error(err);
-    }
+    setLista(prev => prev.filter(a => a.id !== id));
+
+  } catch (err) {
+    console.error(err);
   }
+}
+
 
   useEffect(() => {
     carregar();
@@ -59,7 +61,9 @@ export default function PasseiosHistorico() {
             <div>
               <h3>{a.pet_nome}</h3>
               <p>{a.servico}</p>
-              <span>{new Date(a.data).toLocaleString()}</span>
+              <span>
+                {a.data ? new Date(a.data).toLocaleString("pt-BR") : "Sem data"}
+              </span>
             </div>
 
             <Trash2 size={22}

@@ -4,6 +4,7 @@ import { Mail, Lock, User, Phone, Eye, EyeOff } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import petRegister from "../../assets/pet-cadastro.png";
 import "../../styles/user/cadastro.css";
+import { BASE_URL } from "../../services/config";
 
 export default function Cadastro() {
   const [showPassword, setShowPassword] = useState(false);
@@ -47,7 +48,7 @@ export default function Cadastro() {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/api/cadastro", {
+      const res = await fetch(`${BASE_URL}/cadastro`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

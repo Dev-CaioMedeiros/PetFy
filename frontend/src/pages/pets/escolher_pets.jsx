@@ -4,8 +4,7 @@ import { useEffect, useState } from "react";
 import { BASE_URL } from "../../services/config";
 import { getToken } from "../../services/auth";
 import "../../styles/pets/consulta_escolher_pet.css";
-
-const API_URL = "http://localhost:5000";
+import { API_URL } from "../../services/config";
 
 function getImg(pet) {
   if (pet.foto) return `${API_URL}/uploads/${pet.foto}`;

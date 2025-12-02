@@ -17,6 +17,12 @@ export default function ConsultaAgendar() {
   const [erroData, setErroData] = useState(false);
 
   async function confirmarAgendamento() {
+
+    if (!pet?.id) {
+      alert("Pet inválido");
+      return;
+    }
+
     if (!data) {
       setErroData(true);
       setMsg("Selecione uma data e hora!");

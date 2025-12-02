@@ -11,8 +11,6 @@ import PetDetalhes from "./pages/pets/pet_detalhes";
 import CadastrarPet from "./pages/pets/cadastrar_pet";
 import EditarPet from "./pages/pets/editar_pet";
 import Consultas from "./pages/pets/consulta";
-import ServicosPet from "./pages/pets/pet_shop";
-import Passeios from "./pages/pets/passeios";
 import ActivityTimeout from "./components/ActivityTimeout";
 import Sobre from "./pages/home/sobre";
 import Carrinho from "./pages/pets/cart";
@@ -48,7 +46,6 @@ function App() {
         <Route path="/cadastrar-pet" element={<CadastrarPet />} />
         <Route path="/editar_pet/:id" element={<EditarPet />} />
         <Route path="/consulta" element={<Consultas />} />
-        <Route path="/passeios" element={<Passeios />} />
         <Route path="/sobre" element={<Sobre />} />
         <Route path="/cart" element={<Carrinho />} />
         <Route path="/consultas/escolher_pets" element={<ConsultaEscolherPet />} />

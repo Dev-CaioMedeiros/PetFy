@@ -1,11 +1,9 @@
 import { ArrowLeft } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { BASE_URL } from "../../services/config";
 import { getToken } from "../../services/auth";
 import "../../styles/pets/vacinas_escolher.css";
-
-const API_URL = "http://localhost:5000";
+import { API_URL } from "../../services/config";
 
 export default function VacinasEscolherPet() {
   const { state } = useLocation();

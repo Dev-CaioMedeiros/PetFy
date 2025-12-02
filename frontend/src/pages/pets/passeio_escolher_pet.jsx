@@ -4,8 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../services/config";
 import { getToken } from "../../services/auth";
 import "../../styles/pets/passeio_escolher_pet.css";
-
-const API_URL = "http://localhost:5000";
+import { API_URL } from "../../services/config";
 
 export default function PasseiosEscolherPet() {
   const { state } = useLocation();
@@ -15,8 +14,8 @@ export default function PasseiosEscolherPet() {
   const [pets, setPets] = useState([]);
 
   function getImg(pet) {
-    if (pet.foto) return `${API_URL}/uploads/${pet.foto}`;
-    return "/placeholder_pet.png";
+  if (pet.foto) return `${API_URL}/uploads/${pet.foto}`;
+  return "/placeholder_pet.png";
   }
 
   function escolherPet(pet) {

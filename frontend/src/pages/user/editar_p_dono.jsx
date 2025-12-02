@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { getToken } from "../../services/auth";
 import { BASE_URL } from "../../services/config";
 import "../../styles/user/editar_p_user.css";
+import { API_URL } from "../../services/config";
 
 export default function EditarPerfil() {
   const [usuario, setUsuario] = useState({
@@ -57,7 +58,7 @@ export default function EditarPerfil() {
           });
 
           if (data.foto) {
-            setFotoPreview(`http://localhost:5000/uploads/${data.foto}`);
+            setFotoPreview(`${API_URL}/uploads/${data.foto}`);
           }
         }
       } catch (err) {

@@ -2,6 +2,7 @@ import { ArrowLeft, Search, ChevronRight, Clock } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/pets/pet_shop.css";
 import { useState } from "react";
+import banner from "../../assets/pet_pet_shop.png";
 
 export default function PetShop() {
   const navigate = useNavigate();
@@ -60,8 +61,7 @@ export default function PetShop() {
             </button>
         </div>
 
-        <img
-          src="src/assets/pet_pet_shop.png"
+        <img src={banner} 
           alt="promo"
           className="promo-img"
         />

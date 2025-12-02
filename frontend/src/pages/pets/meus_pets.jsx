@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { getToken } from "../../services/auth";
 import { BASE_URL } from "../../services/config";
 import "../../styles/pets/meus_pets.css";
+import { API_URL } from "../../services/config";
 
 export default function MeusPets() {
   const [pets, setPets] = useState([]);
@@ -155,14 +156,14 @@ export default function MeusPets() {
               </div>
 
               <img
-                src={
-                  pet.foto
-                    ? `http://localhost:5000/uploads/${pet.foto}`
-                    : "/pet.png"
-                }
-                alt={pet.nome}
-                className="pet-card-image"
-              />
+  src={
+    pet.foto
+      ? `${API_URL}/uploads/${pet.foto}`
+      : "/pet.png"
+  }
+  alt={pet.nome}
+  className="pet-card-image"
+/>
             </div>
           </motion.div>
         ))}

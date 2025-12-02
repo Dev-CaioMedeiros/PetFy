@@ -26,6 +26,8 @@ export default function Home() {
   const [busca, setBusca] = useState("");
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
+  const API_URL = BASE_URL.replace("/api", "");
+
 
   // ===== LISTA DE SERVIÇOS PARA PESQUISA =====
   const servicos = [
@@ -99,7 +101,7 @@ const resultados = servicos
         setNomeUsuario(data.nome || "Usuário");
 
         if (data.foto) {
-          setFotoPerfil(`http://localhost:5000/uploads/${data.foto}`);
+          setFotoPerfil(`${API_URL}/uploads/${data.foto}`);
         }
       })
       .catch(() => {

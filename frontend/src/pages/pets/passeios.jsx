@@ -2,6 +2,7 @@ import { ArrowLeft, Search, ChevronRight, Clock } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/pets/passeios.css";
 import { useState } from "react";
+import imgPromo from "../../assets/pet_passeio.png";
 
 export default function Passeios() {
   const navigate = useNavigate();
@@ -59,9 +60,7 @@ export default function Passeios() {
           </button>
         </div>
 
-        <img
-          src="src/assets/pet_passeio.png"
-          alt="promo"
+        <img src={imgPromo} 
           className="promo-img"
         />
       </div>

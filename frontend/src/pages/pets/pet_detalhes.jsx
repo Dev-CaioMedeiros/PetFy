@@ -5,6 +5,7 @@ import { ArrowLeft,PawPrint,Edit,Trash2,CalendarDays,HeartPulse,Weight,Ruler,Bon
 import { getToken } from "../../services/auth";
 import { BASE_URL } from "../../services/config";
 import "../../styles/pets/pet_detalhes.css";
+import { API_URL } from "../../services/config";
 
 export default function PetDetalhes() {
   const { id } = useParams();
@@ -71,14 +72,15 @@ export default function PetDetalhes() {
         <div className="pet-photo-wrapper">
           <div className="pet-photo-bg"></div>
           <img
-            src={
-              pet.foto
-                ? `http://localhost:5000/uploads/${pet.foto}`
-                : "/pet.png"
-            }
-            alt={pet.nome}
-            className="pet-photo"
-          />
+  src={
+    pet.foto
+      ? `${API_URL}/uploads/${pet.foto}`
+      : "/pet.png"
+  }
+  alt={pet.nome}
+  className="pet-photo"
+/>
+      
         </div>
 
         <h1 className="pet-name">{pet.nome}</h1>

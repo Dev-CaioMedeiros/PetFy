@@ -13,6 +13,7 @@ import { BASE_URL } from "../../services/config";
 import { getToken } from "../../services/auth";
 import "../../styles/pets/editar_pet.css";
 
+
 export default function EditarPet() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -30,6 +31,8 @@ export default function EditarPet() {
   const [fotoPreview, setFotoPreview] = useState(null);
   const [fotoFile, setFotoFile] = useState(null);
   const [loading, setLoading] = useState(true);
+  const API_URL = BASE_URL.replace("/api", "");
+
 
   useEffect(() => {
     const token = getToken();
@@ -52,7 +55,8 @@ export default function EditarPet() {
           descricao: data.descricao || "",
         });
 
-        if (data.foto) setFotoPreview(`http://localhost:5000/uploads/${data.foto}`);
+        if (data.foto) 
+          setFotoPreview(`${API_URL}/uploads/${data.foto}`);
       })
       .catch(() => navigate("/meus_pets"))
       .finally(() => setLoading(false));
@@ -81,11 +85,14 @@ export default function EditarPet() {
     Object.entries(form).forEach(([k, v]) => formData.append(k, v));
     if (fotoFile) formData.append("foto", fotoFile);
 
+    
     const res = await fetch(`${BASE_URL}/pets/${id}`, {
-      method: "PUT",
-      headers: { Authorization: `Bearer ${token}` },
-      body: formData,
+    method: "PUT",
+    headers: { Authorization: `Bearer ${token}` },
+    body: formData,
     });
+
+    if (res.ok) navigate("/meus_pets");
 
     const data = await res.json();
     if (res.ok) navigate(`/pets/${id}`);

@@ -2,6 +2,7 @@ import { ArrowLeft, Search, ChevronRight, Clock } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/pets/consultas.css";
 import { useState } from "react";
+import promoImg from "../../assets/pet_consulta.png";
 
 export default function Consultas() {
   const navigate = useNavigate();
@@ -66,7 +67,8 @@ export default function Consultas() {
           </button>
         </div>
 
-        <img src="src/assets/pet_consulta.png" className="c-promo-img" />
+        <img src="promoImg" 
+        className="c-promo-img" />
       </div>
 
       {/* Busca */}

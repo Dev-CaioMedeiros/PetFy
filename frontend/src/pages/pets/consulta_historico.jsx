@@ -75,6 +75,12 @@ export default function ConsultaHistorico() {
       alert("Erro ao excluir");
     }
   }
+      if (res.status === 401) {
+        clearToken();
+        navigate("/login");
+        return;
+      }
+
 
   return (
     <div className="h-page">

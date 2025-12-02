@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import loginImg from "../../assets/pet-login.png";
 import { saveToken } from "../../services/auth";
 import "../../styles/user/login.css";
+import { BASE_URL } from "../../services/config";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -18,7 +19,7 @@ export default function Login() {
     setErro("");
 
     try {
-      const res = await fetch("http://127.0.0.1:5000/api/login", {
+      const res = await fetch(`${BASE_URL}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, senha }),
