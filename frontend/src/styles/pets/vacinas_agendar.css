@@ -120,14 +120,8 @@
   text-align: center;
   font-weight: 600;
   font-size: 15px;
-  margin-top: 6px;
-  padding: 10px;
-  border-radius: 8px;
-}
-
-.vaga-msg.sucesso {
-  color: #256f00;
-  background: #e9ffd9;
+  margin-top: 14px;
+  color: #2f6f00;
 }
 
 .vaga-msg.erro {

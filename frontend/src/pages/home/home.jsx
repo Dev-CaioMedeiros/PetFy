@@ -35,11 +35,50 @@ export default function Home() {
     { nome: "Vacinas", categoria: "Vacinas", rota: "/vacinas" },
     { nome: "Acessórios", categoria: "Pet Store", rota: "/loja" },
     { nome: "Passeios", categoria: "Passeios", rota: "/passeios" },
+    { nome: "Meus Pets", categoria: "Pets", rota: "/meus_pets" },
+    { nome: "Editar perfil", categoria: "Usuário", rota: "/editar_p_dono" },
+    { nome: "Sobre AppPet", categoria: "Informações", rota: "/sobre" }, 
+    { nome : "Ração Premium", categoria: "Pet Store", rota: "/loja" },
+    { nome : "Brinquedos para Pets", categoria: "Pet Store", rota: "/loja" },
+    { nome : "Check-up Veterinário", categoria: "Consultas", rota: "/consulta" },
+    { nome : "Vacina Antirrábica", categoria: "Vacinas", rota: "/vacinas" },
+    { nome : "Caminhada no Parque", categoria: "Passeios", rota: "/passeios" },
+    { nome : "Higiene e Limpeza", categoria: "Pet Shop", rota: "/petshop" },    
+    
   ];
 
-  const resultados = servicos.filter((item) =>
-    item.nome.toLowerCase().includes(busca.toLowerCase())
-  );
+  // normaliza texto (ignora acentos e maiúsculas)
+const normalize = (txt) =>
+  txt
+    ?.toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "") || "";
+
+// pesquisa inteligente
+const resultados = servicos
+  .map((item) => {
+    const termo = normalize(busca);
+    const nome = normalize(item.nome);
+    const categoria = normalize(item.categoria);
+
+    let score = 0;
+
+    // match por nome
+    if (nome.includes(termo)) score += 2;
+
+    // match por categoria
+    if (categoria.includes(termo)) score += 1;
+
+    // se começar com a palavra digitada
+    if (nome.startsWith(termo)) score += 3;
+
+    return { ...item, score };
+  })
+  .filter((i) => i.score > 0)
+  .sort((a, b) => b.score - a.score)
+  .slice(0, 6);
+
+
 
   // ===== BUSCAR USUÁRIO =====
   useEffect(() => {

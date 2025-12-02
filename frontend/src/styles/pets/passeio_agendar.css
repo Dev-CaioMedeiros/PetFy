@@ -113,3 +113,12 @@
   color: #c92a2a;
   font-weight: 500;
 }
+
+.pa-sucesso {
+  text-align: center;
+  font-weight: 600;
+  font-size: 15px;
+  margin-top: 14px;
+  color: #2f6f00;
+}
+
