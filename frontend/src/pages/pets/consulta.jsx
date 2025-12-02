@@ -2,7 +2,7 @@ import { ArrowLeft, Search, ChevronRight, Clock } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/pets/consultas.css";
 import { useState } from "react";
-
+import promoImg from "../../assets/pet_consulta.png";
 
 export default function Consultas() {
   const navigate = useNavigate();
@@ -67,8 +67,10 @@ export default function Consultas() {
           </button>
         </div>
 
-        <img src="../../assets/pet_consulta.png" 
-        className="c-promo-img" />
+        <img src={promoImg} 
+          alt="promo"
+          className="c-promo-img"
+        />
       </div>
 
       {/* Busca */}
@@ -110,3 +112,4 @@ export default function Consultas() {
     </div>
   );
 }
+
