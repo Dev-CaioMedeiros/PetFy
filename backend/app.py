@@ -13,8 +13,6 @@ from models.petshop_agendamento import PetShopAgendamento
 from models.vacina_agendamento import VacinaAgendamento 
 from routes.vacina_routes import vacina_routes
 from routes.passeio_routes import passeio_routes
-
-
 from flask import send_from_directory
 from sqlalchemy import text
 import os
@@ -65,4 +63,5 @@ if __name__ == "__main__":
             db.session.commit()
             print("🏥 Clínica padrão criada!")
 
-    app.run(host="0.0.0.0", port=5000)
+app.run(host="0.0.0.0", port=int(os.getenv("PORT", 5000)))
+
