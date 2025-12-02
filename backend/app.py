@@ -30,15 +30,6 @@ def uploads(filename):
     return send_from_directory(app.config["UPLOAD_FOLDER"], filename)
 
 
-# 🟢 verificar conexão com banco
-with app.app_context():
-    try:
-        db.session.execute(text("SELECT 1"))
-        print("✅ Banco de dados conectado com sucesso!")
-    except Exception as e:
-        print("❌ Erro ao conectar ao banco de dados:", e)
-
-
 # 🔥 registrar rotas
 app.register_blueprint(user_routes, url_prefix="/api")
 app.register_blueprint(pet_routes, url_prefix="/api")
@@ -48,13 +39,16 @@ app.register_blueprint(petshop_routes, url_prefix="/api")
 app.register_blueprint(vacina_routes, url_prefix="/api")
 app.register_blueprint(passeio_routes, url_prefix="/api")
 
-
-
-
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
-        print("📦 Tabelas criadas/verificadas!")
+
+        if not Clinica.query.first():
+            nova = Clinica(nome="Clínica Petfy")
+            db.session.add(nova)
+            db.session.commit()
+
     app.run(host="0.0.0.0", port=int(os.getenv("PORT", 5000)))
+
 
 
