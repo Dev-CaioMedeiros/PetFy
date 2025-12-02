@@ -8,14 +8,15 @@ import { API_URL, BASE_URL } from "../../services/config";
 export default function VacinasEscolherPet() {
   const { state } = useLocation();
   const navigate = useNavigate();
-  const vacina = state?.vacina;
+
+  const vacina = state?.vacina || null;
 
   const [pets, setPets] = useState([]);
   const [loading, setLoading] = useState(true);
 
   function getImg(pet) {
-    if (pet.foto) return `${API_URL}/uploads/${pet.foto}`;
-    return "/placeholder_pet.png"; // imagem fallback
+    if (pet?.foto) return `${API_URL}/uploads/${pet.foto}`;
+    return "https://via.placeholder.com/200?text=Pet";
   }
 
   function escolherPet(pet) {
@@ -26,31 +27,43 @@ export default function VacinasEscolherPet() {
     async function load() {
       try {
         const token = getToken();
+        if (!token) {
+          navigate("/login");
+          return;
+        }
 
         const res = await fetch(`${BASE_URL}/pets`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        if (!res.ok) {
-          throw new Error("Erro ao buscar pets");
+        if (res.status === 401) {
+          navigate("/login");
+          return;
         }
+
+        if (!res.ok) throw new Error("Erro ao buscar pets");
 
         const json = await res.json();
 
-        // garante sempre um array
-        const lista = Array.isArray(json) ? json : json?.pets || [];
-
-        setPets(lista);
+        // back retorna array
+        if (Array.isArray(json)) {
+          setPets(json);
+        } else if (Array.isArray(json?.pets)) {
+          setPets(json.pets);
+        } else {
+          setPets([]);
+        }
 
       } catch (err) {
-        console.error("Erro:", err);
+        console.error("Erro ao carregar pets:", err);
+        setPets([]);
       } finally {
         setLoading(false);
       }
     }
 
     load();
-  }, []);
+  }, [navigate]);
 
   return (
     <div className="vacinas-page">
@@ -64,7 +77,9 @@ export default function VacinasEscolherPet() {
       <h1 className="v-title">Escolha o Pet</h1>
 
       {/* LOADING */}
-      {loading && <p className="v-loading">Carregando pets...</p>}
+      {loading && (
+        <p className="v-loading">Carregando pets...</p>
+      )}
 
       {/* GRID */}
       <div className="pet-grid">
@@ -74,7 +89,7 @@ export default function VacinasEscolherPet() {
             className="pet-card"
             onClick={() => escolherPet(pet)}
           >
-            <img src={getImg(pet)} className="pet-img" />
+            <img src={getImg(pet)} className="pet-img" alt={pet.nome} />
             <p className="pet-name">{pet.nome}</p>
           </div>
         ))}
