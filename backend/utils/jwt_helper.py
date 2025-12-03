@@ -15,9 +15,14 @@ def gerar_token(usuario_id):
         "id": usuario_id,
         "exp": datetime.utcnow() + timedelta(hours=24)
     }
+    
     token = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
-    return token
 
+    # caso PyJWT retorne bytes, converte para string
+    if isinstance(token, bytes):
+        token = token.decode("utf-8")
+
+    return token
 
 # ✅ Decorador que exige token para acessar rotas protegidas
 def token_required(f):
