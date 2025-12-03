@@ -7,17 +7,14 @@ from datetime import datetime
 
 passeio_routes = Blueprint("passeio_routes", __name__)
 
-# -----------------------------
+# -------------------------------------------------
 # CRIAR AGENDAMENTO
-# -----------------------------
+# -------------------------------------------------
 @passeio_routes.route("/passeios/agendamentos", methods=["POST"])
 @token_required
 def criar_agendamento(usuario_id):
 
-    data = request.get_json()
-
-    if not data:
-        return jsonify({"mensagem": "JSON inválido"}), 400
+    data = request.get_json() or {}
 
     pet_id = data.get("pet_id")
     servico = data.get("servico")
@@ -57,33 +54,36 @@ def criar_agendamento(usuario_id):
         return jsonify({"mensagem": str(e)}), 400
 
 
-# -----------------------------
-# LISTAR AGENDAMENTOS
-# -----------------------------
+# -------------------------------------------------
+# LISTAR MEUS AGENDAMENTOS
+# -------------------------------------------------
 @passeio_routes.route("/passeios/agendamentos", methods=["GET"])
 @token_required
-def listar_agendamentos(usuario_id):
-    try:
-        agendamentos = PasseioAgendamento.query.order_by(PasseioAgendamento.data.desc()).all()
-        return jsonify([a.to_dict() for a in agendamentos]), 200
+def listar_passeios(usuario_id):
 
-    except Exception as e:
-        return jsonify({"mensagem": str(e)}), 400
+    agendamentos = PasseioAgendamento.query.join(Pet).filter(
+        Pet.dono_id == usuario_id
+    ).order_by(PasseioAgendamento.data.desc()).all()
+
+    return jsonify([a.to_dict() for a in agendamentos]), 200
 
 
-# -----------------------------
-# DELETAR AGENDAMENTO
-# -----------------------------
+# -------------------------------------------------
+# DELETAR MEU AGENDAMENTO
+# -------------------------------------------------
 @passeio_routes.route("/passeios/agendamentos/<int:id>", methods=["DELETE"])
 @token_required
 def deletar_agendamento(usuario_id, id):
 
+    agendamento = PasseioAgendamento.query.join(Pet).filter(
+        PasseioAgendamento.id == id,
+        Pet.dono_id == usuario_id
+    ).first()
+
+    if not agendamento:
+        return jsonify({"mensagem": "Agendamento não encontrado"}), 404
+
     try:
-        agendamento = PasseioAgendamento.query.get(id)
-
-        if not agendamento:
-            return jsonify({"mensagem": "Agendamento não encontrado"}), 404
-
         db.session.delete(agendamento)
         db.session.commit()
 

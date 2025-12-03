@@ -1,4 +1,3 @@
-# routes/vacina_routes.py
 from flask import Blueprint, request, jsonify
 from datetime import datetime
 
@@ -9,9 +8,9 @@ from utils.jwt_helper import token_required
 
 vacina_routes = Blueprint("vacina_routes", __name__)
 
-# -------------------------------------------
-# CRIAR AGENDAMENTO DE VACINA (POST)
-# -------------------------------------------
+# -------------------------------------------------
+# CRIAR AGENDAMENTO
+# -------------------------------------------------
 @vacina_routes.route("/vacinas/agendamentos", methods=["POST"])
 @token_required
 def criar_vacina_agendamento(usuario_id):
@@ -30,15 +29,9 @@ def criar_vacina_agendamento(usuario_id):
     if not data_str:
         return jsonify({"mensagem": "data é obrigatória"}), 400
 
-    # valida pet
-    pet = Pet.query.get(pet_id)
-    if not pet:
-        return jsonify({"mensagem": "Pet não encontrado"}), 404
-
-    # converte data
     try:
         data_agendamento = datetime.fromisoformat(data_str)
-    except Exception:
+    except:
         return jsonify({"mensagem": "Formato de data inválido"}), 400
 
     try:
@@ -60,39 +53,36 @@ def criar_vacina_agendamento(usuario_id):
         return jsonify({"mensagem": f"Erro ao agendar vacina: {str(e)}"}), 400
 
 
-# -------------------------------------------
-# LISTAR AGENDAMENTOS DE VACINA (GET)
-# -------------------------------------------
+# -------------------------------------------------
+# LISTAR MEUS AGENDAMENTOS
+# -------------------------------------------------
 @vacina_routes.route("/vacinas/agendamentos", methods=["GET"])
 @token_required
 def listar_vacinas_agendadas(usuario_id):
-    try:
-        agendamentos = (
-            VacinaAgendamento.query
-            .join(Pet, VacinaAgendamento.pet_id == Pet.id)
-            .all()
-        )
 
-        result = [a.to_dict() for a in agendamentos]
+    agendamentos = VacinaAgendamento.query.join(Pet).filter(
+        Pet.dono_id == usuario_id
+    ).order_by(VacinaAgendamento.data.desc()).all()
 
-        return jsonify(result), 200
-
-    except Exception as e:
-        return jsonify({"mensagem": f"Erro ao listar vacinas: {str(e)}"}), 400
+    return jsonify([a.to_dict() for a in agendamentos]), 200
 
 
-# -------------------------------------------
-# DELETAR AGENDAMENTO DE VACINA (DELETE)
-# -------------------------------------------
+# -------------------------------------------------
+# DELETAR MEU AGENDAMENTO
+# -------------------------------------------------
 @vacina_routes.route("/vacinas/agendamentos/<int:id>", methods=["DELETE"])
 @token_required
 def deletar_vacina_agendamento(usuario_id, id):
+
+    agendamento = VacinaAgendamento.query.join(Pet).filter(
+        VacinaAgendamento.id == id,
+        Pet.dono_id == usuario_id
+    ).first()
+
+    if not agendamento:
+        return jsonify({"mensagem": "Agendamento não encontrado"}), 404
+
     try:
-        agendamento = VacinaAgendamento.query.get(id)
-
-        if not agendamento:
-            return jsonify({"mensagem": "Agendamento não encontrado"}), 404
-
         db.session.delete(agendamento)
         db.session.commit()
 

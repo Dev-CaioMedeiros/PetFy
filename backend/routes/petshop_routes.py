@@ -7,23 +7,19 @@ from datetime import datetime
 
 petshop_routes = Blueprint("petshop_routes", __name__)
 
-# -----------------------------
+# -------------------------------------------------
 # CRIAR AGENDAMENTO
-# -----------------------------
+# -------------------------------------------------
 @petshop_routes.route("/petshop/agendamentos", methods=["POST"])
 @token_required
 def criar_agendamento(usuario_id):
 
-    data = request.get_json()
-
-    if not data:
-        return jsonify({"mensagem": "JSON inválido"}), 400
+    data = request.get_json() or {}
 
     pet_id = data.get("pet_id")
     servico = data.get("servico")
     data_agendamento = data.get("data")
 
-    # validações
     if not pet_id:
         return jsonify({"mensagem": "pet_id é obrigatório"}), 400
     
@@ -33,7 +29,6 @@ def criar_agendamento(usuario_id):
     if not data_agendamento:
         return jsonify({"mensagem": "data é obrigatória"}), 400
 
-    # converter data
     try:
         data_agendamento = datetime.fromisoformat(data_agendamento)
     except:
@@ -59,33 +54,36 @@ def criar_agendamento(usuario_id):
         return jsonify({"mensagem": str(e)}), 400
 
 
-# -----------------------------
-# LISTAR AGENDAMENTOS
-# -----------------------------
+# -------------------------------------------------
+# LISTAR MEUS AGENDAMENTOS
+# -------------------------------------------------
 @petshop_routes.route("/petshop/agendamentos", methods=["GET"])
 @token_required
-def listar_agendamentos(usuario_id):
-    try:
-        agendamentos = PetShopAgendamento.query.order_by(PetShopAgendamento.data.desc()).all()
-        return jsonify([a.to_dict() for a in agendamentos]), 200
+def listar_petshop(usuario_id):
 
-    except Exception as e:
-        return jsonify({"mensagem": str(e)}), 400
+    agendamentos = PetShopAgendamento.query.join(Pet).filter(
+        Pet.dono_id == usuario_id
+    ).order_by(PetShopAgendamento.data.desc()).all()
+
+    return jsonify([a.to_dict() for a in agendamentos]), 200
 
 
-# -----------------------------
-# DELETAR AGENDAMENTO
-# -----------------------------
+# -------------------------------------------------
+# DELETAR MEU AGENDAMENTO
+# -------------------------------------------------
 @petshop_routes.route("/petshop/agendamentos/<int:id>", methods=["DELETE"])
 @token_required
 def deletar_agendamento(usuario_id, id):
 
+    agendamento = PetShopAgendamento.query.join(Pet).filter(
+        PetShopAgendamento.id == id,
+        Pet.dono_id == usuario_id
+    ).first()
+
+    if not agendamento:
+        return jsonify({"mensagem": "Agendamento não encontrado"}), 404
+
     try:
-        agendamento = PetShopAgendamento.query.get(id)
-
-        if not agendamento:
-            return jsonify({"mensagem": "Agendamento não encontrado"}), 404
-
         db.session.delete(agendamento)
         db.session.commit()
 

@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from config import db
 from models.agendamento import Agendamento
+from models.pet import Pet
 from utils.jwt_helper import token_required
 from datetime import datetime
 
@@ -13,33 +14,28 @@ agendamento_routes = Blueprint("agendamento_routes", __name__)
 @token_required
 def criar_agendamento(usuario_id):
 
-    data = request.get_json()
+    data = request.get_json() or {}
 
-    if not data:
-        return jsonify({"mensagem": "Json inválido ou ausente"}), 400
+    clinica_id = data.get("clinica_id")
+    pet_id = data.get("pet_id")
+    data_agendamento = data.get("data")
+    descricao = data.get("descricao", "")
+
+    if not clinica_id:
+        return jsonify({"mensagem": "clinica_id é obrigatório"}), 400
+        
+    if not pet_id:
+        return jsonify({"mensagem": "pet_id é obrigatório"}), 400
+        
+    if not data_agendamento:
+        return jsonify({"mensagem": "data é obrigatória"}), 400
+        
+    try:
+        data_agendamento = datetime.fromisoformat(data_agendamento)
+    except:
+        return jsonify({"mensagem": "Formato de data inválido"}), 400
 
     try:
-        clinica_id = data.get("clinica_id")
-        pet_id = data.get("pet_id")
-        data_agendamento = data.get("data")
-        descricao = data.get("descricao", "")
-
-        # Validations
-        if not clinica_id:
-            return jsonify({"mensagem": "clinica_id é obrigatório"}), 400
-        
-        if not pet_id:
-            return jsonify({"mensagem": "pet_id é obrigatório"}), 400
-        
-        if not data_agendamento:
-            return jsonify({"mensagem": "data é obrigatória"}), 400
-        
-        # Convert date safely
-        try:
-            data_agendamento = datetime.fromisoformat(data_agendamento)
-        except:
-            return jsonify({"mensagem": "Formato de data inválido"}), 400
-
         novo = Agendamento(
             clinica_id=clinica_id,
             pet_id=pet_id,
@@ -61,48 +57,43 @@ def criar_agendamento(usuario_id):
 
 
 # -------------------------------------------------
-# LISTAR AGENDAMENTOS (GET)
+# LISTAR MEUS AGENDAMENTOS (GET)
 # -------------------------------------------------
 @agendamento_routes.route("/agendamentos", methods=["GET"])
-def listar_agendamentos():
-    try:
-        agendamentos = (
-            db.session.query(Agendamento)
-            .order_by(Agendamento.data_agendamento.desc())
-            .all()
-        )
+@token_required
+def listar_consultas(usuario_id):
 
-        resultado = []
-        for a in agendamentos:
-            pet = a.pet  # relacionamento no model
-            resultado.append({
-                "id": a.id,
-                "clinica_id": a.clinica_id,
-                "pet_id": a.pet_id,
-                "pet_nome": pet.nome if pet else None,
-                "data": a.data_agendamento.isoformat() if a.data_agendamento else None,
-                "descricao": a.descricao
-            })
+    agendamentos = Agendamento.query.join(Pet).filter(
+        Pet.dono_id == usuario_id
+    ).order_by(Agendamento.data_agendamento.desc()).all()
 
-        return jsonify(resultado), 200
-
-    except Exception as e:
-        return jsonify({"mensagem": f"Erro ao listar agendamentos: {str(e)}"}), 400
-
+    return jsonify([
+        {
+            "id": a.id,
+            "descricao": a.descricao,
+            "data": a.data_agendamento.isoformat(),
+            "pet_nome": a.pet.nome
+        }
+        for a in agendamentos
+    ]), 200
 
 
 # -------------------------------------------------
-# DELETAR AGENDAMENTO (DELETE)
+# DELETAR MEU AGENDAMENTO (DELETE)
 # -------------------------------------------------
 @agendamento_routes.route("/agendamentos/<int:id>", methods=["DELETE"])
 @token_required
 def deletar_agendamento(usuario_id, id):
+
+    agendamento = Agendamento.query.join(Pet).filter(
+        Agendamento.id == id,
+        Pet.dono_id == usuario_id
+    ).first()
+
+    if not agendamento:
+        return jsonify({"mensagem": "Agendamento não encontrado"}), 404
+
     try:
-        agendamento = Agendamento.query.get(id)
-
-        if not agendamento:
-            return jsonify({"mensagem": "Agendamento não encontrado"}), 404
-
         db.session.delete(agendamento)
         db.session.commit()
 
