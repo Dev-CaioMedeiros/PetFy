@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
+
 import Welcome from "./pages/home/welcome";
 import Login from "./pages/user/login";
 import Cadastro from "./pages/user/cadastro";
@@ -29,12 +31,55 @@ import Passeios from "./pages/pets/passeios";
 import PasseiosEscolherPet from "./pages/pets/passeio_escolher_pet";
 import PasseiosAgendar from "./pages/pets/passeio_agendar";
 import PasseiosHistorico from "./pages/pets/passeio_historico";
+import SessionExpiredModal from "./components/SessionExpiredModal";
+
+import { clearToken } from "./services/auth";
+
+const MAX_TIMEOUT_CLOSED = 2 * 60 * 1000;
+const [expired, setExpired] = useState(false);
 
 function App() {
+
+  useEffect(() => {
+    const lastActivity = localStorage.getItem("lastActivity");
+    const now = Date.now();
+
+    if (lastActivity && now - lastActivity > MAX_TIMEOUT_CLOSED) {
+      clearToken();
+      window.location.href = "/login";
+    }
+
+    localStorage.setItem("lastActivity", now);
+  }, []);
+
+  useEffect(() => {
+    const handler = () => setExpired(true);
+      window.addEventListener("session-expired", handler);
+    return () => window.removeEventListener("session-expired", handler);
+  }, []);
+ 
+  useEffect(() => {
+    function updateActivity() {
+      localStorage.setItem("lastActivity", Date.now());
+    }
+
+    window.onmousemove = updateActivity;
+    window.onkeypress = updateActivity;
+    window.onscroll = updateActivity;
+
+    return () => {
+      window.onmousemove = null;
+      window.onkeypress = null;
+      window.onscroll = null;
+    };
+  }, []);
+
+
   return (
     <Router>
+
       <ActivityTimeout />
-        {/* rotas */}
+      <SessionExpiredModal open={expired} />
 
       <Routes>
         <Route path="/" element={<Welcome />} />
@@ -64,9 +109,8 @@ function App() {
         <Route path="/passeios/escolher" element={<PasseiosEscolherPet />} />
         <Route path="/passeios/agendar" element={<PasseiosAgendar />} />
         <Route path="/passeios/historico" element={<PasseiosHistorico />} />
-       
 
-        {/* ROTA PROTEGIDA */}
+        {/* Protegida */}
         <Route
           path="/home/home"
           element={

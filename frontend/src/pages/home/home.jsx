@@ -16,6 +16,7 @@ import dogShop from "../../assets/pet-care.png";
 import dogLove from "../../assets/pet-friends-love.png";
 import dogMyPets from "../../assets/pet-mine.png";
 
+import LogoutToast from "../../components/LogoutToast"; // 👈 IMPORTANTE!
 import { getToken, clearToken } from "../../services/auth";
 import { BASE_URL } from "../../services/config";
 import "../../styles/home/home.css";
@@ -25,9 +26,21 @@ export default function Home() {
   const [fotoPerfil, setFotoPerfil] = useState(null);
   const [busca, setBusca] = useState("");
   const [showMenu, setShowMenu] = useState(false);
+  const [showToast, setShowToast] = useState(false); // 👈 novo estado toast
+
   const navigate = useNavigate();
   const API_URL = BASE_URL.replace("/api", "");
 
+  // ===== FUNÇÃO DE LOGOUT =====
+  function handleLogout() {
+    clearToken();
+    setShowMenu(false);
+    setShowToast(true);
+
+    setTimeout(() => {
+      navigate("/login");
+    }, 2000);
+  }
 
   // ===== LISTA DE SERVIÇOS PARA PESQUISA =====
   const servicos = [
@@ -39,48 +52,33 @@ export default function Home() {
     { nome: "Passeios", categoria: "Passeios", rota: "/passeios" },
     { nome: "Meus Pets", categoria: "Pets", rota: "/meus_pets" },
     { nome: "Editar perfil", categoria: "Usuário", rota: "/editar_p_dono" },
-    { nome: "Sobre AppPet", categoria: "Informações", rota: "/sobre" }, 
-    { nome : "Ração Premium", categoria: "Pet Store", rota: "/loja" },
-    { nome : "Brinquedos para Pets", categoria: "Pet Store", rota: "/loja" },
-    { nome : "Check-up Veterinário", categoria: "Consultas", rota: "/consulta" },
-    { nome : "Vacina Antirrábica", categoria: "Vacinas", rota: "/vacinas" },
-    { nome : "Caminhada no Parque", categoria: "Passeios", rota: "/passeios" },
-    { nome : "Higiene e Limpeza", categoria: "Pet Shop", rota: "/petshop" },    
-    
+    { nome: "Sobre AppPet", categoria: "Informações", rota: "/sobre" },
   ];
 
   // normaliza texto (ignora acentos e maiúsculas)
-const normalize = (txt) =>
-  txt
-    ?.toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "") || "";
+  const normalize = (txt) =>
+    txt
+      ?.toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "") || "";
 
-// pesquisa inteligente
-const resultados = servicos
-  .map((item) => {
-    const termo = normalize(busca);
-    const nome = normalize(item.nome);
-    const categoria = normalize(item.categoria);
+  // pesquisa inteligente
+  const resultados = servicos
+    .map((item) => {
+      const termo = normalize(busca);
+      const nome = normalize(item.nome);
+      const categoria = normalize(item.categoria);
 
-    let score = 0;
+      let score = 0;
 
-    // match por nome
-    if (nome.includes(termo)) score += 2;
+      if (nome.includes(termo)) score += 2;
+      if (categoria.includes(termo)) score += 1;
+      if (nome.startsWith(termo)) score += 3;
 
-    // match por categoria
-    if (categoria.includes(termo)) score += 1;
-
-    // se começar com a palavra digitada
-    if (nome.startsWith(termo)) score += 3;
-
-    return { ...item, score };
-  })
-  .filter((i) => i.score > 0)
-  .sort((a, b) => b.score - a.score)
-  .slice(0, 6);
-
-
+      return { ...item, score };
+    })
+    .filter((i) => i.score > 0)
+    .sort((a, b) => b.score - a.score);
 
   // ===== BUSCAR USUÁRIO =====
   useEffect(() => {
@@ -113,6 +111,9 @@ const resultados = servicos
   return (
     <div className="home-container">
 
+      {/* TOAST DE LOGOUT */}
+      <LogoutToast show={showToast} />
+
       {/* Menu usuário */}
       <div className="user-menu">
         <div
@@ -144,11 +145,8 @@ const resultados = servicos
 
             <button
               type="button"
-              onClick={() => {
-                clearToken();
-                navigate("/login");
-              }}
-              className="dropdown-item"
+              onClick={handleLogout} 
+              className="dropdown-item logout"
             >
               Sair
             </button>
