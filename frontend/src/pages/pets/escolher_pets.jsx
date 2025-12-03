@@ -41,30 +41,27 @@ export default function ConsultaEscolherPet() {
   };
 
   return (
-    <div className="cep-page">
-
-      <button className="cep-back" onClick={() => navigate(-1)}>
+    <div className="pe-container">
+      
+      <button className="pe-back" onClick={() => navigate(-1)}>
         <ArrowLeft size={22} /> Voltar
       </button>
 
-      <h1 className="cep-title">Escolha o Pet</h1>
+      <h1 className="pe-title">Escolha o Pet</h1>
 
-      <div className="cep-grid">
+      <div className="pe-grid">
         {pets.map((pet) => (
           <div
             key={pet.id}
-            className="cep-card"
+            className="pe-card"
             onClick={() => escolherPet(pet)}
           >
-            <div className="cep-img-box">
-              <img
-                src={getImg(pet)}
-                alt={pet.nome}
-                className="cep-img"
-              />
-            </div>
-
-            <p className="cep-name">{pet.nome}</p>
+            <img
+              src={getImg(pet)}
+              alt={pet.nome}
+              className="pe-img"
+            />
+            <p className="pe-name">{pet.nome}</p>
           </div>
         ))}
       </div>
