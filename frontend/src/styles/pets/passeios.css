@@ -8,7 +8,7 @@
 }
 
 /* ===== Voltar ===== */
-.ps-back-btn {
+.pss-back-btn {
   border: none;
   background: transparent;
   color: #c0841c;
@@ -21,13 +21,13 @@
   transition: .25s;
 }
 
-.ps-back-btn:hover {
+.pss-back-btn:hover {
   transform: translateX(-4px);
   opacity: .85;
 }
 
 /* ===== Título ===== */
-.ps-title {
+.pss-title {
   text-align: center;
   font-size: 28px;
   font-weight: 700;
@@ -35,7 +35,7 @@
 }
 
 /* ===== Promo Box ===== */
-.ps-promo-box {
+.pss-promo-box {
   background: #fab5b5;
   border-radius: 20px;
   padding: 20px;
@@ -77,7 +77,7 @@
 }
 
 /* ===== Busca ===== */
-.ps-search-box {
+.pss-search-box {
   background: #fff;
   display: flex;
   align-items: center;
@@ -88,7 +88,7 @@
   margin-bottom: 18px;
 }
 
-.ps-search-box input {
+.pss-search-box input {
   border: none;
   outline: none;
   width: 100%;
@@ -102,21 +102,21 @@
 }
 
 /* ===== Subtítulo ===== */
-.ps-subtitle {
+.pss-subtitle {
   margin: 10px 0;
   font-size: 18px;
   font-weight: 700;
 }
 
 /* ===== Grid ===== */
-.ps-grid {
+.pss-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 14px;
 }
 
 /* ===== Card ===== */
-.ps-card {
+.pss-card {
   background: #fff;
   border-radius: 16px;
   padding: 18px 14px;
@@ -130,21 +130,21 @@
   transition: .25s ease;
 }
 
-.ps-card:hover {
+.pss-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 20px rgba(0,0,0,0.12);
 }
 
-.ps-icon {
+.pss-icon {
   font-size: 32px;
 }
 
-.ps-card-title {
+.pss-card-title {
   font-weight: 600;
   text-align: center;
 }
 
-.ps-arrow {
+.pss-arrow {
   color: #bfa37a;
   position: absolute;
   right: 12px;
@@ -152,7 +152,7 @@
 }
 
 /* ===== Empty ===== */
-.ps-empty {
+.pss-empty {
   text-align: center;
   margin-top: 18px;
   color: #8f745b;
@@ -160,7 +160,7 @@
 }
 
 /* ===== Histórico ===== */
-.ps-historico-card {
+.pss-historico-card {
   background: #ffffff;
   border-radius: 16px;
   padding: 18px;
@@ -177,28 +177,28 @@
   position: relative;
 }
 
-.ps-historico-card:hover {
+.pss-historico-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 18px rgba(0,0,0,0.12);
 }
 
-.ps-historico-card h3 {
+.pss-historico-card h3 {
   margin: 0;
   font-size: 18px;
   font-weight: 700;
   color: #3b2d22;
 }
 
-.ps-historico-card p {
+.pss-historico-card p {
   margin: 2px 0 0 0;
   font-size: 14px;
   color: #6a5747;
 }
 
-.ps-historico-icon {
+.pss-historico-icon {
   color: #c0841c;
 }
 
-.ps-historico-arrow {
+.pss-historico-arrow {
   color: #c0841c;
 }

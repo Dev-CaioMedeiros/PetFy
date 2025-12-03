@@ -29,27 +29,27 @@ export default function Passeios() {
   return (
     <div className="passeios-page">
       
-      <button className="ps-back-btn" onClick={() => navigate(-1)}>
+      <button className="pss-back-btn" onClick={() => navigate(-1)}>
         <ArrowLeft size={22} /> Voltar
       </button>
 
-      <h1 className="ps-title">Passeios</h1>
+      <h1 className="pss-title">Passeios</h1>
 
       {/* Histório */}
       <div
-        className="ps-historico-card"
+        className="pss-historico-card"
         onClick={() => navigate("/passeios/historico")}
       >
-        <Clock size={28} className="ps-historico-icon" />
+        <Clock size={28} className="pss-historico-icon" />
         <div>
           <h3>Histórico de passeios</h3>
           <p>Veja passeios anteriores</p>
         </div>
-        <ChevronRight size={20} className="ps-historico-arrow" />
+        <ChevronRight size={20} className="pss-historico-arrow" />
       </div>
 
       {/* Promo */}
-      <div className="ps-promo-box">
+      <div className="pss-promo-box">
         <div className="promo-text">
           <h2>💛 Passeio grátis</h2>
           <p>No primeiro agendamento!</p>
@@ -66,7 +66,7 @@ export default function Passeios() {
       </div>
 
       {/* Busca */}
-      <div className="ps-search-box">
+      <div className="pss-search-box">
         <Search size={18} className="search-icon" />
         <input
           type="text"
@@ -76,25 +76,25 @@ export default function Passeios() {
         />
       </div>
 
-      <h2 className="ps-subtitle">Nossos passeios</h2>
+      <h2 className="pss-subtitle">Nossos passeios</h2>
 
       {/* GRID */}
-      <div className="ps-grid">
+      <div className="pss-grid">
         {filtrados.map((s, i) => (
           <div
-            className="ps-card"
+            className="pss-card"
             key={i}
             onClick={() => escolher(s)}
           >
-            <span className="ps-icon">{s.icon}</span>
-            <p className="ps-card-title">{s.nome}</p>
-            <ChevronRight size={18} className="ps-arrow" />
+            <span className="pss-icon">{s.icon}</span>
+            <p className="pss-card-title">{s.nome}</p>
+            <ChevronRight size={18} className="pss-arrow" />
           </div>
         ))}
       </div>
 
       {busca && filtrados.length === 0 && (
-        <p className="ps-empty">Nenhum passeio encontrado 😕</p>
+        <p className="pss-empty">Nenhum passeio encontrado 😕</p>
       )}
 
       {/* FOOTER */}
