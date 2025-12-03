@@ -7,25 +7,37 @@ export default function ActivityTimeout() {
   useEffect(() => {
     let timer;
 
-    function reset() {
+    function startTimer() {
       clearTimeout(timer);
-      localStorage.setItem("lastActivity", Date.now());
+
       timer = setTimeout(() => {
+        // dispara evento global de expiração
+        window.dispatchEvent(new Event("session-expired"));
+
         clearToken();
         window.location.href = "/login";
       }, TIMEOUT);
     }
 
-    // capturar eventos
-    window.onload = reset;
-    document.onmousemove = reset;
-    document.onkeypress = reset;
-    document.onscroll = reset;
+    function resetActivity() {
+      localStorage.setItem("lastActivity", Date.now());
+      startTimer();
+    }
 
-    reset(); // inicia timer
+    // registrar eventos
+    window.addEventListener("mousemove", resetActivity);
+    window.addEventListener("keypress", resetActivity);
+    window.addEventListener("scroll", resetActivity);
 
-    return () => clearTimeout(timer);
+    // iniciar timer sem salvar timestamp
+    startTimer();
 
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("mousemove", resetActivity);
+      window.removeEventListener("keypress", resetActivity);
+      window.removeEventListener("scroll", resetActivity);
+    };
   }, []);
 
   return null;

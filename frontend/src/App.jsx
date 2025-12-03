@@ -30,17 +30,17 @@ import VacinasHistorico from "./pages/pets/vacina_historico";
 import Passeios from "./pages/pets/passeios";
 import PasseiosEscolherPet from "./pages/pets/passeio_escolher_pet";
 import PasseiosAgendar from "./pages/pets/passeio_agendar";
-import PasseiosHistorico from "./pages/pets/passeio_historico";
+import PasseiosHistorico from "./pages/pets/passeios_historico";
 import SessionExpiredModal from "./components/SessionExpiredModal";
 
 import { clearToken } from "./services/auth";
 
-
 function App() {
 
   const [expired, setExpired] = useState(false);
-  const MAX_TIMEOUT_CLOSED = 2 * 60 * 1000;
+  const MAX_TIMEOUT_CLOSED = 2 * 60 * 1000; // 2 min para teste
 
+  // logout automático após app FECHADO
   useEffect(() => {
     const lastActivity = localStorage.getItem("lastActivity");
     const now = Date.now();
@@ -50,31 +50,16 @@ function App() {
       window.location.href = "/login";
     }
 
+    // ⚠️ IMPORTANTE: só atualizar DEPOIS da checagem
     localStorage.setItem("lastActivity", now);
   }, []);
 
+  // recebe evento global
   useEffect(() => {
     const handler = () => setExpired(true);
     window.addEventListener("session-expired", handler);
     return () => window.removeEventListener("session-expired", handler);
   }, []);
-
-  useEffect(() => {
-    function updateActivity() {
-      localStorage.setItem("lastActivity", Date.now());
-    }
-
-    window.addEventListener("mousemove", updateActivity);
-    window.addEventListener("keypress", updateActivity);
-    window.addEventListener("scroll", updateActivity);
-
-    return () => {
-      window.removeEventListener("mousemove", updateActivity);
-      window.removeEventListener("keypress", updateActivity);
-      window.removeEventListener("scroll", updateActivity);
-    };
-  }, []);
-
 
   return (
     <Router>
@@ -86,6 +71,11 @@ function App() {
         <Route path="/" element={<Welcome />} />
         <Route path="/login" element={<Login />} />
         <Route path="/cadastro" element={<Cadastro />} />
+
+        <Route path="/home/home" element={
+          <PrivateRoute><Home /></PrivateRoute>
+        } />
+
         <Route path="/loja" element={<Loja />} />
         <Route path="/editar_p_dono" element={<EditarPerfil />} />
         <Route path="/meus_pets" element={<MeusPets />} />
@@ -95,6 +85,7 @@ function App() {
         <Route path="/consulta" element={<Consultas />} />
         <Route path="/sobre" element={<Sobre />} />
         <Route path="/cart" element={<Carrinho />} />
+
         <Route path="/consultas/escolher_pets" element={<ConsultaEscolherPet />} />
         <Route path="/consultas/agendar" element={<ConsultaAgendar />} />
         <Route path="/consultas/historico" element={<ConsultaHistorico />} />
@@ -106,20 +97,13 @@ function App() {
         <Route path="/vacinas/escolher_pet" element={<VacinasEscolherPet />} />
         <Route path="/vacinas/agendar" element={<VacinasAgendar />} />
         <Route path="/vacinas/historico" element={<VacinasHistorico />} />
+
         <Route path="/passeios" element={<Passeios />} />
         <Route path="/passeios/escolher" element={<PasseiosEscolherPet />} />
         <Route path="/passeios/agendar" element={<PasseiosAgendar />} />
         <Route path="/passeios/historico" element={<PasseiosHistorico />} />
-
-        <Route
-          path="/home/home"
-          element={
-            <PrivateRoute>
-              <Home />
-            </PrivateRoute>
-          }
-        />
       </Routes>
+
     </Router>
   );
 }

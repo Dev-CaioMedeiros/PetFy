@@ -1,4 +1,3 @@
-// src/components/SessionExpiredModal.jsx
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/session-expired.css";

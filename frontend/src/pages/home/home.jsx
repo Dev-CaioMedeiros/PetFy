@@ -26,7 +26,7 @@ export default function Home() {
   const [fotoPerfil, setFotoPerfil] = useState(null);
   const [busca, setBusca] = useState("");
   const [showMenu, setShowMenu] = useState(false);
-  const [showToast, setShowToast] = useState(false); // 👈 novo estado toast
+  const [showToast, setShowToast] = useState(false); 
 
   const navigate = useNavigate();
   const API_URL = BASE_URL.replace("/api", "");
