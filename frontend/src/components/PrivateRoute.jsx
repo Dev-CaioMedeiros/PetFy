@@ -1,4 +1,5 @@
 // src/components/PrivateRoute.jsx
+import React from "react";
 import { getToken, isExpired, doLogout } from "../services/auth";
 
 export default function PrivateRoute({ children }) {
