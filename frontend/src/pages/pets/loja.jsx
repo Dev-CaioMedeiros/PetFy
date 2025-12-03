@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { ArrowLeft } from "lucide-react";
+import { useState, useEffect } from "react";
+import { ArrowLeft, ShoppingCart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/pets/loja.css";
 
@@ -8,7 +8,7 @@ export default function Loja() {
 
   const [busca, setBusca] = useState("");
   const [favoritos, setFavoritos] = useState({});
-  const [abrirFiltros, setAbrirFiltros] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
 
   const produtos = [
     {
@@ -31,6 +31,12 @@ export default function Loja() {
     },
   ];
 
+  // Load cart on init
+  useEffect(() => {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    setCartCount(cart.length);
+  }, []);
+
   const produtosFiltrados = produtos.filter((p) =>
     p.nome.toLowerCase().includes(busca.toLowerCase())
   );
@@ -39,16 +45,35 @@ export default function Loja() {
     setFavoritos((prev) => ({ ...prev, [id]: !prev[id] }));
   }
 
+  function addToCart(produto) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    cart.push(produto);
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    setCartCount(cart.length);
+  }
+
   return (
     <div className="loja-mobile-container">
 
-      {/* ===== BOTÃO VOLTAR ===== */}
-      <button className="btn-voltar" onClick={() => navigate(-1)}>
-         <ArrowLeft size={22} /> Voltar
-      </button>
+      {/* ===== HEADER ===== */}
+      <div className="loja-header">
 
-      {/* ===== TÍTULO ===== */}
-      <h1 className="loja-titulo">Loja Pet</h1>
+        {/* VOLTAR */}
+        <button className="btn-voltar" onClick={() => navigate(-1)}>
+          <ArrowLeft size={22} /> Voltar
+        </button>
+
+        <h1 className="loja-titulo">Loja Pet</h1>
+
+        {/* CARRINHO */}
+        <div className="cart-icon-container" onClick={() => navigate("/cart")}>
+          <ShoppingCart size={26} className="cart-icon" />
+          {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
+        </div>
+
+      </div>
 
       {/* ===== BUSCA ===== */}
       <input
@@ -63,6 +88,7 @@ export default function Loja() {
       <div className="produtos-grid-mobile">
         {produtosFiltrados.map((produto) => (
           <div key={produto.id} className="produto-card-mobile">
+            {/* Favoritar */}
             <button
               className="favorito-btn"
               onClick={() => toggleFavorito(produto.id)}
@@ -75,10 +101,12 @@ export default function Loja() {
             <h3 className="produto-nome">{produto.nome}</h3>
             <p className="produto-preco">R$ {produto.preco.toFixed(2)}</p>
 
-            <button className="btn-carrinho-geral" onClick={() => navigate("/cart")}>
-              Ir para o Carrinho 🛒
+            <button
+              className="add-carrinho-btn"
+              onClick={() => addToCart(produto)}
+            >
+              Adicionar ao carrinho 🛒
             </button>
-
           </div>
         ))}
       </div>
