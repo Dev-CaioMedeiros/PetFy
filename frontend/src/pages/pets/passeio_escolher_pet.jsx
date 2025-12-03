@@ -51,8 +51,16 @@ export default function PasseiosEscolherPet() {
 
       <div className="pe-grid">
         {pets.map((pet) => (
-          <div key={pet.id} className="pe-card" onClick={() => escolherPet(pet)}>
-            <img src={getImg(pet)} className="pe-img" />
+          <div
+            key={pet.id}
+            className="pe-card"
+            onClick={() => escolherPet(pet)}
+          >
+            <img
+              src={getImg(pet)}
+              alt={pet.nome}
+              className="pe-img"
+            />
             <p className="pe-name">{pet.nome}</p>
           </div>
         ))}

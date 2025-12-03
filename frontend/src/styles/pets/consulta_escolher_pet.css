@@ -29,10 +29,9 @@
 
 /* grid */
 .cep-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
 }
 
 /* card */
