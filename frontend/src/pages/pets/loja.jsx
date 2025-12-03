@@ -31,10 +31,10 @@ export default function Loja() {
     },
   ];
 
-  // Load cart on init
+  // carregar carrinho e quantidade total
   useEffect(() => {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    setCartCount(cart.length);
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    setCartCount(cart.reduce((acc, item) => acc + item.quantidade, 0));
   }, []);
 
   const produtosFiltrados = produtos.filter((p) =>
@@ -48,34 +48,41 @@ export default function Loja() {
   function addToCart(produto) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    cart.push(produto);
+    const existente = cart.find((item) => item.id === produto.id);
+
+    if (existente) {
+      existente.quantidade += 1;
+    } else {
+      cart.push({
+        ...produto,
+        quantidade: 1,
+      });
+    }
 
     localStorage.setItem("cart", JSON.stringify(cart));
-    setCartCount(cart.length);
+
+    setCartCount(cart.reduce((acc, item) => acc + item.quantidade, 0));
   }
 
   return (
     <div className="loja-mobile-container">
 
-      {/* ===== HEADER ===== */}
+      {/* HEADER */}
       <div className="loja-header">
 
-        {/* VOLTAR */}
         <button className="btn-voltar" onClick={() => navigate(-1)}>
           <ArrowLeft size={22} /> Voltar
         </button>
 
         <h1 className="loja-titulo">Loja Pet</h1>
 
-        {/* CARRINHO */}
         <div className="cart-icon-container" onClick={() => navigate("/cart")}>
           <ShoppingCart size={26} className="cart-icon" />
           {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
         </div>
-
       </div>
 
-      {/* ===== BUSCA ===== */}
+      {/* BUSCA */}
       <input
         type="text"
         placeholder="Buscar produtos..."
@@ -84,11 +91,11 @@ export default function Loja() {
         onChange={(e) => setBusca(e.target.value)}
       />
 
-      {/* ===== LISTA DE PRODUTOS ===== */}
+      {/* LISTA */}
       <div className="produtos-grid-mobile">
         {produtosFiltrados.map((produto) => (
           <div key={produto.id} className="produto-card-mobile">
-            {/* Favoritar */}
+
             <button
               className="favorito-btn"
               onClick={() => toggleFavorito(produto.id)}
@@ -107,14 +114,16 @@ export default function Loja() {
             >
               Adicionar ao carrinho 🛒
             </button>
+
           </div>
         ))}
       </div>
 
-      {/* ===== FOOTER ===== */}
+      {/* FOOTER */}
       <footer className="loja-footer">
         © 2025 PetFy — Todos os direitos reservados 🐾
       </footer>
+
     </div>
   );
 }

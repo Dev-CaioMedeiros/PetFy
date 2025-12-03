@@ -9,13 +9,13 @@ export default function Carrinho() {
   const [carrinho, setCarrinho] = useState([]);
   const [mensagem, setMensagem] = useState("");
 
-  // carregar carrinho do storage quando abrir a tela
+  // carregar produtos
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem("cart")) || [];
     setCarrinho(stored);
   }, []);
 
-  // salvar sempre que mudar
+  // salvar após mudanças
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(carrinho));
   }, [carrinho]);
@@ -26,13 +26,11 @@ export default function Carrinho() {
 
   function alterarQuantidade(id, delta) {
     setCarrinho((prev) =>
-      prev
-        .map((item) =>
-          item.id === id
-            ? { ...item, quantidade: Math.max(1, item.quantidade + delta) }
-            : item
-        )
-        .filter((item) => item.quantidade > 0)
+      prev.map((item) =>
+        item.id === id
+          ? { ...item, quantidade: Math.max(1, item.quantidade + delta) }
+          : item
+      )
     );
   }
 
@@ -54,24 +52,19 @@ export default function Carrinho() {
 
   return (
     <div className="cart-container">
-      
-      {/* VOLTAR */}
+
       <button className="cart-voltar" onClick={() => navigate(-1)}>
         <ArrowLeft size={22} /> Voltar
       </button>
 
-      {/* TÍTULO */}
       <h1 className="cart-titulo">Meu Carrinho 🛒</h1>
 
-      {/* MENSAGEM */}
       {mensagem && <p className="mensagem-sucesso">{mensagem}</p>}
 
-      {/* VAZIO */}
       {carrinho.length === 0 && !mensagem && (
         <p className="cart-vazio">Seu carrinho está vazio 🐶</p>
       )}
 
-      {/* LISTA */}
       <div className="cart-lista">
         {carrinho.map((item) => (
           <div key={item.id} className="cart-item">
@@ -82,9 +75,7 @@ export default function Carrinho() {
               <h3>{item.nome}</h3>
               <p className="cart-preco">R$ {item.preco.toFixed(2)}</p>
 
-              {/* QUANTIDADE */}
               <div className="cart-quantidade">
-
                 <button onClick={() => alterarQuantidade(item.id, -1)}>
                   <Minus size={18} />
                 </button>
@@ -94,20 +85,16 @@ export default function Carrinho() {
                 <button onClick={() => alterarQuantidade(item.id, +1)}>
                   <Plus size={18} />
                 </button>
-
               </div>
             </div>
 
-            {/* REMOVER */}
             <button className="btn-remover" onClick={() => removerItem(item.id)}>
               <Trash2 size={18} />
             </button>
-
           </div>
         ))}
       </div>
 
-      {/* TOTAL + BOTÃO */}
       {carrinho.length > 0 && (
         <div className="cart-total">
           <p>Total: <strong>R$ {total.toFixed(2)}</strong></p>
@@ -118,11 +105,9 @@ export default function Carrinho() {
         </div>
       )}
 
-      {/* FOOTER */}
       <footer className="cart-footer">
         © 2025 PetFy — Todos os direitos reservados 🐾
       </footer>
-
     </div>
   );
 }
