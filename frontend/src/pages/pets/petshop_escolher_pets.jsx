@@ -24,7 +24,7 @@ export default function PetShopEscolherPet() {
         setPets(json);
 
       } catch (err) {
-        console.error(err);
+        console.error("Erro ao carregar pets:", err);
       }
     }
 
@@ -35,14 +35,14 @@ export default function PetShopEscolherPet() {
     navigate("/petshop/agendar", { state: { servico, pet } });
   }
 
-  const API_URL = "http://localhost:5000";
-
-function getImg(pet) {
-  if (pet.foto) return `${API_URL}/uploads/${pet.foto}`;
-  return "/placeholder_pet.png";
-}
-
-
+  function getImg(pet) {
+    if (!pet?.foto) {
+      return "/placeholder_pet.png";
+    }
+    // remove /api se existir no BASE_URL (Railway, Render, etc)
+    const base = BASE_URL.replace("/api", "");
+    return `${base}/uploads/${pet.foto}`;
+  }
 
   return (
     <div className="pe-container">
@@ -65,6 +65,7 @@ function getImg(pet) {
               alt={pet.nome}
               className="pe-img"
             />
+
             <p className="pe-name">{pet.nome}</p>
           </div>
         ))}
