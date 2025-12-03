@@ -16,7 +16,7 @@ import dogShop from "../../assets/pet-care.png";
 import dogLove from "../../assets/pet-friends-love.png";
 import dogMyPets from "../../assets/pet-mine.png";
 
-import LogoutToast from "../../components/LogoutToast"; // 👈 IMPORTANTE!
+import LogoutToast from "../../components/LogoutToast"; 
 import { getToken, clearToken } from "../../services/auth";
 import { BASE_URL } from "../../services/config";
 import "../../styles/home/home.css";

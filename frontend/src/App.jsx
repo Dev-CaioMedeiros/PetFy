@@ -35,10 +35,11 @@ import SessionExpiredModal from "./components/SessionExpiredModal";
 
 import { clearToken } from "./services/auth";
 
-const MAX_TIMEOUT_CLOSED = 2 * 60 * 1000;
-const [expired, setExpired] = useState(false);
 
 function App() {
+
+  const [expired, setExpired] = useState(false);
+  const MAX_TIMEOUT_CLOSED = 2 * 60 * 1000;
 
   useEffect(() => {
     const lastActivity = localStorage.getItem("lastActivity");
@@ -54,23 +55,23 @@ function App() {
 
   useEffect(() => {
     const handler = () => setExpired(true);
-      window.addEventListener("session-expired", handler);
+    window.addEventListener("session-expired", handler);
     return () => window.removeEventListener("session-expired", handler);
   }, []);
- 
+
   useEffect(() => {
     function updateActivity() {
       localStorage.setItem("lastActivity", Date.now());
     }
 
-    window.onmousemove = updateActivity;
-    window.onkeypress = updateActivity;
-    window.onscroll = updateActivity;
+    window.addEventListener("mousemove", updateActivity);
+    window.addEventListener("keypress", updateActivity);
+    window.addEventListener("scroll", updateActivity);
 
     return () => {
-      window.onmousemove = null;
-      window.onkeypress = null;
-      window.onscroll = null;
+      window.removeEventListener("mousemove", updateActivity);
+      window.removeEventListener("keypress", updateActivity);
+      window.removeEventListener("scroll", updateActivity);
     };
   }, []);
 
@@ -110,7 +111,6 @@ function App() {
         <Route path="/passeios/agendar" element={<PasseiosAgendar />} />
         <Route path="/passeios/historico" element={<PasseiosHistorico />} />
 
-        {/* Protegida */}
         <Route
           path="/home/home"
           element={
