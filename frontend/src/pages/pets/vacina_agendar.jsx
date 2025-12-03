@@ -12,16 +12,19 @@ export default function VacinasAgendar() {
 
   const [data, setData] = useState("");
   const [msg, setMsg] = useState("");
+  const [isError, setIsError] = useState(false);
   const [loading, setLoading] = useState(false);
 
   async function confirmar() {
     if (!data) {
       setMsg("Selecione uma data e hora!");
+      setIsError(true);
       return;
     }
 
     try {
       setMsg("");
+      setIsError(false);
       setLoading(true);
 
       const token = getToken();
@@ -43,10 +46,12 @@ export default function VacinasAgendar() {
       if (!res.ok) throw new Error(json.mensagem);
 
       setMsg("Vacina agendada com sucesso! 🎉");
+      setIsError(false);
 
       setTimeout(() => navigate("/vacinas/historico"), 1500);
     } catch (err) {
       setMsg("❌ " + err.message);
+      setIsError(true);
     } finally {
       setLoading(false);
     }
@@ -89,9 +94,15 @@ export default function VacinasAgendar() {
         {loading ? "Agendando..." : "Confirmar agendamento"}
       </button>
 
-      {msg && <p className="vaga-msg">{msg}</p>}
+      {msg && (
+        <div className={isError ? "msg-error" : "msg-success"}>
+          {msg}
+        </div>
+      )}
 
-      <footer className="home-footer-text">© 2025 AppPet — Todos os direitos reservados</footer>
+      <footer className="home-footer-text">
+        © 2025 AppPet — Todos os direitos reservados
+      </footer>
     </div>
   );
 }

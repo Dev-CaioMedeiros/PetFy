@@ -16,7 +16,7 @@ export default function PetShopAgendar() {
 
   async function confirmar() {
     if (!data) {
-      setMsg("Selecione uma data e hora!");
+      setMsg("❌ Selecione uma data e hora!");
       return;
     }
 
@@ -99,7 +99,11 @@ export default function PetShopAgendar() {
       </button>
 
       {/* MENSAGEM */}
-      {msg && <p className="psa-msg">{msg}</p>}
+      {msg && (
+        <div className={msg.startsWith("❌") ? "msg-error" : "msg-success"}>
+          {msg}
+        </div>
+      )}
       
       {/* Footer */}
       <footer className="home-footer-text">
@@ -108,3 +112,4 @@ export default function PetShopAgendar() {
     </div>
   );
 }
+  

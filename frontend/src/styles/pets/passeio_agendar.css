@@ -1,3 +1,4 @@
+/* ==== PAGE ==== */
 .pa-page {
   min-height: 100vh;
   background: #fff7ec;
@@ -6,6 +7,7 @@
   color: #3d2c2c;
 }
 
+/* ==== BACK BUTTON ==== */
 .pa-back {
   border: none;
   background: transparent;
@@ -19,6 +21,7 @@
   transition: .25s;
 }
 
+/* ==== TITLE ==== */
 .pa-title {
   text-align: center;
   font-size: 28px;
@@ -26,22 +29,7 @@
   margin-bottom: 18px;
 }
 
-.pa-card {
-  background: #ffffff;
-  border-radius: 20px;
-  padding: 22px;
-  box-shadow: 0 12px 28px rgba(0,0,0,0.07);
-  margin-bottom: 30px;
-} 
-
-.pa-row:last-child {
-  margin-bottom: 0;
-}
-
-.pa-row {
-  margin-bottom: 16px;
-}
-
+/* ==== INFO BOX ==== */
 .pa-info-box {
   background: white;
   border-radius: 16px;
@@ -63,12 +51,14 @@
     color: #3d2c2c;
 }
 
+/* ==== LABEL ==== */
 .pa-label {
   font-size: 15px;
   font-weight: 600;
   margin-bottom: 8px;
 }
 
+/* ==== INPUT ==== */
 .pa-input {
   background: #fff;
   display: flex;
@@ -89,6 +79,7 @@
   background: transparent;
 }
 
+/* ==== BUTTON ==== */
 .pa-btn {
   background: #ffa600;
   color: white;
@@ -106,19 +97,49 @@
   opacity: .85;
 }
 
-.pa-erro {
-  text-align: center;
-  margin-top: 14px;
-  font-size: 15px;
-  color: #c92a2a;
-  font-weight: 500;
+.pa-btn:disabled {
+  opacity: .6;
+  cursor: not-allowed;
 }
 
-.pa-sucesso {
+/* ==== SUCCESS MESSAGE ==== */
+.msg-success {
+  width: 100%;
   text-align: center;
-  font-weight: 600;
-  font-size: 15px;
-  margin-top: 14px;
+  padding: 14px;
+  margin-top: 16px;
+  border-radius: 12px;
+
+  background: #d8ffd1;
+  border: 2px solid #6fc463;
+
   color: #2f6f00;
+  font-size: 15px;
+  font-weight: 600;
+
+  animation: fadeInUp .3s ease forwards;
 }
 
+/* ==== ERROR MESSAGE ==== */
+.msg-error {
+  width: 100%;
+  text-align: center;
+  padding: 14px;
+  margin-top: 16px;
+  border-radius: 12px;
+
+  background: #ffe1e1;
+  border: 2px solid #ff7b7b;
+
+  color: #a60000;
+  font-size: 15px;
+  font-weight: 600;
+
+  animation: fadeInUp .3s ease forwards;
+}
+
+/* ==== ANIMATION ==== */
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}

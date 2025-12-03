@@ -1,3 +1,4 @@
+/* ===== PAGE ===== */
 .vaga-container {
   min-height: 100vh;
   background: #fff7ec;
@@ -6,6 +7,7 @@
   color: #4e2c00;
 }
 
+/* ===== BACK BTN ===== */
 .vaga-back {
   display: flex;
   align-items: center;
@@ -18,90 +20,91 @@
   font-size: 15px;
 }
 
+/* ===== TITLE ===== */
 .vaga-title {
   text-align: center;
   font-size: 28px;
-  font-weight: 700;
+  font-weight: 800;
   margin: 18px 0 26px;
+  color: #3d2c2c;
 }
 
-/* CARD */
+/* ===== CARD ===== */
 .vaga-card {
-  background: #fffbf3;
-  border-radius: 16px;
-  padding: 18px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-  margin-bottom: 24px;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 22px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.07);
+  margin-bottom: 26px;
 }
 
 .vaga-card p {
   margin: 0;
-  font-size: 14px;
-  color: #6d563a;
+  font-size: 13px;
+  color: #7a6346;
 }
 
 .vaga-card h3 {
   margin: 4px 0 12px 0;
   font-size: 18px;
   font-weight: 700;
+  color: #3d2c2c;
 }
 
-/* LABEL */
+/* ===== LABEL ===== */
 .vaga-label {
-  font-size: 14px;
-  margin-bottom: 6px;
+  font-size: 15px;
+  margin-bottom: 10px;
   display: block;
+  font-weight: 600;
 }
 
-/* INPUT */
+/* ===== INPUT ===== */
 .vaga-input-box {
   display: flex;
   align-items: center;
   background: #fff;
-  border-radius: 14px;
-  border: 1.8px solid  #ff9e9e;
-  padding: 12px 14px;
-  margin-bottom: 18px;
-  transition: .2s ease;
+  border-radius: 16px;
+  border: 1.8px solid #ff9e9e;
+  padding: 12px 16px;
+  margin-bottom: 22px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.05);
+  transition: .2s;
 }
 
-.vaga-input-box:focus-within {
-  border-color: #ffb84c;
-  box-shadow: 0 0 0 3px rgba(255,184,76,0.25);
+.vaga-empty {
+  border-color: #ff9e9e;
 }
 
+/* ===== ICON ===== */
 .vaga-icon {
-  margin-right: 10px;
+  margin-right: 12px;
   color: #c0841c;
 }
 
+/* ===== INPUT FIELD ===== */
 .vaga-input {
   border: none;
   outline: none;
   width: 100%;
   font-size: 15px;
   background: none;
-  color: #4e2c00;
+  color: #3d2c2c;
 }
 
-.vaga-input::placeholder {
-  color: #b8a08a;
-}
-
-/* BUTTON */
+/* ===== BUTTON ===== */
 .vaga-btn {
   width: 100%;
   padding: 16px;
   background: #ffb84c;
   border: none;
-  border-radius: 14px;
+  border-radius: 16px;
   font-weight: 700;
-  font-size: 16px;
-  color: white;
+  font-size: 17px;
+  color: #fff;
   cursor: pointer;
   transition: .25s ease;
-  margin-bottom: 12px;
-  letter-spacing: .5px;
+  box-shadow: 0 8px 18px rgba(255, 184, 76, 0.35);
 }
 
 .vaga-btn:hover {
@@ -110,26 +113,54 @@
 }
 
 .vaga-btn.disabled {
-  background: #ffd9a3;
+  background: #ffc785;
   cursor: not-allowed;
   transform: none;
 }
 
-/* MESSAGE */
-.vaga-msg {
+/* ===== SUCCESS BOX ===== */
+.msg-success {
+  width: 100%;
   text-align: center;
-  font-weight: 600;
-  font-size: 15px;
-  margin-top: 14px;
+  padding: 14px;
+  margin-top: 20px;
+  border-radius: 14px;
+
+  background: #d8ffd1;
+  border: 2px solid #6fc463;
   color: #2f6f00;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  animation: fadeInUp .3s ease forwards;
 }
 
-.vaga-msg.erro {
-  color: #7a0000;
-  background: #ffdede;
+/* ===== ERROR BOX ===== */
+.msg-error {
+  width: 100%;
+  text-align: center;
+  padding: 14px;
+  margin-top: 20px;
+  border-radius: 14px;
+
+  background: #ffe1e1;
+  border: 2px solid #ff7b7b;
+  color: #a60000;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  animation: fadeInUp .3s ease forwards;
 }
 
-/* FOOTER */
+/* ===== ANIMATION ===== */
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== FOOTER ===== */
 .home-footer-text {
   text-align: center;
   font-size: 13px;

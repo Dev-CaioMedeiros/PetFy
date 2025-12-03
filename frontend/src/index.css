@@ -5,3 +5,26 @@
 body {
   @apply bg-amber-50 text-gray-800 font-[Poppins];
 }
+
+.success-box {
+  width: 100%;
+  text-align: center;
+  padding: 14px 16px;
+  margin-top: 16px;
+  border-radius: 12px;
+
+  background: #d8ffd1;
+  border: 1.8px solid #6fc463;
+
+  color: #2f6f00;
+  font-size: 15px;
+  font-weight: 600;
+
+  animation: fadeInUp .4s ease forwards;
+}
+
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(6px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+

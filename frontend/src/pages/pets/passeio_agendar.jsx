@@ -13,14 +13,19 @@ export default function PasseiosAgendar() {
   const pet = state?.pet;
 
   const [data, setData] = useState("");
-  const [erro, setErro] = useState(null);
+  const [msg, setMsg] = useState(""); // sucesso ou erro
+  const [loading, setLoading] = useState(false);
 
   async function enviar() {
-    setErro(null);
-
-    if (!data) return setErro("Selecione uma data e hora");
+    if (!data) {
+      setMsg("❌ Selecione uma data e hora");
+      return;
+    }
 
     try {
+      setLoading(true);
+      setMsg("");
+
       const token = getToken();
 
       const res = await fetch(`${BASE_URL}/passeios/agendamentos`, {
@@ -38,12 +43,17 @@ export default function PasseiosAgendar() {
 
       const json = await res.json();
 
-      if (!res.ok) throw new Error(json.mensagem || "Erro");
+      if (!res.ok) throw new Error(json.mensagem || "Erro ao agendar");
 
-      navigate("/passeios/historico");
+      setMsg("Passeio agendado com sucesso! 🎉");
+
+      // redireciona após 1.5s
+      setTimeout(() => navigate("/passeios/historico"), 1500);
 
     } catch (err) {
-      setErro(err.message);
+      setMsg("❌ " + err.message);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -56,6 +66,7 @@ export default function PasseiosAgendar() {
 
       <h1 className="pa-title">Agendar Passeio</h1>
 
+      {/* CARD DE INFO */}
       <div className="pa-info-box">
         <p>Pet:</p>
         <h3>{pet?.nome}</h3>
@@ -66,6 +77,7 @@ export default function PasseiosAgendar() {
 
       <p className="pa-label">Escolha a data e hora:</p>
 
+      {/* INPUT */}
       <div className="pa-input">
         <Calendar size={20} className="pa-cal-icon" />
         <input
@@ -75,11 +87,17 @@ export default function PasseiosAgendar() {
         />
       </div>
 
-      <button className="pa-btn" onClick={enviar}>
-        Confirmar agendamento
+      {/* BOTÃO */}
+      <button className="pa-btn" onClick={enviar} disabled={loading}>
+        {loading ? "Agendando..." : "Confirmar agendamento"}
       </button>
 
-      {erro && <p className="pa-erro">❌ {erro}</p>}
+      {/* MENSAGEM */}
+      {msg && (
+        <div className={msg.includes("❌") ? "msg-error" : "msg-success"}>
+          {msg}
+        </div>
+      )}
 
       <footer className="home-footer-text">
         © 2025 AppPet — Todos os direitos reservados

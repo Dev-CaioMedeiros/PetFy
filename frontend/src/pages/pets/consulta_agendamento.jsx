@@ -12,28 +12,19 @@ export default function ConsultaAgendar() {
 
   const [data, setData] = useState("");
   const [msg, setMsg] = useState("");
-  const [tipoMsg, setTipoMsg] = useState(""); // "sucesso" ou "erro"
+  const [isError, setIsError] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [erroData, setErroData] = useState(false);
 
   async function confirmarAgendamento() {
-
-    if (!pet?.id) {
-      alert("Pet inválido");
-      return;
-    }
-
     if (!data) {
-      setErroData(true);
       setMsg("Selecione uma data e hora!");
-      setTipoMsg("erro");
+      setIsError(true);
       return;
     }
 
     try {
-      setErroData(false);
       setMsg("");
-      setTipoMsg("");
+      setIsError(false);
       setLoading(true);
 
       const token = getToken();
@@ -53,17 +44,17 @@ export default function ConsultaAgendar() {
       });
 
       const json = await res.json();
-      if (!res.ok) throw new Error(json.mensagem || "Erro ao agendar");
+      if (!res.ok) throw new Error(json.mensagem);
 
       setMsg("Consulta agendada com sucesso! 🎉");
-      setTipoMsg("sucesso");
+      setIsError(false);
 
       setTimeout(() => {
         navigate("/consultas/historico");
       }, 1500);
     } catch (err) {
       setMsg("❌ " + err.message);
-      setTipoMsg("erro");
+      setIsError(true);
     } finally {
       setLoading(false);
     }
@@ -71,15 +62,16 @@ export default function ConsultaAgendar() {
 
   return (
     <div className="agendar-container">
+
       {/* Voltar */}
       <button className="agendar-back" onClick={() => navigate(-1)}>
         <ArrowLeft size={22} /> Voltar
       </button>
 
-      {/* Título – igual PetShop */}
+      {/* Título */}
       <h1 className="agendar-title">Agendar Consulta</h1>
 
-      {/* Card Pet + Serviço (mesmo layout) */}
+      {/* Card */}
       <div className="agendar-card">
         <div className="agendar-row">
           <p>Pet</p>
@@ -92,15 +84,13 @@ export default function ConsultaAgendar() {
         </div>
       </div>
 
-      {/* Data e hora */}
+      {/* Label */}
       <label className="agendar-label">Escolha data e hora</label>
 
-      <div
-        className={`agendar-input-box ${
-          erroData ? "agendar-input-error" : ""
-        }`}
-      >
+      {/* Input */}
+      <div className={`agendar-input-box ${isError ? "agendar-input-error" : ""}`}>
         <Calendar size={22} className="agendar-icon" />
+
         <input
           type="datetime-local"
           value={data}
@@ -120,7 +110,9 @@ export default function ConsultaAgendar() {
 
       {/* Mensagem */}
       {msg && (
-        <p className={`agendar-msg ${tipoMsg ? tipoMsg : ""}`}>{msg}</p>
+        <div className={isError ? "msg-error" : "msg-success"}>
+          {msg}
+        </div>
       )}
 
       {/* Footer */}
