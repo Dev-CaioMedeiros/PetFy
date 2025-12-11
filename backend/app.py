@@ -45,21 +45,34 @@ with app.app_context():
 
     try:
         insp = inspect(db.engine)
-        if "agendamentos" in insp.get_table_names():
-            colunas_ag = [c["name"] for c in insp.get_columns("agendamentos")]
-            if "observacoes" not in colunas_ag:
-                try:
-                    db.session.execute(
-                        text("ALTER TABLE agendamentos ADD COLUMN observacoes TEXT NULL")
-                    )
-                    db.session.commit()
-                    print("✅ Coluna 'observacoes' adicionada em agendamentos")
-                except Exception as e:
-                    db.session.rollback()
-                    print(f"⚠️ Erro ao adicionar coluna 'observacoes': {e}")
-        else:
-            # se a tabela não existia, db.create_all() já a criou com o campo (se você atualizou o model)
-            print("Tabela 'agendamentos' não encontrada — criado via create_all() se necessário.")
+
+        # Mapeia tabelas que queremos garantir a coluna observacoes
+        tabelas_checar = [
+            ("agendamentos", "observacoes"),
+            ("petshop_agendamentos", "observacoes"),
+            ("passeios_agendamentos", "observacoes"),
+        ]
+
+        for table_name, coluna in tabelas_checar:
+            try:
+                if table_name in insp.get_table_names():
+                    colunas = [c["name"] for c in insp.get_columns(table_name)]
+                    if coluna not in colunas:
+                        try:
+                            db.session.execute(
+                                text(f"ALTER TABLE {table_name} ADD COLUMN {coluna} TEXT NULL")
+                            )
+                            db.session.commit()
+                            print(f"✅ Coluna '{coluna}' adicionada em {table_name}")
+                        except Exception as e:
+                            db.session.rollback()
+                            print(f"⚠️ Erro ao adicionar coluna '{coluna}' em {table_name}: {e}")
+                else:
+                    # se a tabela não existia, db.create_all() já deve tê-la criado a partir dos models
+                    print(f"Tabela '{table_name}' não encontrada — create_all() pode criá-la se model estiver atualizado.")
+            except Exception as e_inner:
+                print(f"⚠️ Falha ao inspecionar tabela {table_name}: {e_inner}")
+
     except Exception as e:
         # segurança: se o inspect falhar, só registra
         print(f"⚠️ Falha ao verificar colunas (inspect): {e}")
