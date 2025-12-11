@@ -1,45 +1,63 @@
 /* ===== PAGE ===== */
 .psa-container {
   min-height: 100vh;
+  width: 100%;
   background: #fff7ec;
-  padding: 22px;
+  padding: 18px;
   font-family: "Poppins", sans-serif;
   color: #4e2c00;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.psa-content {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
 /* ===== BACK BTN ===== */
 .psa-back {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   background: none;
   border: none;
   color: #c0841c;
   font-weight: 600;
   cursor: pointer;
   font-size: 15px;
+  padding: 6px 0;
 }
 
 /* ===== TITLE ===== */
 .psa-title {
-  text-align: center;
-  font-size: 28px;
+  text-align: left;
+  font-size: 26px;
   font-weight: 800;
-  margin: 18px 0 26px;
+  margin: 4px 0 8px;
   color: #3d2c2c;
 }
 
 /* ===== CARD ===== */
 .psa-card {
   background: #ffffff;
-  border-radius: 20px;
-  padding: 22px;
-  box-shadow: 0 12px 28px rgba(0,0,0,0.07);
-  margin-bottom: 30px;
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+  margin-bottom: 6px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 .psa-row {
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 }
 
 .psa-row:last-child {
@@ -48,36 +66,37 @@
 
 .psa-card p {
   margin: 0;
-  font-size: 13px;
+  font-size: 12px;
   color: #7a6346;
 }
 
 .psa-card h3 {
-  margin: 4px 0 0;
-  font-size: 18px;
+  margin: 6px 0 0;
+  font-size: 16px;
   font-weight: 700;
   color: #3d2c2c;
 }
 
 /* ===== LABEL ===== */
 .psa-label {
-  font-size: 15px;
-  margin-bottom: 10px;
+  font-size: 14px;
+  margin-bottom: 8px;
   display: block;
   font-weight: 600;
+  color: #4b2e10;
 }
 
 /* ===== INPUT BOX ===== */
 .psa-input-box {
   display: flex;
   align-items: center;
-  background: #fff;
-  border-radius: 16px;
-  border: 1.8px solid #ff9e9e;
-  padding: 12px 16px;
-  margin-bottom: 22px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.05);
-  transition: .2s;
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1.6px solid #ffe0c2;
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.04);
+  transition: .18s;
 }
 
 .psa-input-box.psa-empty {
@@ -88,6 +107,7 @@
 .psa-icon {
   margin-right: 12px;
   color: #c0841c;
+  flex-shrink: 0;
 }
 
 /* ===== INPUT ===== */
@@ -100,19 +120,49 @@
   color: #3d2c2c;
 }
 
+/* ===== TEXTAREA ===== */
+.psa-textarea-box {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1.4px solid #ffe0c2;
+  padding: 10px 12px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.03);
+}
+
+.psa-textarea-icon {
+  color: #c0841c;
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+
+.psa-textarea {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 14px;
+  min-height: 76px;
+  resize: vertical;
+  color: #4b2e10;
+  background: transparent;
+}
+
 /* ===== BUTTON ===== */
 .psa-btn {
   width: 100%;
-  padding: 16px;
+  padding: 14px;
   background: #ffb84c;
   border: none;
-  border-radius: 16px;
+  border-radius: 12px;
   font-weight: 700;
-  font-size: 17px;
+  font-size: 16px;
   color: #fff;
   cursor: pointer;
-  transition: .25s ease;
+  transition: .2s ease;
   box-shadow: 0 8px 18px rgba(255, 184, 76, 0.35);
+  margin-top: 6px;
 }
 
 .psa-btn:hover {
@@ -126,40 +176,28 @@
   transform: none;
 }
 
-/* ===== SUCCESS BOX ===== */
-.msg-success {
+/* ===== SUCCESS / ERROR ===== */
+.msg-success, .msg-error {
   width: 100%;
   text-align: center;
-  padding: 14px;
-  margin-top: 20px;
-  border-radius: 14px;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  animation: fadeInUp .25s ease forwards;
+}
 
+.msg-success {
   background: #d8ffd1;
   border: 2px solid #6fc463;
   color: #2f6f00;
-
-  font-size: 15px;
-  font-weight: 600;
-
-  animation: fadeInUp .3s ease forwards;
 }
 
-/* ===== ERROR BOX ===== */
 .msg-error {
-  width: 100%;
-  text-align: center;
-  padding: 14px;
-  margin-top: 20px;
-  border-radius: 14px;
-
   background: #ffe1e1;
   border: 2px solid #ff7b7b;
   color: #a60000;
-
-  font-size: 15px;
-  font-weight: 600;
-
-  animation: fadeInUp .3s ease forwards;
 }
 
 /* ===== ANIMATION ===== */
@@ -172,6 +210,6 @@
 .home-footer-text {
   text-align: center;
   font-size: 13px;
-  margin-top: 40px;
+  margin-top: 22px;
   color: #a1876b;
 }

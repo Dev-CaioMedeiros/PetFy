@@ -1,135 +1,149 @@
-import { ArrowLeft, Trash2 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { ArrowLeft, Calendar, PawPrint, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../services/config";
 import { getToken } from "../../services/auth";
 import "../../styles/pets/petshop_historico.css";
 
 export default function PetShopHistorico() {
   const navigate = useNavigate();
-  const [historico, setHistorico] = useState([]);
-  const [erro, setErro] = useState(null);
+  const [agendamentos, setAgendamentos] = useState([]);
+  const [filtro, setFiltro] = useState("todos"); // todos | futuro | passado
+  const [loading, setLoading] = useState(false);
+  const [msg, setMsg] = useState("");
 
-  // ===== Formatador de Data =====
-  function formatarData(iso) {
-    if (!iso) return "";
+  useEffect(() => {
+    buscar();
+  }, []);
 
+  async function buscar() {
     try {
-      const data = new Date(iso);
-      return data.toLocaleString("pt-BR", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
+      setLoading(true);
+      const token = getToken();
+      const res = await fetch(`${BASE_URL}/petshop/agendamentos`, {
+        headers: { Authorization: `Bearer ${token}` }
       });
-    } catch {
-      return iso;
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.mensagem || "Erro");
+      setAgendamentos(json);
+    } catch (err) {
+      console.error(err);
+      setMsg(err.message || "Erro ao carregar");
+    } finally {
+      setLoading(false);
     }
   }
 
-  // ===== Buscar Histórico =====
-  useEffect(() => {
-    async function load() {
-      try {
-        const token = getToken();
-        const res = await fetch(`${BASE_URL}/petshop/agendamentos`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-
-        if (!res.ok) throw new Error("Erro ao buscar histórico");
-
-        const json = await res.json();
-
-        // Ordenar por data DESC
-        json.sort((a, b) => new Date(b.data) - new Date(a.data));
-
-        setHistorico(json);
-
-      } catch (err) {
-        console.error(err);
-        setErro("Erro ao carregar histórico.");
-      }
-    }
-
-    load();
-  }, []);
-
-  // ===== Deletar =====
-  async function deletar(id) {
+  async function remover(id) {
+    if (!window.confirm("Tem certeza que deseja remover esse agendamento?")) return;
     try {
       const token = getToken();
       const res = await fetch(`${BASE_URL}/petshop/agendamentos/${id}`, {
         method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${token}` }
       });
-
-      if (!res.ok) throw new Error("Erro ao excluir");
-
-      setHistorico((prev) => prev.filter((item) => item.id !== id));
-
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.mensagem || "Erro ao remover");
+      // remove da lista
+      setAgendamentos(prev => prev.filter(a => a.id !== id));
     } catch (err) {
-      console.error(err);
-      alert("Erro ao excluir");
+      alert(err.message || "Erro ao remover");
     }
   }
 
-  // ===== Render =====
+  function getStatus(a) {
+    if (a.status === "cancelado") return "cancelado";
+    const d = new Date(a.data);
+    const agora = new Date();
+    return d < agora ? "passado" : "futuro";
+  }
+
+  function formatar(dataStr) {
+    const d = new Date(dataStr);
+    if (isNaN(d.getTime())) return dataStr;
+    const dia = String(d.getDate()).padStart(2, "0");
+    const mes = String(d.getMonth() + 1).padStart(2, "0");
+    const ano = d.getFullYear();
+    const h = String(d.getHours()).padStart(2, "0");
+    const m = String(d.getMinutes()).padStart(2, "0");
+    return `${dia}/${mes}/${ano}, ${h}:${m}`;
+  }
+
+  const filtrados = agendamentos.filter(a => {
+    const s = getStatus(a);
+    if (filtro === "todos") return true;
+    if (filtro === "futuro") return s === "futuro";
+    if (filtro === "passado") return s === "passado";
+    if (filtro === "cancelado") return s === "cancelado";
+    return true;
+  });
+
   return (
-    <div className="h-page">
+    <div className="psh-container">
+      <div className="psh-content">
+        <header className="psh-header">
+          <button className="psh-back" onClick={() => navigate(-1)}>
+            <ArrowLeft size={20} /> Voltar
+          </button>
+          <h1 className="psh-title">Histórico PetShop</h1>
+        </header>
 
-      {/* Voltar */}
-      <button className="h-back" onClick={() => navigate(-1)}>
-        <ArrowLeft size={22} /> Voltar
-      </button>
+        <div className="psh-filters">
+          <button className={`psh-chip ${filtro === "todos" ? "active" : ""}`} onClick={() => setFiltro("todos")}>Todos</button>
+          <button className={`psh-chip ${filtro === "futuro" ? "active" : ""}`} onClick={() => setFiltro("futuro")}>Ainda vai acontecer</button>
+          <button className={`psh-chip ${filtro === "passado" ? "active" : ""}`} onClick={() => setFiltro("passado")}>Já aconteceu</button>
+          <button className={`psh-chip ${filtro === "cancelado" ? "active" : ""}`} onClick={() => setFiltro("cancelado")}>Cancelado</button>
+        </div>
 
-      {/* Título */}
-      <h1 className="h-title">Histórico do Pet Shop</h1>
+        {msg && <div className="psh-msg">{msg}</div>}
+        {loading && <p className="psh-loading">Carregando...</p>}
+        {!loading && filtrados.length === 0 && <p className="psh-empty">Nenhum agendamento encontrado.</p>}
 
-      {/* Erro */}
-      {erro && <p className="h-erro">{erro}</p>}
+        <div className="psh-list">
+          {filtrados.map(a => {
+            const status = getStatus(a);
+            return (
+              <article key={a.id} className="psh-card">
+                <div className={`psh-bar ${status}`} />
+                <div className="psh-main">
+                  <header className="psh-card-header">
+                    <div>
+                      <h2 className="psh-card-title">{a.servico}</h2>
+                      <span className={`psh-status ${status}`}>
+                        {status === "futuro" ? "Ainda vai acontecer" : status === "passado" ? "Já aconteceu" : "Cancelado"}
+                      </span>
+                    </div>
+                    <button className="psh-delete" onClick={() => remover(a.id)} title="Remover">
+                      <Trash2 size={16} />
+                    </button>
+                  </header>
 
-      {/* Lista */}
-      <div className="h-list">
-        {historico.map((item) => (
-          <div key={item.id} className="h-card">
+                  <div className="psh-row">
+                    <Calendar size={16} />
+                    <span>{formatar(a.data)}</span>
+                  </div>
 
-            <div className="h-card-top">
-              <h3>{item.servico}</h3>
-              <Trash2
-                size={20}
-                className="h-trash"
-                onClick={() => deletar(item.id)}
-              />
-            </div>
+                  <div className="psh-row">
+                    <PawPrint size={16} />
+                    <span><strong>Pet:</strong> {a.pet_nome}</span>
+                  </div>
 
-            <p className="h-date">{formatarData(item.data)}</p>
+                  {a.observacoes && (
+                    <div className="psh-obs">
+                      <small className="psh-obs-label">Observações</small>
+                      <p className="psh-obs-text">{a.observacoes}</p>
+                    </div>
+                  )}
+                </div>
+              </article>
+            );
+          })}
+        </div>
 
-            <p className="h-pet">
-              <b>Pet:</b> {item.pet_nome}
-            </p>
-
-          </div>
-        ))}
-
-        <button
-  className="h-home-btn"
-  onClick={() => navigate("/")}
->
-  Voltar ao Início
-</button>
-
-
-        {/* Se vazio */}
-        {historico.length === 0 && !erro && (
-          <p className="h-empty">Nenhum serviço encontrado 😕</p>
-        )}
+        <button className="psh-home" onClick={() => navigate("/")}>Voltar ao Início</button>
       </div>
 
-      {/* Footer */}
-      <footer className="home-footer-text">
-         © 2025 PetFy — Todos os direitos reservados 🐾
-      </footer>
+      <footer className="psh-footer">© 2025 PetFy — Todos os direitos reservados 🐾</footer>
     </div>
   );
 }

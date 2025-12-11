@@ -13,19 +13,19 @@ petshop_routes = Blueprint("petshop_routes", __name__)
 @petshop_routes.route("/petshop/agendamentos", methods=["POST"])
 @token_required
 def criar_agendamento(usuario_id):
-
     data = request.get_json() or {}
 
     pet_id = data.get("pet_id")
     servico = data.get("servico")
     data_agendamento = data.get("data")
+    observacoes = data.get("observacoes")  # 🔹 novo
 
     if not pet_id:
         return jsonify({"mensagem": "pet_id é obrigatório"}), 400
-    
+
     if not servico:
         return jsonify({"mensagem": "servico é obrigatório"}), 400
-    
+
     if not data_agendamento:
         return jsonify({"mensagem": "data é obrigatória"}), 400
 
@@ -38,7 +38,8 @@ def criar_agendamento(usuario_id):
         novo = PetShopAgendamento(
             pet_id=pet_id,
             servico=servico,
-            data=data_agendamento
+            data=data_agendamento,
+            observacoes=observacoes  # 🔹 salvar
         )
 
         db.session.add(novo)
@@ -48,7 +49,7 @@ def criar_agendamento(usuario_id):
             "mensagem": "Agendamento criado com sucesso",
             "id": novo.id
         }), 201
-    
+
     except Exception as e:
         db.session.rollback()
         return jsonify({"mensagem": str(e)}), 400
@@ -60,7 +61,6 @@ def criar_agendamento(usuario_id):
 @petshop_routes.route("/petshop/agendamentos", methods=["GET"])
 @token_required
 def listar_petshop(usuario_id):
-
     agendamentos = PetShopAgendamento.query.join(Pet).filter(
         Pet.dono_id == usuario_id
     ).order_by(PetShopAgendamento.data.desc()).all()
@@ -74,7 +74,6 @@ def listar_petshop(usuario_id):
 @petshop_routes.route("/petshop/agendamentos/<int:id>", methods=["DELETE"])
 @token_required
 def deletar_agendamento(usuario_id, id):
-
     agendamento = PetShopAgendamento.query.join(Pet).filter(
         PetShopAgendamento.id == id,
         Pet.dono_id == usuario_id

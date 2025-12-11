@@ -10,6 +10,9 @@ class PetShopAgendamento(db.Model):
     data = db.Column(db.DateTime, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
+    # 🔹 novo campo
+    observacoes = db.Column(db.Text, nullable=True)
+
     pet = db.relationship("Pet", backref="petshop_agendamentos")
 
     def to_dict(self):
@@ -18,6 +21,7 @@ class PetShopAgendamento(db.Model):
             "pet_id": self.pet_id,
             "pet_nome": self.pet.nome if self.pet else None,
             "servico": self.servico,
-            "data": self.data.isoformat(),
-            "created_at": self.created_at.isoformat()
+            "data": self.data.isoformat() if self.data else None,
+            "created_at": self.created_at.isoformat() if self.created_at else None,
+            "observacoes": self.observacoes
         }

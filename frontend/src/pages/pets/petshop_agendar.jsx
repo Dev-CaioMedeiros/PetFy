@@ -1,4 +1,4 @@
-import { ArrowLeft, Calendar } from "lucide-react";
+import { ArrowLeft, Calendar, ClipboardList } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { BASE_URL } from "../../services/config";
@@ -11,6 +11,7 @@ export default function PetShopAgendar() {
   const { servico, pet } = state || {};
 
   const [data, setData] = useState("");
+  const [observacoes, setObservacoes] = useState("");
   const [msg, setMsg] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -36,18 +37,19 @@ export default function PetShopAgendar() {
           pet_id: pet.id,
           servico: servico.nome,
           data,
+          observacoes, // enviado pro back
         })
       });
 
       const json = await res.json();
-      if (!res.ok) throw new Error(json.mensagem);
+      if (!res.ok) throw new Error(json.mensagem || "Erro ao agendar");
 
       setMsg("Serviço agendado com sucesso! 🎉");
 
-      setTimeout(() => navigate("/petshop/historico"), 1500);
+      setTimeout(() => navigate("/petshop/historico"), 1200);
 
     } catch (err) {
-      setMsg("❌ " + err.message);
+      setMsg("❌ " + (err.message || err));
     } finally {
       setLoading(false);
     }
@@ -55,56 +57,70 @@ export default function PetShopAgendar() {
 
   return (
     <div className="psa-container">
-      
-      <button className="psa-back" onClick={() => navigate(-1)}>
-        <ArrowLeft size={22} /> Voltar
-      </button>
+      <div className="psa-content">
+        <button className="psa-back" onClick={() => navigate(-1)}>
+          <ArrowLeft size={22} /> Voltar
+        </button>
 
-      <h1 className="psa-title">Agendar serviço</h1>
+        <h1 className="psa-title">Agendar serviço</h1>
 
-      {/* CARD */}
-      <div className="psa-card">
-        <div className="psa-row">
-          <p>Pet</p>
-          <h3>{pet?.nome}</h3>
+        {/* CARD */}
+        <div className="psa-card">
+          <div className="psa-row">
+            <p>Pet</p>
+            <h3>{pet?.nome}</h3>
+          </div>
+
+          <div className="psa-row">
+            <p>Serviço</p>
+            <h3>{servico?.nome}</h3>
+          </div>
         </div>
 
-        <div className="psa-row">
-          <p>Serviço</p>
-          <h3>{servico?.nome}</h3>
+        {/* INPUT */}
+        <label className="psa-label">Escolha data e hora</label>
+
+        <div className={`psa-input-box ${!data ? "psa-empty" : ""}`}>
+          <Calendar size={22} className="psa-icon" />
+
+          <input
+            type="datetime-local"
+            value={data}
+            onChange={(e) => setData(e.target.value)}
+            className="psa-input"
+          />
         </div>
+
+        {/* OBSERVAÇÕES */}
+        <label className="psa-label">Observações (opcional)</label>
+        <div className="psa-textarea-box">
+          <ClipboardList size={18} className="psa-textarea-icon" />
+          <textarea
+            className="psa-textarea"
+            rows={4}
+            placeholder="Ex: Tigre está sujo nas patas, por favor caprichar na escovação. Já tomou anti-pulgas."
+            value={observacoes}
+            onChange={(e) => setObservacoes(e.target.value)}
+          />
+        </div>
+
+        {/* BOTÃO */}
+        <button
+          className={`psa-btn ${loading ? "disabled" : ""}`}
+          onClick={confirmar}
+          disabled={loading}
+        >
+          {loading ? "Agendando..." : "Confirmar agendamento"}
+        </button>
+
+        {/* MENSAGEM */}
+        {msg && (
+          <div className={msg.startsWith("❌") ? "msg-error" : "msg-success"}>
+            {msg}
+          </div>
+        )}
       </div>
 
-      {/* INPUT */}
-      <label className="psa-label">Escolha data e hora</label>
-
-      <div className={`psa-input-box ${!data ? "psa-empty" : ""}`}>
-        <Calendar size={22} className="psa-icon" />
-
-        <input
-          type="datetime-local"
-          value={data}
-          onChange={(e) => setData(e.target.value)}
-          className="psa-input"
-        />
-      </div>
-
-      {/* BOTÃO */}
-      <button
-        className={`psa-btn ${loading ? "disabled" : ""}`}
-        onClick={confirmar}
-        disabled={loading}
-      >
-        {loading ? "Agendando..." : "Confirmar agendamento"}
-      </button>
-
-      {/* MENSAGEM */}
-      {msg && (
-        <div className={msg.startsWith("❌") ? "msg-error" : "msg-success"}>
-          {msg}
-        </div>
-      )}
-      
       {/* Footer */}
       <footer className="home-footer-text">
          © 2025 PetFy — Todos os direitos reservados 🐾
@@ -112,4 +128,3 @@ export default function PetShopAgendar() {
     </div>
   );
 }
-  
