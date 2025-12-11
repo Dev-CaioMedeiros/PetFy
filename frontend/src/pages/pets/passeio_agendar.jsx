@@ -9,7 +9,6 @@ import "../../styles/pets/agendar.css"; // reaproveita CSS existente
 export default function PasseioAgendar() {
   const { state } = useLocation();
   const navigate = useNavigate();
-  // espera state = { pet, servico } ou só { pet } (servico pode ser "Passeio")
   const { pet, servico } = state || {};
 
   const passeioNome = servico?.nome || "Passeio";

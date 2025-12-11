@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { BASE_URL } from "../../services/config";
 import { getToken } from "../../services/auth";
-import "../../styles/pets/agendar.css"; // reaproveita CSS do agendar
+import "../../styles/pets/passeio_agendar.css"; // reaproveita CSS do agendar
 
 export default function VacinaAgendar() {
   const { state } = useLocation();
