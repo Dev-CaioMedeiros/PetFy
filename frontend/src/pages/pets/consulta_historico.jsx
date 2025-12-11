@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../services/config";
 import { getToken } from "../../services/auth";
-import "../../styles/pets/historico.css";
+import "../../styles/pets/consulta_historico.css";
 
 export default function ConsultasHistorico() {
   const navigate = useNavigate();
