@@ -1,97 +1,246 @@
-/* HISTÓRICO - layout unificado para cards */
+/* ===== PAGE ===== */
 .historico-container {
   min-height: 100vh;
   width: 100%;
   background: #fff7ec;
-  padding: 18px;
+  padding: 20px 18px 28px;
   font-family: "Poppins", sans-serif;
   color: #4e2c00;
+
   display: flex;
   flex-direction: column;
-  align-items: center;
-  box-sizing: border-box;
+  justify-content: space-between;
 }
 
 .historico-content {
   width: 100%;
-  max-width: 640px;
+  max-width: 540px;
   margin: 0 auto;
+}
+
+/* ===== HEADER ===== */
+.historico-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.historico-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  color: #c0841c;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 4px 0;
+}
+
+.historico-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 800;
+  color: #3d2c2c;
+}
+
+/* ===== FILTERS ===== */
+.historico-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.historico-filter-chip {
+  border-radius: 999px;
+  border: 1px solid #ffd9a7;
+  background: #fffdf8;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  color: #7a5732;
+  transition: 0.18s;
+}
+
+.historico-filter-chip.active {
+  background: #ffb84c;
+  border-color: #ffb84c;
+  color: white;
+  box-shadow: 0 4px 10px rgba(255, 184, 76, 0.35);
+}
+
+/* ===== LIST ===== */
+.historico-list {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
+  margin-top: 6px;
 }
 
-/* header */
-.historico-header { display:flex; gap:12px; align-items:center; margin-bottom:8px; width:100%; }
-.historico-back { background:none; border:none; color:#c0841c; font-weight:600; cursor:pointer; }
-.historico-title { margin:0; font-size:24px; font-weight:800; color:#3d2c2c; }
+.historico-loading,
+.historico-empty {
+  font-size: 14px;
+  color: #9b8064;
+  margin-top: 12px;
+}
 
-/* filtros */
-.historico-filters { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px; width:100%; }
-.historico-filter-chip { padding:6px 12px; border-radius:999px; border:1px solid #ffd9a7; background:#fffdf8; color:#7a5732; cursor:pointer; }
-.historico-filter-chip.active { background:#ffb84c; border-color:#ffb84c; color:#fff; box-shadow:0 4px 10px rgba(255,184,76,0.25); }
+/* ===== ERROR MSG ===== */
+.historico-msg-error {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #ffe1e1;
+  border: 1px solid #ff7b7b;
+  color: #a60000;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
 
-/* lista */
-.historico-list { display:flex; flex-direction:column; gap:12px; margin-top:8px; width:100%; }
-.historico-empty, .historico-loading { color:#9b8064; }
-
-/* card */
+/* ===== CARD ===== */
 .historico-card {
-  position: relative;
-  display:flex;
-  border-radius:14px;
-  background:#fff;
-  box-shadow:0 6px 16px rgba(0,0,0,0.05);
-  overflow:hidden;
-  width:100%;
-  box-sizing:border-box;
+  display: flex;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
 }
 
-.historico-card-status-bar { width:6px; }
-.historico-card-status-bar.status-futuro, .status-futuro { background:#2fb67c; }
-.historico-card-status-bar.status-passado, .status-passado { background:#4d7cff; }
-.historico-card-status-bar.status-cancelado, .status-cancelado { background:#ff6b6b; }
+/* barrinha lateral de status */
+.historico-card-status-bar {
+  width: 4px;
+}
 
-.historico-card-main { flex:1; padding:12px 14px; }
-.historico-card-header { display:flex; justify-content:space-between; align-items:flex-start; gap:8px; margin-bottom:6px; }
-.historico-card-title { margin:0 0 4px; font-size:15px; font-weight:700; color:#3d2c2c; }
-.historico-status-chip { padding:4px 8px; border-radius:999px; font-size:11px; font-weight:600; }
-.historico-status-chip.status-futuro { background:#e4ffef; color:#157b4c; }
-.historico-status-chip.status-passado { background:#e5ecff; color:#2748b5; }
-.historico-status-chip.status-cancelado { background:#ffe4e4; color:#b51f1f; }
+/* cores de status */
+.status-futuro {
+  background: #2fb67c;
+}
 
-.historico-delete-btn { background:none; border:none; cursor:pointer; color:#d8664f; }
+.status-passado {
+  background: #4d7cff;
+}
 
-.historico-card-info-row { display:flex; gap:8px; align-items:center; color:#6b4a26; font-size:13px; margin-top:6px; }
-.historico-card-info-row svg { opacity:0.9; }
+.status-cancelado {
+  background: #ff6b6b;
+}
 
-.historico-card-observacoes { margin-top:8px; border-top:1px dashed #f0d6b3; padding-top:8px; }
-.historico-observacoes-label { display:block; font-size:11px; color:#a78b6b; text-transform:uppercase; }
-.historico-observacoes-text { margin:4px 0 0; color:#4b2e10; font-size:13px; }
+/* conteúdo principal do card */
+.historico-card-main {
+  flex: 1;
+  padding: 14px 16px 14px 14px;
+}
 
-/* botão voltar ao início */
+/* header do card */
+.historico-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.historico-card-title {
+  margin: 0 0 4px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #3d2c2c;
+}
+
+/* badge de status */
+.historico-status-chip {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.historico-status-chip.status-futuro {
+  background: #e4ffef;
+  color: #157b4c;
+}
+
+.historico-status-chip.status-passado {
+  background: #e5ecff;
+  color: #2748b5;
+}
+
+.historico-status-chip.status-cancelado {
+  background: #ffe4e4;
+  color: #b51f1f;
+}
+
+/* botão delete */
+.historico-delete-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 4px;
+  color: #d8664f;
+  flex-shrink: 0;
+}
+
+/* linhas de info */
+.historico-card-info-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #6b4a26;
+  margin-top: 4px;
+}
+
+.historico-card-info-row svg {
+  flex-shrink: 0;
+}
+
+/* observações */
+.historico-card-observacoes {
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px dashed #f0d6b3;
+}
+
+.historico-observacoes-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #a78b6b;
+}
+
+.historico-observacoes-text {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: #4b2e10;
+}
+
+/* ===== HOME BUTTON ===== */
 .historico-home-btn {
-  width:100%;
-  margin-top:18px;
-  padding:14px;
-  background:#ffb84c;
-  color:#fff;
-  border:none;
-  border-radius:12px;
-  font-weight:700;
-  cursor:pointer;
-  box-shadow:0 8px 18px rgba(255,184,76,0.35);
-  max-width:640px;
-  margin-left:auto;
-  margin-right:auto;
+  width: 100%;
+  margin-top: 22px;
+  padding: 14px;
+  background: #ffb84c;
+  border: none;
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 15px;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.2s;
+  box-shadow: 0 8px 18px rgba(255, 184, 76, 0.35);
 }
 
-.historico-home-btn:hover { background:#ff9907; transform:translateY(-1px); }
+.historico-home-btn:hover {
+  background: #ff9907;
+  transform: translateY(-1px);
+}
 
-.historico-footer { text-align:center; color:#a1876b; margin-top:20px; font-size:12px; }
-
-/* responsividade */
-@media (max-width: 520px) {
-  .historico-content { padding-left:12px; padding-right:12px; max-width:100%; }
-  .historico-title { font-size:20px; }
+/* ===== FOOTER ===== */
+.historico-footer {
+  text-align: center;
+  font-size: 12px;
+  margin-top: 20px;
+  color: #a1876b;
 }
