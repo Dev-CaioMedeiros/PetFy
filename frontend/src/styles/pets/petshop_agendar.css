@@ -10,6 +10,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center; /* adicionado: centraliza conteúdo horizontalmente */
+  box-sizing: border-box;
 }
 
 .psa-content {
@@ -87,6 +89,8 @@
   display: flex;
   justify-content: space-between;
   gap: 16px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .psa-pet-left {
@@ -206,6 +210,8 @@
   margin-top: 8px;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
   transition: 0.2s;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .psa-input-box:focus-within {
@@ -291,6 +297,8 @@
   padding: 10px 12px;
   display: flex;
   gap: 8px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .psa-textarea-icon {
@@ -322,6 +330,11 @@
   cursor: pointer;
   transition: 0.22s ease;
   box-shadow: 0 8px 18px rgba(255, 184, 76, 0.35);
+
+  max-width: 640px; /* adicionado: limita largura do botão e centraliza abaixo */
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
 
 .psa-btn:hover {
@@ -346,6 +359,10 @@
   font-size: 14px;
   font-weight: 600;
   animation: fadeInUp 0.2s ease forwards;
+
+  max-width: 640px; /* adicionado: limita largura das mensagens */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .msg-success {
@@ -378,4 +395,20 @@
   font-size: 12px;
   margin-top: 26px;
   color: #a1876b;
+}
+
+/* ===== CENTRALIZAÇÃO MOBILE ===== */
+@media (max-width: 520px) {
+  .psa-content {
+    padding-left: 12px;
+    padding-right: 12px;
+    gap: 12px;
+    max-width: 100%;
+  }
+
+  .psa-title {
+    font-size: 20px;
+  }
+
+  .psa-pet-avatar { width:44px; height:44px; } /* mantém avatar em mobile */
 }
