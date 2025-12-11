@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { BASE_URL } from "../../services/config";
 import { getToken } from "../../services/auth";
-import "../../styles/pets/agendar.css"; // reaproveita CSS existente
+import "../../styles/pets/passeio_agendar.css";
 
 export default function PasseioAgendar() {
   const { state } = useLocation();
