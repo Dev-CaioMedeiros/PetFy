@@ -381,3 +381,86 @@
   margin-top: 24px;
   color: #a1876b;
 }
+
+/* ===== PET CARD - ajustes para ficar igual ao PetShop ===== */
+
+/* aumenta um pouco o padding do card (como no PetShop) */
+.agendar-pet-card {
+  padding: 18px 18px;
+  border-radius: 20px;
+}
+
+/* garante que a coluna direita (serviço) fique bem alinhada verticalmente como no PetShop */
+.agendar-pet-right {
+  text-align: right;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* tags: deixa do mesmo tamanho, com borda sutil e spacing igual ao PetShop */
+.agendar-pet-tags {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 6px;
+  flex-wrap: nowrap; /* tenta manter em uma linha quando couber */
+}
+
+/* estilo das tags (pills) idêntico ao PetShop */
+.agendar-tag {
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: #fff6e6;
+  color: #8b5a18;
+  border: 1px solid rgba(255, 208, 140, 0.7);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+  white-space: nowrap;
+}
+
+/* se quiser as tags menores quando o espaço for pequeno */
+@media (max-width: 420px) {
+  .agendar-pet-tags {
+    gap: 6px;
+  }
+  .agendar-tag {
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+}
+
+/* avatar: permitir imagem real com cover + pequena borda */
+.agendar-pet-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 999px;
+  display: block;
+}
+
+/* alternativa: avatar maior no estilo PetShop (opcional) */
+.agendar-pet-avatar--large {
+  width: 56px;
+  height: 56px;
+  font-size: 22px;
+}
+
+/* quando houver muitas tags, permite quebra elegante */
+.agendar-pet-tags.wrap {
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* corrige alinhamento vertical em telas pequenas */
+@media (max-width: 560px) {
+  .agendar-pet-card {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .agendar-pet-right {
+    text-align: left;
+    align-self: flex-start;
+  }
+}

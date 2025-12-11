@@ -46,7 +46,7 @@ export default function ConsultaAgendar() {
       });
 
       const json = await res.json();
-      if (!res.ok) throw new Error(json.mensagem);
+      if (!res.ok) throw new Error(json.mensagem || "Erro ao agendar");
 
       setMsg("Consulta agendada com sucesso! 🎉");
       setIsError(false);
@@ -55,12 +55,17 @@ export default function ConsultaAgendar() {
         navigate("/consultas/historico");
       }, 1500);
     } catch (err) {
-      setMsg("❌ " + err.message);
+      setMsg("❌ " + (err.message || err));
       setIsError(true);
     } finally {
       setLoading(false);
     }
   }
+
+  // pegar valores com fallback entre propriedades diferentes do model
+  const especie = pet?.especie || pet?.tipo || null;
+  const porte = pet?.porte || null;
+  const raca = pet?.raca || null;
 
   return (
     <div className="agendar-container">
@@ -90,9 +95,12 @@ export default function ConsultaAgendar() {
               <div>
                 <p className="agendar-pet-label">Pet</p>
                 <h3 className="agendar-pet-name">{pet?.nome}</h3>
+
+                {/* tags: espécie/tipo, porte, raça */}
                 <div className="agendar-pet-tags">
-                  {pet?.tipo && <span className="agendar-tag">{pet.tipo}</span>}
-                  {pet?.raca && <span className="agendar-tag">{pet.raca}</span>}
+                  {especie && <span className="agendar-tag">{especie}</span>}
+                  {porte && <span className="agendar-tag">{porte}</span>}
+                  {raca && <span className="agendar-tag">{raca}</span>}
                 </div>
               </div>
             </div>
