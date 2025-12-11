@@ -197,7 +197,7 @@ export default function CadastrarPet() {
           disabled={loading}
           whileTap={{ scale: loading ? 1 : 0.95 }}
         >
-          {loading ? "Cadastrando..." : "Cadastrar Pet"}
+          {loading ? "Cadastrando" : "Cadastrar Pet"}
         </motion.button>
       </form>
 

@@ -223,7 +223,7 @@ export default function Cadastro() {
             transition={{ duration: 0.2 }}
             disabled={loading}
           >
-            {loading ? "Cadastrando..." : "Cadastrar"}
+            {loading ? "Cadastrando" : "Cadastrar"}
           </motion.button>
         </form>
 

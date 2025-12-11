@@ -129,7 +129,7 @@ export default function Login() {
             whileTap={{ scale: loading ? 1 : 0.95 }}
             transition={{ duration: 0.2 }}
           >
-            {loading ? "Entrando..." : "Entrar"}
+            {loading ? "Entrando" : "Entrar"}
           </motion.button>
         </form>
 
