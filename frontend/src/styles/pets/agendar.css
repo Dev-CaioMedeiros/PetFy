@@ -3,7 +3,7 @@
   min-height: 100vh;
   width: 100%;
   background: #fff7ec;
-  padding: 20px 18px 28px;
+  padding: 10px 18px 28px; /* ajustado: padding-top reduzido para ficar menos espaçado */
   font-family: "Poppins", sans-serif;
   color: #4e2c00;
 
@@ -25,9 +25,9 @@
 /* ===== HEADER ===== */
 .agendar-header {
   display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  padding-bottom: 10px;
+  align-items: center; /* centralizado verticalmente agora */
+  gap: 10px;           /* gap reduzido */
+  padding-bottom: 6px; /* menos espaço abaixo do header */
 }
 
 .agendar-back {
@@ -40,17 +40,18 @@
   font-weight: 600;
   cursor: pointer;
   font-size: 14px;
-  padding: 6px 0;
+  padding: 4px 0; /* reduzido */
 }
 
 .agendar-header-texts {
   flex: 1;
+  line-height: 1;
 }
 
 .agendar-title {
   font-size: 24px;
   font-weight: 800;
-  margin: 0 0 4px;
+  margin: 0; /* removido margin-bottom extra */
   color: #3d2c2c;
 }
 
@@ -83,8 +84,8 @@
 /* ===== PET CARD ===== */
 .agendar-pet-card {
   background: #ffffff;
-  border-radius: 18px;
-  padding: 16px 14px;
+  border-radius: 20px; /* leve ajuste para combinar com as mudanças */
+  padding: 18px 18px; /* aumentado pra visual consistente com petshop */
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
   display: flex;
   justify-content: space-between;
@@ -126,23 +127,30 @@
 }
 
 .agendar-pet-tags {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 6px;
+  flex-wrap: nowrap;
 }
 
 .agendar-tag {
-  font-size: 11px;
-  padding: 4px 8px;
+  font-size: 12px;
+  padding: 5px 10px;
   border-radius: 999px;
-  background: #fff5db;
+  background: #fff6e6;
   color: #8b5a18;
-  border: 1px solid #ffe0a8;
+  border: 1px solid rgba(255, 208, 140, 0.7);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+  white-space: nowrap;
 }
 
 .agendar-pet-right {
   text-align: right;
   align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .agendar-service-name {
@@ -308,6 +316,7 @@
   font-size: 13px;
   color: #4b2e10;
   background: transparent;
+  min-height: 54px;
 }
 
 /* ===== BUTTON ===== */
@@ -384,50 +393,15 @@
 
 /* ===== PET CARD - ajustes para ficar igual ao PetShop ===== */
 
-/* aumenta um pouco o padding do card (como no PetShop) */
-.agendar-pet-card {
-  padding: 18px 18px;
-  border-radius: 20px;
-}
-
-/* garante que a coluna direita (serviço) fique bem alinhada verticalmente como no PetShop */
-.agendar-pet-right {
-  text-align: right;
-  align-self: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-/* tags: deixa do mesmo tamanho, com borda sutil e spacing igual ao PetShop */
-.agendar-pet-tags {
-  display: inline-flex;
-  gap: 8px;
-  align-items: center;
-  margin-top: 6px;
-  flex-wrap: nowrap; /* tenta manter em uma linha quando couber */
-}
-
-/* estilo das tags (pills) idêntico ao PetShop */
-.agendar-tag {
-  font-size: 12px;
-  padding: 5px 10px;
-  border-radius: 999px;
-  background: #fff6e6;
-  color: #8b5a18;
-  border: 1px solid rgba(255, 208, 140, 0.7);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
-  white-space: nowrap;
-}
-
-/* se quiser as tags menores quando o espaço for pequeno */
-@media (max-width: 420px) {
-  .agendar-pet-tags {
-    gap: 6px;
+/* when space is small, allow column layout */
+@media (max-width: 560px) {
+  .agendar-pet-card {
+    flex-direction: column;
+    gap: 12px;
   }
-  .agendar-tag {
-    font-size: 11px;
-    padding: 4px 8px;
+  .agendar-pet-right {
+    text-align: left;
+    align-self: flex-start;
   }
 }
 
@@ -453,14 +427,27 @@
   gap: 6px;
 }
 
-/* corrige alinhamento vertical em telas pequenas */
-@media (max-width: 560px) {
-  .agendar-pet-card {
-    flex-direction: column;
-    gap: 12px;
+/* ===== MOBILE (ajustes adicionais) ===== */
+@media (max-width: 420px) {
+  .agendar-content {
+    padding: 0 6px;
   }
-  .agendar-pet-right {
-    text-align: left;
-    align-self: flex-start;
+
+  .agendar-title {
+    font-size: 22px;
+  }
+
+  .agendar-pet-avatar {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  .agendar-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .agendar-pet-tags {
+    gap: 6px;
   }
 }
