@@ -51,12 +51,17 @@ with app.app_context():
         # lista de (tabela, coluna, tipo_sql) que queremos garantir
         # tipo_sql será usado quando precisarmos adicionar a coluna
         tabelas_checar = [
+            
             ("agendamentos", "observacoes", "TEXT NULL"),
             ("petshop_agendamentos", "observacoes", "TEXT NULL"),
             ("passeios_agendamentos", "observacoes", "TEXT NULL"),
-            ("vacinas_agendamentos", "observacoes", "TEXT NULL"),
+            
             ("petshop_agendamentos", "clinica_id", "INT NULL"),
             ("petshop_agendamentos", "clinica_nome", "VARCHAR(255) NULL"),
+
+            ("vacinas_agendamentos", "observacoes", "TEXT NULL"),
+            ("vacinas_agendamentos", "clinica_id", "INT NULL"),
+            ("vacinas_agendamentos", "clinica_nome", "VARCHAR(255) NULL"),
         ]
 
         for table_name, coluna, tipo_sql in tabelas_checar:

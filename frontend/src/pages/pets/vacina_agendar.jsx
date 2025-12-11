@@ -131,7 +131,7 @@ export default function VacinaAgendar() {
               <Calendar size={18} />
               <div>
                 <p className="agendar-info-label">Local</p>
-                <p className="agendar-info-value">PetFy PetShop</p>
+                <p className="agendar-info-value">Clinica PetFy</p>
               </div>
             </div>
           </div>
