@@ -1,6 +1,7 @@
 import os
 from flask import send_from_directory
-from sqlalchemy import text, inspect
+from sqlalchemy import text
+from sqlalchemy.inspection import inspect
 from config import init_app, db
 from routes.user_routes import user_routes
 from routes.pet_routes import pet_routes
@@ -41,12 +42,13 @@ app.register_blueprint(passeio_routes, url_prefix="/api")
 
 
 with app.app_context():
+    # cria tabelas novas conforme models
     db.create_all()
 
     try:
         insp = inspect(db.engine)
 
-        # Mapeia tabelas que queremos garantir a coluna observacoes
+        # lista de (tabela, coluna) que queremos garantir
         tabelas_checar = [
             ("agendamentos", "observacoes"),
             ("petshop_agendamentos", "observacoes"),
@@ -68,8 +70,7 @@ with app.app_context():
                             db.session.rollback()
                             print(f"⚠️ Erro ao adicionar coluna '{coluna}' em {table_name}: {e}")
                 else:
-                    # se a tabela não existia, db.create_all() já deve tê-la criado a partir dos models
-                    print(f"Tabela '{table_name}' não encontrada — create_all() pode criá-la se model estiver atualizado.")
+                    print(f"🚧 Tabela '{table_name}' não encontrada — se o model existir, create_all() tentou criá-la.")
             except Exception as e_inner:
                 print(f"⚠️ Falha ao inspecionar tabela {table_name}: {e_inner}")
 
