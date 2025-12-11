@@ -1,16 +1,28 @@
-/* ===== PAGE ===== */
+/* ================= PASSEIO — AGENDAR (psa) - padronizado ================= */
+:root {
+  --bg: #fff7ec;
+  --card: #ffffff;
+  --text: #3d2c2c;
+  --muted: #9b8064;
+  --accent: #ffb84c;
+  --accent-dark: #ff9907;
+  --accent-border: #ffe0c2;
+  --icon: #c0841c;
+  --success-bg: #d8ffd1;
+  --error-bg: #ffe1e1;
+}
+
 .psa-container {
   min-height: 100vh;
   width: 100%;
-  background: #fff7ec;
+  background: var(--bg);
   padding: 18px;
   font-family: "Poppins", sans-serif;
-  color: #4e2c00;
-
+  color: var(--text);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center; /* adicionado: centraliza conteúdo horizontalmente */
+  align-items: center;
   box-sizing: border-box;
 }
 
@@ -21,9 +33,11 @@
   display: flex;
   flex-direction: column;
   gap: 14px;
+  box-sizing: border-box;
+  padding-bottom: 24px;
 }
 
-/* ===== HEADER ===== */
+/* header */
 .psa-header {
   display: flex;
   align-items: flex-start;
@@ -36,7 +50,7 @@
   gap: 6px;
   background: none;
   border: none;
-  color: #c0841c;
+  color: var(--icon);
   font-weight: 600;
   cursor: pointer;
   font-size: 14px;
@@ -51,15 +65,15 @@
   font-size: 24px;
   font-weight: 800;
   margin: 0 0 4px;
-  color: #3d2c2c;
+  color: var(--text);
 }
 
 .psa-subtitle {
   font-size: 13px;
-  color: #9b8064;
+  color: var(--muted);
 }
 
-/* ===== SECTIONS ===== */
+/* sections */
 .psa-section {
   margin-top: 6px;
 }
@@ -72,17 +86,17 @@
   margin: 0;
   font-size: 16px;
   font-weight: 700;
-  color: #3d2c2c;
+  color: var(--text);
 }
 
 .psa-section-sub {
   font-size: 12px;
-  color: #9b8064;
+  color: var(--muted);
 }
 
-/* ===== PET CARD ===== */
+/* pet card */
 .psa-pet-card {
-  background: #ffffff;
+  background: var(--card);
   border-radius: 18px;
   padding: 16px 14px;
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
@@ -124,7 +138,7 @@
   margin: 2px 0 4px;
   font-size: 17px;
   font-weight: 700;
-  color: #3d2c2c;
+  color: var(--text);
 }
 
 .psa-pet-tags {
@@ -139,7 +153,7 @@
   border-radius: 999px;
   background: #fff5db;
   color: #8b5a18;
-  border: 1px solid #ffe0a8;
+  border: 1px solid rgba(255, 208, 140, 0.7);
 }
 
 .psa-pet-right {
@@ -151,7 +165,7 @@
   margin: 0;
   font-size: 15px;
   font-weight: 700;
-  color: #3d2c2c;
+  color: var(--text);
 }
 
 .psa-service-chip {
@@ -164,7 +178,7 @@
   color: #c6533f;
 }
 
-/* ===== INFO GRID ===== */
+/* info grid */
 .psa-info-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -175,7 +189,7 @@
   background: #fffdf8;
   border-radius: 14px;
   padding: 10px 9px;
-  border: 1px solid #ffe4c4;
+  border: 1px solid var(--accent-border);
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -199,13 +213,13 @@
   font-size: 12px;
 }
 
-/* ===== INPUT BOX DATA/HORA ===== */
+/* input box */
 .psa-input-box {
   display: flex;
   align-items: center;
-  background: #ffffff;
+  background: var(--card);
   border-radius: 16px;
-  border: 1.6px solid #ffe0c2;
+  border: 1.6px solid var(--accent-border);
   padding: 12px 14px;
   margin-top: 8px;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
@@ -215,25 +229,22 @@
 }
 
 .psa-input-box:focus-within {
-  border-color: #ffb84c;
+  border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(255, 184, 76, 0.28);
 }
 
-/* INPUT ERROR */
 .psa-input-error {
   border: 1.8px solid #ff5b5b !important;
   background: #fff0f0;
   box-shadow: 0 0 0 3px rgba(255, 90, 90, 0.22);
 }
 
-/* ICON */
 .psa-icon {
   margin-right: 12px;
-  color: #c0841c;
+  color: var(--icon);
   flex-shrink: 0;
 }
 
-/* INPUT WRAPPER */
 .psa-input-wrapper {
   width: 100%;
   display: flex;
@@ -246,24 +257,23 @@
   margin-bottom: 2px;
 }
 
-/* INPUT FIELD */
 .psa-input {
   border: none;
   outline: none;
   width: 100%;
   font-size: 14px;
   background: none;
-  color: #3d2c2c;
+  color: var(--text);
 }
 
-/* ===== TIME CHIPS ===== */
+/* time chips */
 .psa-times {
   margin-top: 12px;
 }
 
 .psa-times-label {
   font-size: 12px;
-  color: #9b8064;
+  color: var(--muted);
 }
 
 .psa-times-list {
@@ -288,12 +298,18 @@
   background: #ffe7bf;
 }
 
-/* ===== TEXTAREA (OBSERVAÇÕES) ===== */
+.psa-time-chip.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+/* textarea */
 .psa-textarea-wrapper {
   margin-top: 6px;
   border-radius: 16px;
-  background: #ffffff;
-  border: 1.4px solid #ffe0c2;
+  background: var(--card);
+  border: 1.4px solid var(--accent-border);
   padding: 10px 12px;
   display: flex;
   gap: 8px;
@@ -303,7 +319,7 @@
 
 .psa-textarea-icon {
   margin-top: 4px;
-  color: #c0841c;
+  color: var(--icon);
 }
 
 .psa-textarea {
@@ -316,12 +332,12 @@
   background: transparent;
 }
 
-/* ===== BUTTON ===== */
+/* button */
 .psa-btn {
   width: 100%;
   margin-top: 18px;
   padding: 15px;
-  background: #ffb84c;
+  background: var(--accent);
   border: none;
   border-radius: 16px;
   font-weight: 700;
@@ -330,15 +346,14 @@
   cursor: pointer;
   transition: 0.22s ease;
   box-shadow: 0 8px 18px rgba(255, 184, 76, 0.35);
-
-  max-width: 640px; /* adicionado: limita largura do botão e centraliza abaixo */
+  max-width: 640px;
   margin-left: auto;
   margin-right: auto;
   display: block;
 }
 
 .psa-btn:hover {
-  background: #ff9907;
+  background: var(--accent-dark);
   transform: translateY(-2px);
 }
 
@@ -348,7 +363,7 @@
   transform: none;
 }
 
-/* ===== SUCCESS / ERROR ===== */
+/* messages */
 .msg-success,
 .msg-error {
   width: 100%;
@@ -359,37 +374,35 @@
   font-size: 14px;
   font-weight: 600;
   animation: fadeInUp 0.2s ease forwards;
-
-  max-width: 640px; /* adicionado: limita largura das mensagens */
+  max-width: 640px;
   margin-left: auto;
   margin-right: auto;
 }
 
 .msg-success {
-  background: #d8ffd1;
+  background: var(--success-bg);
   border: 2px solid #6fc463;
   color: #2f6f00;
 }
 
 .msg-error {
-  background: #ffe1e1;
+  background: var(--error-bg);
   border: 2px solid #ff7b7b;
   color: #a60000;
 }
 
-/* ===== ANIMATION ===== */
 @keyframes fadeInUp {
-  0% {
+  from {
     opacity: 0;
     transform: translateY(6px);
   }
-  100% {
+  to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-/* ===== FOOTER ===== */
+/* footer */
 .home-footer-text {
   text-align: center;
   font-size: 12px;
@@ -397,7 +410,7 @@
   color: #a1876b;
 }
 
-/* ===== CENTRALIZAÇÃO MOBILE ===== */
+/* responsive */
 @media (max-width: 520px) {
   .psa-content {
     padding-left: 12px;
@@ -410,5 +423,22 @@
     font-size: 20px;
   }
 
-  .psa-pet-avatar { width:44px; height:44px; } /* mantém avatar em mobile */
+  .psa-pet-avatar {
+    width: 44px;
+    height: 44px;
+  }
+
+  .psa-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .psa-pet-card {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .psa-pet-right {
+    text-align: left;
+    align-self: flex-start;
+  }
 }

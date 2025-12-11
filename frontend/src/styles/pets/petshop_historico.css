@@ -1,26 +1,38 @@
-/* ========== HISTÓRICO (historico.css) ========== */
-/* Versão identada / organizada para manter padrão com psa/psh */
+/* ================= PASSEIOS — HISTÓRICO (psh) - padronizado ================= */
+:root {
+  --bg: #fff7ec;
+  --card: #ffffff;
+  --text: #3d2c2c;
+  --muted: #9b8064;
+  --accent: #ffb84c;
+  --accent-dark: #ff9907;
+  --accent-border: #ffd9a7;
+}
+
+/* page */
 .psh-container {
   min-height: 100vh;
   width: 100%;
-  background: #fff7ec;
+  background: var(--bg);
   padding: 20px 18px 28px;
   font-family: "Poppins", sans-serif;
-  color: #4e2c00;
+  color: var(--text);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center; /* centraliza conteúdo horizontalmente */
+  align-items: center;
   box-sizing: border-box;
 }
 
 .psh-content {
   width: 100%;
-  max-width: 640px; /* igual à tela de agendar */
+  max-width: 640px;
   margin: 0 auto;
+  box-sizing: border-box;
+  padding-bottom: 24px;
 }
 
-/* ===== HEADER ===== */
+/* header */
 .psh-header {
   display: flex;
   gap: 12px;
@@ -35,16 +47,19 @@
   color: #c0841c;
   font-weight: 600;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .psh-title {
   margin: 0;
   font-size: 24px;
   font-weight: 800;
-  color: #3d2c2c;
+  color: var(--text);
 }
 
-/* ===== FILTROS ===== */
+/* filters */
 .psh-filters {
   display: flex;
   gap: 8px;
@@ -56,40 +71,54 @@
 .psh-chip {
   padding: 6px 12px;
   border-radius: 999px;
-  border: 1px solid #ffd9a7;
+  border: 1px solid var(--accent-border);
   background: #fffdf8;
   color: #7a5732;
   cursor: pointer;
+  font-size: 12px;
+  transition: 0.18s;
 }
 
 .psh-chip.active {
-  background: #ffb84c;
-  border-color: #ffb84c;
+  background: var(--accent);
+  border-color: var(--accent);
   color: #fff;
-  box-shadow: 0 4px 10px rgba(255, 184, 76, 0.25);
+  box-shadow: 0 4px 10px rgba(255, 184, 76, 0.35);
 }
 
-/* ===== MESSAGES / LOADING / EMPTY ===== */
+/* messages / empty */
 .psh-empty,
 .psh-loading {
-  color: #9b8064;
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 12px;
 }
 
-/* ===== LISTA ===== */
+.psh-msg-error {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #ffe1e1;
+  border: 1px solid #ff7b7b;
+  color: #a60000;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+/* list */
 .psh-list {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-top: 8px;
-  width: 100%;
+  margin-top: 6px;
 }
 
-/* ===== CARD ===== */
+/* card */
 .psh-card {
   display: flex;
-  border-radius: 14px;
-  background: #fff;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+  border-radius: 18px;
+  background: var(--card);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
   overflow: hidden;
   width: 100%;
   box-sizing: border-box;
@@ -114,6 +143,7 @@
 .psh-main {
   flex: 1;
   padding: 12px 14px;
+  box-sizing: border-box;
 }
 
 .psh-card-header {
@@ -128,10 +158,11 @@
   margin: 0 0 4px;
   font-size: 15px;
   font-weight: 700;
-  color: #3d2c2c;
+  color: var(--text);
 }
 
 .psh-status {
+  display: inline-block;
   padding: 4px 8px;
   border-radius: 999px;
   font-size: 11px;
@@ -158,9 +189,11 @@
   border: none;
   cursor: pointer;
   color: #d8664f;
+  padding: 4px;
+  flex-shrink: 0;
 }
 
-/* linhas de info (data, serviço, pet, clínica) */
+/* info rows */
 .psh-row {
   display: flex;
   gap: 8px;
@@ -168,6 +201,10 @@
   color: #6b4a26;
   font-size: 13px;
   margin-top: 6px;
+}
+
+.psh-row svg {
+  flex-shrink: 0;
 }
 
 /* observações */
@@ -182,6 +219,7 @@
   font-size: 11px;
   color: #a78b6b;
   text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 .psh-obs-text {
@@ -190,29 +228,29 @@
   font-size: 13px;
 }
 
-/* ===== BOTÃO VOLTAR AO INÍCIO ===== */
+/* home button */
 .psh-home {
   width: 100%;
   margin-top: 20px;
   padding: 14px;
-  background: #ffb84c;
+  background: var(--accent);
   color: #fff;
   border: none;
   border-radius: 12px;
   font-weight: 700;
   cursor: pointer;
   box-shadow: 0 8px 18px rgba(255, 184, 76, 0.35);
-  max-width: 640px; /* centraliza e limita largura do botão */
+  max-width: 640px;
   margin-left: auto;
   margin-right: auto;
 }
 
 .psh-home:hover {
-  background: #ff9907;
+  background: var(--accent-dark);
   transform: translateY(-1px);
 }
 
-/* ===== FOOTER ===== */
+/* footer */
 .psh-footer {
   text-align: center;
   color: #a1876b;
@@ -220,14 +258,13 @@
   font-size: 12px;
 }
 
-/* ===== REGRAS DE CENTRALIZAÇÃO / LIMITES (reaproveitamento global) ===== */
+/* shared centralization limits */
 .psh-content,
 .psa-content {
   box-sizing: border-box;
   padding-bottom: 24px;
 }
 
-/* limita largura de cards / listas globalmente */
 .psh-card,
 .psh-list,
 .psa-pet-card,
@@ -239,7 +276,7 @@
   box-sizing: border-box;
 }
 
-/* ===== MOBILE ===== */
+/* responsive */
 @media (max-width: 520px) {
   .psh-content {
     padding-left: 12px;
@@ -250,5 +287,14 @@
 
   .psh-title {
     font-size: 20px;
+  }
+
+  .psh-card {
+    flex-direction: column;
+  }
+
+  .psh-bar {
+    width: 100%;
+    height: 6px;
   }
 }
