@@ -53,6 +53,7 @@ with app.app_context():
             ("agendamentos", "observacoes"),
             ("petshop_agendamentos", "observacoes"),
             ("passeios_agendamentos", "observacoes"),
+            ("vacinas_agendamentos", "observacoes"),
         ]
 
         for table_name, coluna in tabelas_checar:

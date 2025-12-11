@@ -1,15 +1,37 @@
-/* ===== PAGE ===== */
-.vaga-container {
+/* ===== PAGE (TELA TODA) ===== */
+.agendar-container {
   min-height: 100vh;
+  width: 100%;
   background: #fff7ec;
-  padding: 22px;
+  padding: 20px 18px 28px;
   font-family: "Poppins", sans-serif;
   color: #4e2c00;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-/* ===== BACK BTN ===== */
-.vaga-back {
+/* Conteúdo central (organizado, mas sem limitar a tela) */
+.agendar-content {
+  width: 100%;
+  max-width: 540px;
+  margin: 0 auto;
   display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* ===== HEADER ===== */
+.agendar-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding-bottom: 10px;
+}
+
+.agendar-back {
+  display: inline-flex;
   align-items: center;
   gap: 6px;
   background: none;
@@ -17,153 +39,367 @@
   color: #c0841c;
   font-weight: 600;
   cursor: pointer;
-  font-size: 15px;
+  font-size: 14px;
+  padding: 6px 0;
 }
 
-/* ===== TITLE ===== */
-.vaga-title {
-  text-align: center;
+.agendar-header-texts {
+  flex: 1;
+}
+
+.agendar-title {
   font-size: 28px;
   font-weight: 800;
-  margin: 18px 0 26px;
+  margin: 0 0 4px;
   color: #3d2c2c;
 }
 
-/* ===== CARD ===== */
-.vaga-card {
-  background: #ffffff;
-  border-radius: 20px;
-  padding: 22px;
-  box-shadow: 0 12px 28px rgba(0,0,0,0.07);
-  margin-bottom: 26px;
-}
-
-.vaga-card p {
-  margin: 0;
+.agendar-subtitle {
   font-size: 13px;
-  color: #7a6346;
+  color: #9b8064;
 }
 
-.vaga-card h3 {
-  margin: 4px 0 12px 0;
-  font-size: 18px;
+/* ===== SECTIONS ===== */
+.agendar-section {
+  margin-top: 6px;
+}
+
+.agendar-section-header {
+  margin-bottom: 8px;
+}
+
+.agendar-section-title {
+  margin: 0;
+  font-size: 16px;
   font-weight: 700;
   color: #3d2c2c;
 }
 
-/* ===== LABEL ===== */
-.vaga-label {
-  font-size: 15px;
-  margin-bottom: 10px;
-  display: block;
-  font-weight: 600;
+.agendar-section-sub {
+  font-size: 12px;
+  color: #9b8064;
 }
 
-/* ===== INPUT ===== */
-.vaga-input-box {
+/* ===== PET CARD ===== */
+.agendar-pet-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 16px 14px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.agendar-pet-left {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.agendar-pet-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  background: #ffe3b3;
   display: flex;
   align-items: center;
-  background: #fff;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 20px;
+  color: #5a3810;
+}
+
+.agendar-pet-label {
+  margin: 0;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #a78b6b;
+}
+
+.agendar-pet-name {
+  margin: 2px 0 4px;
+  font-size: 17px;
+  font-weight: 700;
+  color: #3d2c2c;
+}
+
+.agendar-pet-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.agendar-tag {
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #fff5db;
+  color: #8b5a18;
+  border: 1px solid #ffe0a8;
+}
+
+.agendar-pet-right {
+  text-align: right;
+  align-self: center;
+}
+
+.agendar-service-name {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: #3d2c2c;
+}
+
+.agendar-service-chip {
+  margin-top: 4px;
+  display: inline-block;
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #fff1f0;
+  color: #c6533f;
+}
+
+/* ===== INFO GRID ===== */
+.agendar-info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.agendar-info-card {
+  background: #fffdf8;
+  border-radius: 14px;
+  padding: 10px 9px;
+  border: 1px solid #ffe4c4;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.agendar-info-card svg {
+  opacity: 0.9;
+}
+
+.agendar-info-label {
+  margin: 0;
+  color: #a78b6b;
+  font-size: 11px;
+}
+
+.agendar-info-value {
+  margin: 0;
+  font-weight: 600;
+  color: #4b2e10;
+  font-size: 12px;
+}
+
+/* ===== INPUT BOX DATA/HORA ===== */
+.agendar-input-box {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
   border-radius: 16px;
-  border: 1.8px solid #ff9e9e;
-  padding: 12px 16px;
-  margin-bottom: 22px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.05);
-  transition: .2s;
+  border: 1.6px solid #ffe0c2;
+  padding: 12px 14px;
+  margin-top: 8px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
+  transition: 0.2s;
 }
 
-.vaga-empty {
-  border-color: #ff9e9e;
+.agendar-input-box:focus-within {
+  border-color: #ffb84c;
+  box-shadow: 0 0 0 3px rgba(255, 184, 76, 0.28);
 }
 
-/* ===== ICON ===== */
-.vaga-icon {
+/* INPUT ERROR */
+.agendar-input-error {
+  border: 1.8px solid #ff5b5b !important;
+  background: #fff0f0;
+  box-shadow: 0 0 0 3px rgba(255, 90, 90, 0.22);
+}
+
+/* ICON */
+.agendar-icon {
   margin-right: 12px;
   color: #c0841c;
+  flex-shrink: 0;
 }
 
-/* ===== INPUT FIELD ===== */
-.vaga-input {
+/* INPUT WRAPPER */
+.agendar-input-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.agendar-input-label {
+  font-size: 11px;
+  color: #a78b6b;
+  margin-bottom: 2px;
+}
+
+/* INPUT FIELD */
+.agendar-input {
   border: none;
   outline: none;
   width: 100%;
-  font-size: 15px;
+  font-size: 14px;
   background: none;
   color: #3d2c2c;
 }
 
-/* ===== BUTTON ===== */
-.vaga-btn {
+/* ===== TIME CHIPS ===== */
+.agendar-times {
+  margin-top: 12px;
+}
+
+.agendar-times-label {
+  font-size: 12px;
+  color: #9b8064;
+}
+
+.agendar-times-list {
+  margin-top: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.agendar-time-chip {
+  border-radius: 999px;
+  padding: 6px 12px;
+  border: 1px solid #ffd6a3;
+  background: #fffdf8;
+  font-size: 12px;
+  color: #5a3810;
+  cursor: pointer;
+  transition: 0.18s;
+}
+
+.agendar-time-chip:hover {
+  background: #ffe7bf;
+}
+
+/* ===== TEXTAREA (OBSERVAÇÕES) ===== */
+.agendar-textarea-wrapper {
+  margin-top: 6px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1.4px solid #ffe0c2;
+  padding: 10px 12px;
+  display: flex;
+  gap: 8px;
+}
+
+.agendar-textarea-icon {
+  margin-top: 4px;
+  color: #c0841c;
+}
+
+.agendar-textarea {
+  border: none;
+  outline: none;
   width: 100%;
-  padding: 16px;
+  resize: vertical;
+  font-size: 13px;
+  color: #4b2e10;
+  background: transparent;
+  min-height: 54px;
+}
+
+/* ===== BUTTON ===== */
+.agendar-btn {
+  width: 100%;
+  margin-top: 18px;
+  padding: 15px;
   background: #ffb84c;
   border: none;
   border-radius: 16px;
   font-weight: 700;
-  font-size: 17px;
+  font-size: 16px;
   color: #fff;
   cursor: pointer;
-  transition: .25s ease;
+  transition: 0.22s ease;
   box-shadow: 0 8px 18px rgba(255, 184, 76, 0.35);
 }
 
-.vaga-btn:hover {
+.agendar-btn:hover {
   background: #ff9907;
   transform: translateY(-2px);
 }
 
-.vaga-btn.disabled {
+.agendar-btn.disabled {
   background: #ffc785;
   cursor: not-allowed;
   transform: none;
 }
 
-/* ===== SUCCESS BOX ===== */
-.msg-success {
-  width: 100%;
-  text-align: center;
-  padding: 14px;
-  margin-top: 20px;
-  border-radius: 14px;
-
-  background: #d8ffd1;
-  border: 2px solid #6fc463;
-  color: #2f6f00;
-
-  font-size: 15px;
-  font-weight: 600;
-
-  animation: fadeInUp .3s ease forwards;
-}
-
-/* ===== ERROR BOX ===== */
+/* ===== SUCCESS / ERROR ===== */
+.msg-success,
 .msg-error {
   width: 100%;
   text-align: center;
-  padding: 14px;
-  margin-top: 20px;
+  padding: 13px;
+  margin-top: 14px;
   border-radius: 14px;
+  font-size: 14px;
+  font-weight: 600;
+  animation: fadeInUp 0.2s ease forwards;
+}
 
+.msg-success {
+  background: #d8ffd1;
+  border: 2px solid #6fc463;
+  color: #2f6f00;
+}
+
+.msg-error {
   background: #ffe1e1;
   border: 2px solid #ff7b7b;
   color: #a60000;
-
-  font-size: 15px;
-  font-weight: 600;
-
-  animation: fadeInUp .3s ease forwards;
 }
 
 /* ===== ANIMATION ===== */
 @keyframes fadeInUp {
-  0% { opacity: 0; transform: translateY(8px); }
-  100% { opacity: 1; transform: translateY(0); }
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ===== FOOTER ===== */
 .home-footer-text {
   text-align: center;
-  font-size: 13px;
-  margin-top: 40px;
+  font-size: 12px;
+  margin-top: 24px;
   color: #a1876b;
+}
+
+/* ===== SMALL SCREENS TWEAKS ===== */
+@media (max-width: 420px) {
+  .agendar-content {
+    padding: 0 6px;
+  }
+
+  .agendar-title {
+    font-size: 22px;
+  }
+
+  .agendar-pet-avatar {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  .agendar-info-grid {
+    grid-template-columns: 1fr;
+  }
 }

@@ -19,6 +19,7 @@ def criar_vacina_agendamento(usuario_id):
     pet_id = data.get("pet_id")
     vacina = data.get("vacina")
     data_str = data.get("data")
+    observacoes = data.get("observacoes")  # ← novo
 
     if not pet_id:
         return jsonify({"mensagem": "pet_id é obrigatório"}), 400
@@ -38,7 +39,8 @@ def criar_vacina_agendamento(usuario_id):
         novo = VacinaAgendamento(
             pet_id=pet_id,
             vacina=vacina,
-            data=data_agendamento
+            data=data_agendamento,
+            observacoes=observacoes  # ← salva no model
         )
         db.session.add(novo)
         db.session.commit()
@@ -64,6 +66,7 @@ def listar_vacinas_agendadas(usuario_id):
         Pet.dono_id == usuario_id
     ).order_by(VacinaAgendamento.data.desc()).all()
 
+    # já retorna observacoes via to_dict()
     return jsonify([a.to_dict() for a in agendamentos]), 200
 
 
