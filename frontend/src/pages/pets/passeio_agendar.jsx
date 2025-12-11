@@ -1,107 +1,268 @@
-import { ArrowLeft, Calendar } from "lucide-react";
-import { useState } from "react";
+// PasseioAgendar.jsx
+import { ArrowLeft, Calendar, ClipboardList, MapPin, User } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { BASE_URL } from "../../services/config";
 import { getToken } from "../../services/auth";
-import "../../styles/pets/passeio_agendar.css";
+import "../../styles/pets/agendar.css"; // reaproveita CSS existente
 
-export default function PasseiosAgendar() {
+export default function PasseioAgendar() {
   const { state } = useLocation();
   const navigate = useNavigate();
+  // espera state = { pet, servico } ou só { pet } (servico pode ser "Passeio")
+  const { pet, servico } = state || {};
 
-  const servico = state?.servico;
-  const pet = state?.pet;
+  const passeioNome = servico?.nome || "Passeio";
 
   const [data, setData] = useState("");
-  const [msg, setMsg] = useState(""); // sucesso ou erro
+  const [observacoes, setObservacoes] = useState("");
+  const [walkerName, setWalkerName] = useState("");
+  const [local, setLocal] = useState("Parque Central");
+  const [msg, setMsg] = useState("");
+  const [isError, setIsError] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  async function enviar() {
+  const locaisSugestao = ["Parque Central", "Praça da Matriz", "Residência", "Praça do Bairro"];
+
+  async function confirmarAgendamento() {
     if (!data) {
-      setMsg("❌ Selecione uma data e hora");
+      setMsg("Selecione uma data e hora!");
+      setIsError(true);
       return;
     }
 
+    // walkerName é opcional, mas podemos exigir se quiser. Aqui deixei opcional.
     try {
-      setLoading(true);
       setMsg("");
+      setIsError(false);
+      setLoading(true);
 
       const token = getToken();
-
       const res = await fetch(`${BASE_URL}/passeios/agendamentos`, {
         method: "POST",
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`
         },
         body: JSON.stringify({
           pet_id: pet.id,
-          servico: servico.nome,
-          data: data
-        })
+          servico: passeioNome,
+          data,
+          observacoes,
+          walker_name: walkerName || null,
+          local,
+        }),
       });
 
       const json = await res.json();
-
-      if (!res.ok) throw new Error(json.mensagem || "Erro ao agendar");
+      if (!res.ok) throw new Error(json.mensagem || "Erro ao agendar passeio");
 
       setMsg("Passeio agendado com sucesso! 🎉");
+      setIsError(false);
 
-      // redireciona após 1.5s
-      setTimeout(() => navigate("/passeios/historico"), 1500);
-
+      setTimeout(() => {
+        navigate("/passeios/historico");
+      }, 1200);
     } catch (err) {
-      setMsg("❌ " + err.message);
+      setMsg("❌ " + (err.message || err));
+      setIsError(true);
     } finally {
       setLoading(false);
     }
   }
 
+  // sugestões rápidas de horário
+  const sugestoes = ["08:00", "09:30", "12:00", "17:00"];
+
   return (
-    <div className="pa-page">
+    <div className="agendar-container">
+      <div className="agendar-content">
+        <header className="agendar-header">
+          <button className="agendar-back" onClick={() => navigate(-1)}>
+            <ArrowLeft size={20} /> Voltar
+          </button>
 
-      <button className="pa-back" onClick={() => navigate(-1)}>
-        <ArrowLeft size={22} /> Voltar
-      </button>
+          <div className="agendar-header-texts">
+            <h1 className="agendar-title">Agendar passeio</h1>
+            <span className="agendar-subtitle">
+              Revise os dados do pet e escolha o melhor dia e horário.
+            </span>
+          </div>
+        </header>
 
-      <h1 className="pa-title">Agendar Passeio</h1>
+        {/* PET CARD */}
+        <section className="agendar-section">
+          <div className="agendar-pet-card">
+            <div className="agendar-pet-left">
+              <div className="agendar-pet-avatar">
+                {pet?.nome?.[0]?.toUpperCase() ?? "P"}
+              </div>
+              <div>
+                <p className="agendar-pet-label">Pet</p>
+                <h3 className="agendar-pet-name">{pet?.nome}</h3>
+                <div className="agendar-pet-tags">
+                  {pet?.especie && <span className="agendar-tag">{pet.especie}</span>}
+                  {pet?.porte && <span className="agendar-tag">{pet.porte}</span>}
+                </div>
+              </div>
+            </div>
 
-      {/* CARD DE INFO */}
-      <div className="pa-info-box">
-        <p>Pet:</p>
-        <h3>{pet?.nome}</h3>
+            <div className="agendar-pet-right">
+              <p className="agendar-pet-label">Serviço</p>
+              <h3 className="agendar-service-name">{passeioNome}</h3>
+              <span className="agendar-service-chip">Passeio</span>
+            </div>
+          </div>
+        </section>
 
-        <p className="mt">Passeio:</p>
-        <h3>{servico?.nome}</h3>
+        {/* INFO GRID */}
+        <section className="agendar-section">
+          <div className="agendar-info-grid">
+            <div className="agendar-info-card">
+              <Calendar size={18} />
+              <div>
+                <p className="agendar-info-label">Disponibilidade</p>
+                <p className="agendar-info-value">Seg a Dom</p>
+              </div>
+            </div>
+
+            <div className="agendar-info-card">
+              <Calendar size={18} />
+              <div>
+                <p className="agendar-info-label">Horário</p>
+                <p className="agendar-info-value">08h às 20h</p>
+              </div>
+            </div>
+
+            <div className="agendar-info-card">
+              <MapPin size={18} />
+              <div>
+                <p className="agendar-info-label">Local</p>
+                <p className="agendar-info-value">{local}</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* DATA E HORA */}
+        <section className="agendar-section">
+          <div className="agendar-section-header">
+            <h2 className="agendar-section-title">Data e horário</h2>
+            <span className="agendar-section-sub">Escolha um dia e um horário disponíveis.</span>
+          </div>
+
+          <div className={`agendar-input-box ${isError ? "agendar-input-error" : ""}`}>
+            <Calendar size={22} className="agendar-icon" />
+            <div className="agendar-input-wrapper">
+              <label className="agendar-input-label">Data e hora</label>
+              <input
+                type="datetime-local"
+                value={data}
+                onChange={(e) => setData(e.target.value)}
+                className="agendar-input"
+              />
+            </div>
+          </div>
+
+          <div className="agendar-times">
+            <span className="agendar-times-label">Sugestões de horário</span>
+            <div className="agendar-times-list">
+              {sugestoes.map((hora) => (
+                <button
+                  key={hora}
+                  type="button"
+                  className="agendar-time-chip"
+                  onClick={() => {
+                    if (!data) {
+                      const hoje = new Date().toISOString().slice(0, 10);
+                      setData(`${hoje}T${hora}`);
+                    } else {
+                      const apenasData = data.slice(0, 10);
+                      setData(`${apenasData}T${hora}`);
+                    }
+                  }}
+                >
+                  {hora}
+                </button>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* WALKER NAME + LOCAL PICKER */}
+        <section className="agendar-section">
+          <div className="agendar-section-header">
+            <h2 className="agendar-section-title">Quem vai passear</h2>
+            <span className="agendar-section-sub">Informe o nome da pessoa que levará seu pet (opcional).</span>
+          </div>
+
+          <div className="agendar-textarea-wrapper" style={{ alignItems: "center" }}>
+            <User size={18} className="agendar-textarea-icon" />
+            <input
+              className="agendar-input"
+              placeholder="Nome de quem vai passear (ex: João Silva)"
+              value={walkerName}
+              onChange={(e) => setWalkerName(e.target.value)}
+              style={{ border: "none", outline: "none", width: "100%", fontSize: 14 }}
+            />
+          </div>
+
+          <div style={{ marginTop: 10 }}>
+            <span className="agendar-times-label">Escolher local</span>
+            <div className="agendar-times-list" style={{ marginTop: 8 }}>
+              {locaisSugestao.map((l) => (
+                <button
+                  key={l}
+                  type="button"
+                  className={`agendar-time-chip ${local === l ? "active" : ""}`}
+                  onClick={() => setLocal(l)}
+                >
+                  {l}
+                </button>
+              ))}
+              <button
+                type="button"
+                className="agendar-time-chip"
+                onClick={() => setLocal("Residência do dono")}
+              >
+                Residência do dono
+              </button>
+            </div>
+          </div>
+        </section>
+
+        {/* OBSERVAÇÕES */}
+        <section className="agendar-section">
+          <div className="agendar-section-header">
+            <h2 className="agendar-section-title">Observações</h2>
+            <span className="agendar-section-sub">Informe detalhes que ajudam no passeio (opcional).</span>
+          </div>
+
+          <div className="agendar-textarea-wrapper">
+            <ClipboardList size={18} className="agendar-textarea-icon" />
+            <textarea
+              className="agendar-textarea"
+              placeholder="Ex: Evitar rua movimentada, pet assusta com carros, precisa coleira especial..."
+              value={observacoes}
+              onChange={(e) => setObservacoes(e.target.value)}
+              rows={3}
+            />
+          </div>
+        </section>
+
+        {/* BOTÃO */}
+        <button
+          className={`agendar-btn ${loading ? "disabled" : ""}`}
+          onClick={confirmarAgendamento}
+          disabled={loading}
+        >
+          {loading ? "Agendando..." : "Confirmar agendamento"}
+        </button>
+
+        {msg && <div className={isError ? "msg-error" : "msg-success"}>{msg}</div>}
       </div>
 
-      <p className="pa-label">Escolha a data e hora:</p>
-
-      {/* INPUT */}
-      <div className="pa-input">
-        <Calendar size={20} className="pa-cal-icon" />
-        <input
-          type="datetime-local"
-          value={data}
-          onChange={(e) => setData(e.target.value)}
-        />
-      </div>
-
-      {/* BOTÃO */}
-      <button className="pa-btn" onClick={enviar} disabled={loading}>
-        {loading ? "Agendando..." : "Confirmar agendamento"}
-      </button>
-
-      {/* MENSAGEM */}
-      {msg && (
-        <div className={msg.includes("❌") ? "msg-error" : "msg-success"}>
-          {msg}
-        </div>
-      )}
-
-      <footer className="home-footer-text">
-         © 2025 PetFy — Todos os direitos reservados 🐾
-      </footer>
+      <footer className="home-footer-text">© 2025 PetFy — Todos os direitos reservados 🐾</footer>
     </div>
   );
 }

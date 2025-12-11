@@ -30,7 +30,6 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 def uploads(filename):
     return send_from_directory(app.config["UPLOAD_FOLDER"], filename)
 
-
 # 🔥 registrar rotas
 app.register_blueprint(user_routes, url_prefix="/api")
 app.register_blueprint(pet_routes, url_prefix="/api")
@@ -49,13 +48,16 @@ with app.app_context():
         insp = inspect(db.engine)
 
         # lista de (tabela, coluna, tipo_sql) que queremos garantir
-        # tipo_sql será usado quando precisarmos adicionar a coluna
         tabelas_checar = [
-            
             ("agendamentos", "observacoes", "TEXT NULL"),
             ("petshop_agendamentos", "observacoes", "TEXT NULL"),
+
             ("passeios_agendamentos", "observacoes", "TEXT NULL"),
-            
+            ("passeios_agendamentos", "walker_name", "VARCHAR(200) NULL"),
+            ("passeios_agendamentos", "local", "VARCHAR(255) NULL"),
+            ("passeios_agendamentos", "clinica_id", "INT NULL"),
+            ("passeios_agendamentos", "clinica_nome", "VARCHAR(255) NULL"),
+
             ("petshop_agendamentos", "clinica_id", "INT NULL"),
             ("petshop_agendamentos", "clinica_nome", "VARCHAR(255) NULL"),
 
@@ -83,7 +85,6 @@ with app.app_context():
                 print(f"⚠️ Falha ao inspecionar tabela {table_name}: {e_inner}")
 
     except Exception as e:
-        # segurança: se o inspect falhar, só registra
         print(f"⚠️ Falha ao verificar colunas (inspect): {e}")
 
     # cria clínica default 1 vez
@@ -92,7 +93,6 @@ with app.app_context():
         db.session.add(nova)
         db.session.commit()
         print("🏥 Clínica padrão criada!")
-
 
 # 🔥 development server (local)
 if __name__ == "__main__":
