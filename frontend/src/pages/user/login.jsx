@@ -138,7 +138,7 @@ export default function Login() {
       </motion.div>
 
       <footer className="login-footer-text">
-        © 2025 AppPet — Todos os direitos reservados
+        © 2025 PetFy — Todos os direitos reservados 🐾
       </footer>
     </motion.div>
   );

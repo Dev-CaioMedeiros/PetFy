@@ -233,7 +233,7 @@ export default function Cadastro() {
       </motion.div>
 
       <footer className="cadastro-footer-text">
-        © 2025 AppPet — Todos os direitos reservados
+        © 2025 PetFy — Todos os direitos reservados 🐾
       </footer>
     </motion.div>
   );

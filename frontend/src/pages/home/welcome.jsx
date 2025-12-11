@@ -59,7 +59,7 @@ export default function Welcome() {
 
       {/* Rodapé */}
       <p className="welcome-footer">
-        © 2025 AppPet — Todos os direitos reservados
+        © 2025 PetFy — Todos os direitos reservados 🐾
       </p>
     </div>
   );

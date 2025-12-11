@@ -121,7 +121,7 @@ export default function Loja() {
 
       {/* FOOTER */}
       <footer className="loja-footer">
-        © 2025 PetFy — Todos os direitos reservados 🐾
+         © 2025 PetFy — Todos os direitos reservados 🐾
       </footer>
 
     </div>

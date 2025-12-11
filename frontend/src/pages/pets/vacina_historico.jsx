@@ -83,7 +83,9 @@ export default function VacinasHistorico() {
         Voltar ao Início
       </button>
 
-      <footer className="home-footer-text">© 2025 AppPet — Todos os direitos reservados</footer>
+      <footer className="home-footer-text">
+         © 2025 PetFy — Todos os direitos reservados 🐾
+        </footer>
     </div>
   );
 }

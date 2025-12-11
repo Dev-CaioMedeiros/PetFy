@@ -217,7 +217,7 @@ export default function EditarPet() {
         </button>
       </form>
       <footer className="home-footer-text">
-        © 2025 AppPet — Todos os direitos reservados
+         © 2025 PetFy — Todos os direitos reservados 🐾
       </footer>
     </div>
   );

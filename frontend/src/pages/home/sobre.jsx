@@ -60,7 +60,9 @@ export default function Sobre() {
       </motion.button>
 
       {/* RODAPÉ */}
-      <p className="sobre-footer">© 2025 PetFy — Todos os direitos reservados</p>
+      <p className="sobre-footer">
+        © 2025 PetFy — Todos os direitos reservados 🐾
+        </p>
     </div>
   );
 }
