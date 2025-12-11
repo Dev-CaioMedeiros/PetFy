@@ -54,7 +54,7 @@ export default function ConsultaAgendar() {
       setTimeout(() => {
         navigate("/consultas/historico");
       }, 1500);
-    } catch (err: any) {
+    } catch (err) {
       setMsg("❌ " + err.message);
       setIsError(true);
     } finally {
