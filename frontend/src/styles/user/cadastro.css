@@ -120,3 +120,35 @@
   font-size: 0.75rem;
   color: #999;
 }
+
+/* ===============================
+   ESTILO DO BOTÃO EM LOADING
+================================ */
+.cadastro-button.disabled,
+.cadastro-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  filter: grayscale(20%);
+  box-shadow: none !important;
+  transform: none !important;
+  transition: 0.2s ease;
+  pointer-events: none; 
+}
+
+.cadastro-button.disabled {
+  position: relative;
+}
+
+.cadastro-button.disabled::after {
+  content: "...";
+  animation: dots 1s infinite;
+  margin-left: 4px;
+  opacity: 0.9;
+}
+
+@keyframes dots {
+  0%   { content: "."; }
+  33%  { content: ".."; }
+  66%  { content: "..."; }
+  100% { content: "."; }
+}

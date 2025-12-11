@@ -125,3 +125,35 @@ a.cadastro-link {
 a.cadastro-link:hover {
   text-decoration: underline;
 }
+
+/* ===============================
+   ESTADO LOADING / DESABILITADO
+================================ */
+.login-button.disabled,
+.login-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  filter: grayscale(20%);
+  box-shadow: none !important;
+  transform: none !important;
+  transition: 0.2s ease;
+  pointer-events: none; 
+}
+
+.login-button.disabled {
+  position: relative;
+}
+
+.login-button.disabled::after {
+  content: "...";
+  animation: loginDots 1s infinite;
+  margin-left: 4px;
+  opacity: 0.9;
+}
+
+@keyframes loginDots {
+  0%   { content: "."; }
+  33%  { content: ".."; }
+  66%  { content: "..."; }
+  100% { content: "."; }
+}

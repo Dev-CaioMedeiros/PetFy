@@ -12,11 +12,14 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [erro, setErro] = useState("");
+  const [loading, setLoading] = useState(false); // ⬅️ ADD
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    if (loading) return; // ⬅️ Bloqueia clique duplo
     setErro("");
+    setLoading(true); // ⬅️ Liga loading
 
     try {
       const res = await fetch(`${BASE_URL}/login`, {
@@ -24,6 +27,7 @@ export default function Login() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, senha }),
       });
+
       const data = await res.json();
 
       if (res.ok) {
@@ -34,6 +38,8 @@ export default function Login() {
       }
     } catch {
       setErro("Erro ao conectar ao servidor.");
+    } finally {
+      setLoading(false); // ⬅️ Desliga loading
     }
   };
 
@@ -111,16 +117,19 @@ export default function Login() {
             </button>
           </div>
 
-          {erro && <p className="text-red-500 text-sm mt-2 mb-1 text-center">{erro}</p>}
+          {erro && (
+            <p className="text-red-500 text-sm mt-2 mb-1 text-center">{erro}</p>
+          )}
 
           <motion.button
             type="submit"
-            className="login-button"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            className={`login-button ${loading ? "disabled" : ""}`}
+            disabled={loading}
+            whileHover={{ scale: loading ? 1 : 1.05 }}
+            whileTap={{ scale: loading ? 1 : 0.95 }}
             transition={{ duration: 0.2 }}
           >
-            Entrar
+            {loading ? "Entrando..." : "Entrar"}
           </motion.button>
         </form>
 

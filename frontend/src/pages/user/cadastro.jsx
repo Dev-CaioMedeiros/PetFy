@@ -15,6 +15,7 @@ export default function Cadastro() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [confirmarSenha, setConfirmarSenha] = useState("");
+  const [loading, setLoading] = useState(false); // <-- loading state
   const navigate = useNavigate();
 
   // === Máscaras ===
@@ -41,6 +42,7 @@ export default function Cadastro() {
   // === Função para enviar cadastro ===
   const handleCadastro = async (e) => {
     e.preventDefault();
+    if (loading) return; // impede múltiplos envios
 
     if (senha !== confirmarSenha) {
       alert("As senhas não coincidem!");
@@ -48,6 +50,8 @@ export default function Cadastro() {
     }
 
     try {
+      setLoading(true);
+
       const res = await fetch(`${BASE_URL}/cadastro`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -60,16 +64,20 @@ export default function Cadastro() {
         }),
       });
 
-      const data = await res.json();
+      // tenta parsear o json com fallback
+      const data = await res.json().catch(() => ({}));
 
       if (res.ok) {
         alert("Cadastro realizado com sucesso!");
         navigate("/login");
       } else {
-        alert(data.message || "Erro ao realizar cadastro");
+        alert(data.message || data.mensagem || "Erro ao realizar cadastro");
       }
     } catch (err) {
+      console.error(err);
       alert("Erro ao conectar ao servidor");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -97,7 +105,7 @@ export default function Cadastro() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5, duration: 0.6 }}
       >
-        Cadastro PetFy 🐾  
+        Cadastro PetFy 🐾
       </motion.h1>
 
       <motion.p
@@ -209,12 +217,13 @@ export default function Cadastro() {
           {/* Botão */}
           <motion.button
             type="submit"
-            className="cadastro-button"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            className={`cadastro-button ${loading ? "disabled" : ""}`}
+            whileHover={{ scale: loading ? 1 : 1.05 }}
+            whileTap={{ scale: loading ? 1 : 0.95 }}
             transition={{ duration: 0.2 }}
+            disabled={loading}
           >
-            Cadastrar
+            {loading ? "Cadastrando..." : "Cadastrar"}
           </motion.button>
         </form>
 

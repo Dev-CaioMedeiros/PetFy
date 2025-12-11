@@ -1,6 +1,7 @@
+// CadastrarPet.jsx
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { PawPrint,Camera,Dog,Info,HeartPulse,ArrowLeft } from "lucide-react";
+import { PawPrint, Camera, Dog, Info, HeartPulse, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { getToken } from "../../services/auth";
 import { BASE_URL } from "../../services/config";
@@ -19,47 +20,59 @@ export default function CadastrarPet() {
   });
 
   const [preview, setPreview] = useState(null);
+  const [loading, setLoading] = useState(false); // <--- LOADING
   const navigate = useNavigate();
 
   // FOTO PREVIEW
   const handleFoto = (e) => {
-    const file = e.target.files[0];
+    const file = e.target.files?.[0];
     if (file) {
-      setPet({ ...pet, foto: file });
+      setPet((prev) => ({ ...prev, foto: file }));
       setPreview(URL.createObjectURL(file));
     }
   };
 
- const salvarPet = async (e) => {
-  e.preventDefault();
+  const salvarPet = async (e) => {
+    e.preventDefault();
 
-  if (!pet.nome || !pet.especie || !pet.sexo) {
-    alert("Preencha nome, espécie e sexo!");
-    return;
-  }
+    if (loading) return; // IMPEDIR CLIQUE DUPLO
 
-  const token = getToken();
-  const formData = new FormData();
+    if (!pet.nome || !pet.especie || !pet.sexo) {
+      alert("Preencha nome, espécie e sexo!");
+      return;
+    }
 
-  for (let key in pet) {
-    formData.append(key, pet[key]);
-  }
+    try {
+      setLoading(true);
 
-  const res = await fetch(`${BASE_URL}/pets`, {
-    method: "POST",
-    headers: { Authorization: `Bearer ${token}` },
-    body: formData,
-  });
+      const token = getToken();
+      const formData = new FormData();
 
-  const data = await res.json();
+      // append seguro
+      Object.entries(pet).forEach(([key, value]) => {
+        if (value !== null) formData.append(key, value);
+      });
 
-  if (res.ok) {
-    alert("Pet cadastrado com sucesso!");
-    navigate("/meus_pets");
-  } else {
-    alert(data.mensagem || "Erro ao cadastrar pet");
-  }
-};
+      const res = await fetch(`${BASE_URL}/pets`, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}` },
+        body: formData,
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (res.ok) {
+        alert("Pet cadastrado com sucesso!");
+        navigate("/meus_pets");
+      } else {
+        alert(data.mensagem || "Erro ao cadastrar pet");
+      }
+    } catch (err) {
+      alert("Erro ao cadastrar pet");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <motion.div
@@ -68,8 +81,7 @@ export default function CadastrarPet() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-
-      {/* SETA VOLTAR */}
+      {/* VOLTAR */}
       <div className="voltar-btn" onClick={() => navigate("/home/home")}>
         <ArrowLeft size={22} />
         <span>Voltar</span>
@@ -81,26 +93,24 @@ export default function CadastrarPet() {
         initial={{ y: -10, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
       >
-        Cadastrar Pet 
+        Cadastrar Pet
       </motion.h1>
 
       {/* FOTO */}
       <label className="pet-foto-label">
         {preview ? (
-          <img src={preview} className="pet-preview" />
+          <img src={preview} className="pet-preview" alt="preview" />
         ) : (
           <div className="foto-placeholder">
             <Camera size={32} />
             <p>Adicionar foto</p>
           </div>
         )}
-        <input type="file" accept="image/*" onChange={handleFoto} hidden />
+        <input type="file" hidden accept="image/*" onChange={handleFoto} />
       </label>
 
       {/* FORM */}
       <form className="pet-form" onSubmit={salvarPet}>
-        
-        {/* NOME */}
         <div className="input-box">
           <Dog size={18} className="input-icon" />
           <input
@@ -108,10 +118,10 @@ export default function CadastrarPet() {
             placeholder="Nome do pet"
             value={pet.nome}
             onChange={(e) => setPet({ ...pet, nome: e.target.value })}
+            required
           />
         </div>
 
-        {/* ESPÉCIE */}
         <div className="input-box">
           <PawPrint size={18} className="input-icon" />
           <input
@@ -119,33 +129,30 @@ export default function CadastrarPet() {
             placeholder="Espécie (Cachorro, Gato...)"
             value={pet.especie}
             onChange={(e) => setPet({ ...pet, especie: e.target.value })}
+            required
           />
         </div>
 
-       {/* IDADE */}
-<div className="input-box">
-  <Info size={18} className="input-icon" />
-  <input
-    type="text"
-    placeholder="Idade"
-    value={pet.idade}
-    onChange={(e) =>
-      setPet({
-        ...pet,
-        idade: e.target.value.replace(/\D/g, "") 
-      })
-    }
-    inputMode="numeric"
-    maxLength="2"
-  />
-</div>
+        <div className="input-box">
+          <Info size={18} className="input-icon" />
+          <input
+            type="text"
+            placeholder="Idade"
+            value={pet.idade}
+            onChange={(e) =>
+              setPet({ ...pet, idade: e.target.value.replace(/\D/g, "") })
+            }
+            inputMode="numeric"
+            maxLength="2"
+          />
+        </div>
 
-        {/* SEXO */}
         <div className="select-box">
           <label>Sexo</label>
           <select
             value={pet.sexo}
             onChange={(e) => setPet({ ...pet, sexo: e.target.value })}
+            required
           >
             <option value="">Selecione</option>
             <option value="Macho">Macho</option>
@@ -153,7 +160,6 @@ export default function CadastrarPet() {
           </select>
         </div>
 
-        {/* PORTE */}
         <div className="select-box">
           <label>Porte</label>
           <select
@@ -167,7 +173,6 @@ export default function CadastrarPet() {
           </select>
         </div>
 
-        {/* ESTADO DE SAÚDE */}
         <div className="input-box">
           <HeartPulse size={18} className="input-icon" />
           <input
@@ -178,28 +183,27 @@ export default function CadastrarPet() {
           />
         </div>
 
-        {/* DESCRIÇÃO */}
         <div className="textarea-box">
           <textarea
             placeholder="Descrição do pet"
             value={pet.descricao}
             onChange={(e) => setPet({ ...pet, descricao: e.target.value })}
-          ></textarea>
+          />
         </div>
 
         <motion.button
-          className="salvar-pet-btn"
-          whileTap={{ scale: 0.95 }}
+          type="submit"
+          className={`salvar-pet-btn ${loading ? "disabled" : ""}`}
+          disabled={loading}
+          whileTap={{ scale: loading ? 1 : 0.95 }}
         >
-          Cadastrar Pet
+          {loading ? "Cadastrando..." : "Cadastrar Pet"}
         </motion.button>
-
       </form>
+
       <footer className="home-footer-text">
-         © 2025 PetFy — Todos os direitos reservados 🐾
+        © 2025 PetFy — Todos os direitos reservados 🐾
       </footer>
     </motion.div>
-    
-    
   );
 }
