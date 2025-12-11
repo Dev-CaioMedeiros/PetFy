@@ -1,4 +1,4 @@
-import { ArrowLeft, Calendar, Clock, PawPrint, Trash2 } from "lucide-react";
+import { ArrowLeft, Calendar, PawPrint, MapPin, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../services/config";
@@ -29,6 +29,7 @@ export default function VacinasHistorico() {
       });
 
       const json = await res.json();
+      console.log("VACINAS GET ->", json); // <<--- veja o que o backend está enviando
       if (!res.ok) throw new Error(json.mensagem || "Erro ao carregar vacinas");
 
       setAgendamentos(json);
@@ -64,14 +65,14 @@ export default function VacinasHistorico() {
   }
 
   function getStatus(ag) {
-    // se o back já manda status = "cancelado"
     if (ag.status === "cancelado") return "cancelado";
 
-    const dataAg = new Date(ag.data || ag.data_agendamento || ag.data);
+    // tenta vários campos possíveis de data (fallbacks)
+    const dataStr = ag.data || ag.data_agendamento || ag.created_at || null;
+    const dataAg = dataStr ? new Date(dataStr) : new Date(NaN);
     const agora = new Date();
 
     if (Number.isNaN(dataAg.getTime())) return "futuro";
-
     return dataAg < agora ? "passado" : "futuro";
   }
 
@@ -91,7 +92,6 @@ export default function VacinasHistorico() {
 
   const agendamentosFiltrados = agendamentos.filter((ag) => {
     const statusReal = getStatus(ag);
-
     if (filtro === "todos") return true;
     if (filtro === "cancelado") return statusReal === "cancelado";
     if (filtro === "passado") return statusReal === "passado";
@@ -100,96 +100,58 @@ export default function VacinasHistorico() {
   });
 
   function formatarData(dataStr) {
+    if (!dataStr) return "";
     const data = new Date(dataStr);
     if (Number.isNaN(data.getTime())) return dataStr;
-
     const dia = String(data.getDate()).padStart(2, "0");
     const mes = String(data.getMonth() + 1).padStart(2, "0");
     const ano = data.getFullYear();
     const hora = String(data.getHours()).padStart(2, "0");
     const min = String(data.getMinutes()).padStart(2, "0");
-
     return `${dia}/${mes}/${ano}, ${hora}:${min}`;
   }
 
   return (
     <div className="historico-container">
       <div className="historico-content">
-        {/* header */}
         <header className="historico-header">
           <button className="historico-back" onClick={() => navigate(-1)}>
             <ArrowLeft size={20} /> Voltar
           </button>
-
           <h1 className="historico-title">Histórico de Vacinas</h1>
         </header>
 
-        {/* filtros */}
         <div className="historico-filters">
-          <button
-            className={`historico-filter-chip ${filtro === "todos" ? "active" : ""}`}
-            onClick={() => setFiltro("todos")}
-          >
-            Todos
-          </button>
-          <button
-            className={`historico-filter-chip ${filtro === "futuro" ? "active" : ""}`}
-            onClick={() => setFiltro("futuro")}
-          >
-            Ainda vai acontecer
-          </button>
-          <button
-            className={`historico-filter-chip ${filtro === "passado" ? "active" : ""}`}
-            onClick={() => setFiltro("passado")}
-          >
-            Já aconteceu
-          </button>
-          <button
-            className={`historico-filter-chip ${filtro === "cancelado" ? "active" : ""}`}
-            onClick={() => setFiltro("cancelado")}
-          >
-            Cancelado
-          </button>
+          <button className={`historico-filter-chip ${filtro === "todos" ? "active" : ""}`} onClick={() => setFiltro("todos")}>Todos</button>
+          <button className={`historico-filter-chip ${filtro === "futuro" ? "active" : ""}`} onClick={() => setFiltro("futuro")}>Ainda vai acontecer</button>
+          <button className={`historico-filter-chip ${filtro === "passado" ? "active" : ""}`} onClick={() => setFiltro("passado")}>Já aconteceu</button>
+          <button className={`historico-filter-chip ${filtro === "cancelado" ? "active" : ""}`} onClick={() => setFiltro("cancelado")}>Cancelado</button>
         </div>
 
-        {/* mensagem de erro */}
         {msg && <div className="historico-msg-error">{msg}</div>}
-
-        {/* loading */}
         {loading && <p className="historico-loading">Carregando vacinas...</p>}
+        {!loading && agendamentosFiltrados.length === 0 && <p className="historico-empty">Nenhuma vacina encontrada nesse filtro.</p>}
 
-        {/* vazio */}
-        {!loading && agendamentosFiltrados.length === 0 && (
-          <p className="historico-empty">Nenhuma vacina encontrada nesse filtro.</p>
-        )}
-
-        {/* lista */}
         <div className="historico-list">
           {agendamentosFiltrados.map((ag) => {
             const petNome = ag.pet?.nome || ag.pet_nome || "Pet";
             const vacinaNome = ag.vacina || ag.servico || ag.descricao || "Vacina";
-            const dataIso = ag.data || ag.data_agendamento || ag.data;
+            const dataIso = ag.data || ag.data_agendamento || ag.created_at || null;
+            const clinicaNome = ag.clinica_nome || (ag.clinica && ag.clinica.nome) || "Clínica PetFy";
             const statusLabel = getStatusLabel(ag);
             const statusClass = getStatusClass(ag);
 
             return (
               <article key={ag.id} className="historico-card">
                 <div className={`historico-card-status-bar ${statusClass}`} />
-
                 <div className="historico-card-main">
                   <header className="historico-card-header">
                     <div>
                       <h2 className="historico-card-title">{vacinaNome}</h2>
-                      <span className={`historico-status-chip ${statusClass}`}>
-                        {statusLabel}
-                      </span>
+                      <span className={`historico-status-chip ${statusClass}`}>{statusLabel}</span>
                     </div>
 
-                    <button
-                      className="historico-delete-btn"
-                      onClick={() => deletarAgendamento(ag.id)}
-                      title="Excluir agendamento"
-                    >
+                    <button className="historico-delete-btn" onClick={() => deletarAgendamento(ag.id)} title="Excluir agendamento">
                       <Trash2 size={18} />
                     </button>
                   </header>
@@ -201,15 +163,17 @@ export default function VacinasHistorico() {
 
                   <div className="historico-card-info-row">
                     <PawPrint size={16} />
-                    <span>
-                      <strong>Pet:</strong> {petNome}
-                    </span>
+                    <span><strong>Pet:</strong> {petNome}</span>
                   </div>
 
-                  {/* observações se algum dia quiser adicionar no model */}
+                  <div className="historico-card-info-row">
+                    <MapPin size={16} />
+                    <span><strong>Clínica:</strong> {clinicaNome}</span>
+                  </div>
+
                   {ag.observacoes && (
                     <div className="historico-card-observacoes">
-                      <span className="historico-observacoes-label">Observações</span>
+                      <span className="historico-observacoes-label">OBSERVAÇÕES</span>
                       <p className="historico-observacoes-text">{ag.observacoes}</p>
                     </div>
                   )}
@@ -219,14 +183,10 @@ export default function VacinasHistorico() {
           })}
         </div>
 
-        <button className="historico-home-btn" onClick={() => navigate("/")}>
-          Voltar ao Início
-        </button>
+        <button className="historico-home-btn" onClick={() => navigate("/")}>Voltar ao Início</button>
       </div>
 
-      <footer className="historico-footer">
-        © 2025 PetFy — Todos os direitos reservados 🐾
-      </footer>
+      <footer className="historico-footer">© 2025 PetFy — Todos os direitos reservados 🐾</footer>
     </div>
   );
 }
