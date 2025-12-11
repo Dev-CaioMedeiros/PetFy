@@ -1,13 +1,4 @@
-/* ===== PAGE ===== */
-.agendar-container {
-  min-height: 100vh;
-  background: #fff7ec;
-  padding: 22px 22px 32px;
-  font-family: "Poppins", sans-serif;
-  color: #4e2c00;
-  max-width: 480px;
-  margin: 0 auto;
-}
+
 
 /* ===== HEADER ===== */
 .agendar-header {
