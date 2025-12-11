@@ -1,3 +1,5 @@
+/* ========== HISTÓRICO (historico.css) ========== */
+/* Versão identada / organizada para manter padrão com psa/psh */
 .psh-container {
   min-height: 100vh;
   width: 100%;
@@ -8,81 +10,224 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center; /* adicionado: centraliza conteúdo horizontalmente */
+  align-items: center; /* centraliza conteúdo horizontalmente */
   box-sizing: border-box;
 }
 
 .psh-content {
   width: 100%;
-  max-width: 640px; /* ajustado para 640px pra ficar igual à tela de agendar */
+  max-width: 640px; /* igual à tela de agendar */
   margin: 0 auto;
 }
 
-/* header */
-.psh-header { display:flex; gap:12px; align-items:center; margin-bottom:16px; width:100%; }
-.psh-back { background:none; border:none; color:#c0841c; font-weight:600; cursor:pointer; }
-.psh-title { margin:0; font-size:24px; font-weight:800; color:#3d2c2c; }
+/* ===== HEADER ===== */
+.psh-header {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 16px;
+  width: 100%;
+}
 
-/* filtros */
-.psh-filters { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px; width:100%; }
-.psh-chip { padding:6px 12px; border-radius:999px; border:1px solid #ffd9a7; background:#fffdf8; color:#7a5732; cursor:pointer; }
-.psh-chip.active { background:#ffb84c; border-color:#ffb84c; color:#fff; box-shadow:0 4px 10px rgba(255,184,76,0.25); }
+.psh-back {
+  background: none;
+  border: none;
+  color: #c0841c;
+  font-weight: 600;
+  cursor: pointer;
+}
 
-/* lista */
-.psh-list { display:flex; flex-direction:column; gap:12px; margin-top:8px; width:100%; }
-.psh-empty, .psh-loading { color:#9b8064; }
+.psh-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 800;
+  color: #3d2c2c;
+}
 
-/* card */
-.psh-card { display:flex; border-radius:14px; background:#fff; box-shadow:0 6px 16px rgba(0,0,0,0.05); overflow:hidden; width:100%; box-sizing:border-box; }
-.psh-bar { width:6px; }
-.psh-bar.futuro { background:#2fb67c; }
-.psh-bar.passado { background:#4d7cff; }
-.psh-bar.cancelado { background:#ff6b6b; }
+/* ===== FILTROS ===== */
+.psh-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+  width: 100%;
+}
 
-.psh-main { flex:1; padding:12px 14px; }
-.psh-card-header { display:flex; justify-content:space-between; align-items:flex-start; gap:8px; margin-bottom:6px; }
-.psh-card-title { margin:0 0 4px; font-size:15px; font-weight:700; color:#3d2c2c; }
-.psh-status { padding:4px 8px; border-radius:999px; font-size:11px; font-weight:600; }
-.psh-status.futuro { background:#e4ffef; color:#157b4c; }
-.psh-status.passado { background:#e5ecff; color:#2748b5; }
-.psh-status.cancelado { background:#ffe4e4; color:#b51f1f; }
+.psh-chip {
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid #ffd9a7;
+  background: #fffdf8;
+  color: #7a5732;
+  cursor: pointer;
+}
 
-.psh-delete { background:none; border:none; cursor:pointer; color:#d8664f; }
+.psh-chip.active {
+  background: #ffb84c;
+  border-color: #ffb84c;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(255, 184, 76, 0.25);
+}
 
-.psh-row { display:flex; gap:8px; align-items:center; color:#6b4a26; font-size:13px; margin-top:6px; }
-.psh-obs { margin-top:8px; border-top:1px dashed #f0d6b3; padding-top:6px; }
-.psh-obs-label { display:block; font-size:11px; color:#a78b6b; text-transform:uppercase; }
-.psh-obs-text { margin:4px 0 0; color:#4b2e10; font-size:13px; }
+/* ===== MESSAGES / LOADING / EMPTY ===== */
+.psh-empty,
+.psh-loading {
+  color: #9b8064;
+}
 
+/* ===== LISTA ===== */
+.psh-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+  width: 100%;
+}
+
+/* ===== CARD ===== */
+.psh-card {
+  display: flex;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.psh-bar {
+  width: 6px;
+}
+
+.psh-bar.futuro {
+  background: #2fb67c;
+}
+
+.psh-bar.passado {
+  background: #4d7cff;
+}
+
+.psh-bar.cancelado {
+  background: #ff6b6b;
+}
+
+.psh-main {
+  flex: 1;
+  padding: 12px 14px;
+}
+
+.psh-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.psh-card-title {
+  margin: 0 0 4px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #3d2c2c;
+}
+
+.psh-status {
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.psh-status.futuro {
+  background: #e4ffef;
+  color: #157b4c;
+}
+
+.psh-status.passado {
+  background: #e5ecff;
+  color: #2748b5;
+}
+
+.psh-status.cancelado {
+  background: #ffe4e4;
+  color: #b51f1f;
+}
+
+.psh-delete {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #d8664f;
+}
+
+/* linhas de info (data, serviço, pet, clínica) */
+.psh-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: #6b4a26;
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+/* observações */
+.psh-obs {
+  margin-top: 8px;
+  border-top: 1px dashed #f0d6b3;
+  padding-top: 6px;
+}
+
+.psh-obs-label {
+  display: block;
+  font-size: 11px;
+  color: #a78b6b;
+  text-transform: uppercase;
+}
+
+.psh-obs-text {
+  margin: 4px 0 0;
+  color: #4b2e10;
+  font-size: 13px;
+}
+
+/* ===== BOTÃO VOLTAR AO INÍCIO ===== */
 .psh-home {
-  width:100%;
-  margin-top:20px;
-  padding:14px;
-  background:#ffb84c;
-  color:#fff;
-  border:none;
-  border-radius:12px;
-  font-weight:700;
-  cursor:pointer;
-  box-shadow:0 8px 18px rgba(255,184,76,0.35);
-
-  max-width: 640px; /* adicionado: centraliza e limita largura do botão */
+  width: 100%;
+  margin-top: 20px;
+  padding: 14px;
+  background: #ffb84c;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(255, 184, 76, 0.35);
+  max-width: 640px; /* centraliza e limita largura do botão */
   margin-left: auto;
   margin-right: auto;
 }
-.psh-home:hover { background:#ff9907; transform:translateY(-1px); }
 
-.psh-footer { text-align:center; color:#a1876b; margin-top:20px; font-size:12px; }
+.psh-home:hover {
+  background: #ff9907;
+  transform: translateY(-1px);
+}
 
-/* ===== CENTRALIZAÇÃO ADICIONAL E LIMITE DE LARGURA PARA ITENS ===== */
-/* garante que conteúdo da página fique centralizado e com largura consistente */
+/* ===== FOOTER ===== */
+.psh-footer {
+  text-align: center;
+  color: #a1876b;
+  margin-top: 20px;
+  font-size: 12px;
+}
+
+/* ===== REGRAS DE CENTRALIZAÇÃO / LIMITES (reaproveitamento global) ===== */
 .psh-content,
 .psa-content {
   box-sizing: border-box;
   padding-bottom: 24px;
 }
 
-/* pequena melhoria visual: limita largura de cards e mensagens (quando usados globalmente) */
+/* limita largura de cards / listas globalmente */
 .psh-card,
 .psh-list,
 .psa-pet-card,

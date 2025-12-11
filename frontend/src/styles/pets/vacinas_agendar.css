@@ -1,25 +1,40 @@
+/* ================= AGENDAR (padronizado) ================= */
+:root {
+  --bg: #fff7ec;
+  --card: #ffffff;
+  --text: #3d2c2c;
+  --muted: #9b8064;
+  --accent: #ffb84c;
+  --accent-dark: #ff9907;
+  --success-bg: #d8ffd1;
+  --error-bg: #ffe1e1;
+}
+
 /* ===== PAGE (TELA TODA) ===== */
 .agendar-container {
   min-height: 100vh;
   width: 100%;
-  background: #fff7ec;
+  background: var(--bg);
   padding: 20px 18px 28px;
   font-family: "Poppins", sans-serif;
   color: #4e2c00;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
 }
 
-/* Conteúdo central (organizado, mas sem limitar a tela) */
+/* Conteúdo central (organizado, com largura padronizada) */
 .agendar-content {
   width: 100%;
-  max-width: 540px;
+  max-width: 640px; /* padronizado */
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 18px;
+  box-sizing: border-box;
+  padding-bottom: 24px;
 }
 
 /* ===== HEADER ===== */
@@ -51,12 +66,12 @@
   font-size: 28px;
   font-weight: 800;
   margin: 0 0 4px;
-  color: #3d2c2c;
+  color: var(--text);
 }
 
 .agendar-subtitle {
   font-size: 13px;
-  color: #9b8064;
+  color: var(--muted);
 }
 
 /* ===== SECTIONS ===== */
@@ -72,23 +87,25 @@
   margin: 0;
   font-size: 16px;
   font-weight: 700;
-  color: #3d2c2c;
+  color: var(--text);
 }
 
 .agendar-section-sub {
   font-size: 12px;
-  color: #9b8064;
+  color: var(--muted);
 }
 
 /* ===== PET CARD ===== */
 .agendar-pet-card {
-  background: #ffffff;
+  background: var(--card);
   border-radius: 18px;
   padding: 16px 14px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
   display: flex;
   justify-content: space-between;
   gap: 16px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .agendar-pet-left {
@@ -122,7 +139,7 @@
   margin: 2px 0 4px;
   font-size: 17px;
   font-weight: 700;
-  color: #3d2c2c;
+  color: var(--text);
 }
 
 .agendar-pet-tags {
@@ -149,7 +166,7 @@
   margin: 0;
   font-size: 15px;
   font-weight: 700;
-  color: #3d2c2c;
+  color: var(--text);
 }
 
 .agendar-service-chip {
@@ -201,17 +218,19 @@
 .agendar-input-box {
   display: flex;
   align-items: center;
-  background: #ffffff;
+  background: var(--card);
   border-radius: 16px;
   border: 1.6px solid #ffe0c2;
   padding: 12px 14px;
   margin-top: 8px;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
   transition: 0.2s;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .agendar-input-box:focus-within {
-  border-color: #ffb84c;
+  border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(255, 184, 76, 0.28);
 }
 
@@ -249,7 +268,7 @@
   width: 100%;
   font-size: 14px;
   background: none;
-  color: #3d2c2c;
+  color: var(--text);
 }
 
 /* ===== TIME CHIPS ===== */
@@ -259,7 +278,7 @@
 
 .agendar-times-label {
   font-size: 12px;
-  color: #9b8064;
+  color: var(--muted);
 }
 
 .agendar-times-list {
@@ -288,11 +307,13 @@
 .agendar-textarea-wrapper {
   margin-top: 6px;
   border-radius: 16px;
-  background: #ffffff;
+  background: var(--card);
   border: 1.4px solid #ffe0c2;
   padding: 10px 12px;
   display: flex;
   gap: 8px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .agendar-textarea-icon {
@@ -316,7 +337,7 @@
   width: 100%;
   margin-top: 18px;
   padding: 15px;
-  background: #ffb84c;
+  background: var(--accent);
   border: none;
   border-radius: 16px;
   font-weight: 700;
@@ -325,10 +346,15 @@
   cursor: pointer;
   transition: 0.22s ease;
   box-shadow: 0 8px 18px rgba(255, 184, 76, 0.35);
+
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
 
 .agendar-btn:hover {
-  background: #ff9907;
+  background: var(--accent-dark);
   transform: translateY(-2px);
 }
 
@@ -349,16 +375,20 @@
   font-size: 14px;
   font-weight: 600;
   animation: fadeInUp 0.2s ease forwards;
+
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .msg-success {
-  background: #d8ffd1;
+  background: var(--success-bg);
   border: 2px solid #6fc463;
   color: #2f6f00;
 }
 
 .msg-error {
-  background: #ffe1e1;
+  background: var(--error-bg);
   border: 2px solid #ff7b7b;
   color: #a60000;
 }
@@ -384,9 +414,11 @@
 }
 
 /* ===== SMALL SCREENS TWEAKS ===== */
-@media (max-width: 420px) {
+@media (max-width: 560px) {
   .agendar-content {
-    padding: 0 6px;
+    padding: 0 12px;
+    gap: 12px;
+    max-width: 100%;
   }
 
   .agendar-title {
@@ -401,5 +433,16 @@
 
   .agendar-info-grid {
     grid-template-columns: 1fr;
+  }
+
+  .agendar-pet-card {
+    flex-direction: column;
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .agendar-pet-right {
+    text-align: left;
+    align-self: flex-start;
   }
 }

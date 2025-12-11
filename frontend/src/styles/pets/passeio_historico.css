@@ -1,212 +1,289 @@
-/* passeios_historico.css
-   Mesmo visual do petshop_historico (mesmas larguras, fontes e comportamento responsivo)
-*/
+/* ================= PASSEIOS — HISTÓRICO (padronizado) ================= */
+:root {
+  --bg: #fff7ec;
+  --card: #ffffff;
+  --text: #3d2c2c;
+  --muted: #9b8064;
+  --accent: #ffb84c;
+  --accent-dark: #ff9907;
+}
 
-/* container geral - mesma estrutura do psh */
-.psa-container {
+/* PAGE */
+.passeios-container {
   min-height: 100vh;
   width: 100%;
-  background: #fff7ec;
+  background: var(--bg);
   padding: 20px 18px 28px;
   font-family: "Poppins", sans-serif;
   color: #4e2c00;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center; /* centraliza conteúdo horizontalmente */
   box-sizing: border-box;
 }
 
-/* conteúdo central com limite */
-.psa-content {
+.passeios-content {
   width: 100%;
-  max-width: 640px; /* mesmo limite do petshop/agendar */
+  max-width: 640px;
   margin: 0 auto;
   box-sizing: border-box;
   padding-bottom: 24px;
 }
 
-/* header */
-.psa-header {
-  display:flex;
-  gap:12px;
-  align-items:center;
-  margin-bottom:16px;
-  width:100%;
-}
-.psa-back {
-  background:none;
-  border:none;
-  color:#c0841c;
-  font-weight:600;
-  cursor:pointer;
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-}
-.psa-title {
-  margin:0;
-  font-size:24px; /* igual ao agendar e petshop */
-  font-weight:800;
-  color:#3d2c2c;
+/* HEADER */
+.passeios-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
 }
 
-/* filtros (chips) */
-.psa-filters {
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  margin-bottom:12px;
-  width:100%;
-}
-.psa-chip {
-  padding:6px 12px;
-  border-radius:999px;
-  border:1px solid #ffd9a7;
-  background:#fffdf8;
-  color:#7a5732;
-  cursor:pointer;
-  font-size:14px;
-}
-.psa-chip.active {
-  background:#ffb84c;
-  border-color:#ffb84c;
-  color:#fff;
-  box-shadow:0 4px 10px rgba(255,184,76,0.25);
+.passeios-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  color: #c0841c;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 6px 0;
 }
 
-/* lista */
-.psa-list {
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  margin-top:8px;
-  width:100%;
-}
-.psa-empty, .psa-loading {
-  color:#9b8064;
-  font-size:14px;
+.passeios-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text);
 }
 
-/* card */
-.psa-card {
-  display:flex;
-  border-radius:14px;
-  background:#fff;
-  box-shadow:0 6px 16px rgba(0,0,0,0.05);
-  overflow:hidden;
-  width:100%;
-  box-sizing:border-box;
-}
-.psa-bar {
-  width:6px;
-}
-.psa-bar.futuro { background:#2fb67c; }
-.psa-bar.passado { background:#4d7cff; }
-.psa-bar.cancelado { background:#ff6b6b; }
-
-.psa-main {
-  flex:1;
-  padding:12px 14px;
-}
-.psa-card-header {
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  gap:8px;
-  margin-bottom:6px;
-}
-.psa-card-title {
-  margin:0 0 4px;
-  font-size:15px; /* idêntico ao petshop/consulta */
-  font-weight:700;
-  color:#3d2c2c;
-}
-.psa-status {
-  padding:4px 8px;
-  border-radius:999px;
-  font-size:11px;
-  font-weight:600;
-}
-.psa-status.futuro { background:#e4ffef; color:#157b4c; }
-.psa-status.passado { background:#e5ecff; color:#2748b5; }
-.psa-status.cancelado { background:#ffe4e4; color:#b51f1f; }
-
-.psa-delete {
-  background:none;
-  border:none;
-  cursor:pointer;
-  color:#d8664f;
+/* FILTERS */
+.passeios-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
 }
 
-/* linhas de info (data, pet, walker, local) */
-.psa-row {
-  display:flex;
-  gap:8px;
-  align-items:center;
-  color:#6b4a26;
-  font-size:13px; /* igual ao petshop */
-  margin-top:6px;
+.passeios-chip {
+  border-radius: 999px;
+  border: 1px solid #ffd9a7;
+  background: #fffdf8;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  color: #7a5732;
+  transition: 0.18s;
 }
 
-/* observações */
-.psa-obs {
-  margin-top:8px;
-  border-top:1px dashed #f0d6b3;
-  padding-top:6px;
-}
-.psa-obs-label {
-  display:block;
-  font-size:11px;
-  color:#a78b6b;
-  text-transform:uppercase;
-}
-.psa-obs-text {
-  margin:4px 0 0;
-  color:#4b2e10;
-  font-size:13px;
+.passeios-chip.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(255, 184, 76, 0.35);
 }
 
-/* botão voltar ao início - alinhado e largura limitada */
-.psa-home {
-  width:100%;
-  margin-top:20px;
-  padding:14px;
-  background:#ffb84c;
-  color:#fff;
-  border:none;
-  border-radius:12px;
-  font-weight:700;
-  cursor:pointer;
-  box-shadow:0 8px 18px rgba(255,184,76,0.35);
-
-  max-width: 640px;
-  margin-left: auto;
-  margin-right: auto;
+/* MESSAGES / EMPTY / LOADING */
+.passeios-loading,
+.passeios-empty {
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 12px;
 }
-.psa-home:hover { background:#ff9907; transform:translateY(-1px); }
 
-/* footer */
-.psa-footer { text-align:center; color:#a1876b; margin-top:20px; font-size:12px; }
+.passeios-msg {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #ffe1e1;
+  border: 1px solid #ff7b7b;
+  color: #a60000;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
 
-/* pequenas melhorias: limite de largura para cards (consistência) */
-.psa-card, .psa-list {
-  max-width: 640px;
-  margin-left: auto;
-  margin-right: auto;
+/* LIST */
+.passeios-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+/* CARD */
+.passeios-card {
+  display: flex;
+  border-radius: 18px;
+  background: var(--card);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
   width: 100%;
   box-sizing: border-box;
 }
 
-/* MOBILE */
-@media (max-width: 520px) {
-  .psa-content {
+/* lateral bar (status) */
+.passeios-card-bar {
+  width: 6px;
+}
+
+.status-futuro {
+  background: #2fb67c;
+}
+
+.status-passado {
+  background: #4d7cff;
+}
+
+.status-cancelado {
+  background: #ff6b6b;
+}
+
+/* main content */
+.passeios-card-main {
+  flex: 1;
+  padding: 14px 16px 14px 14px;
+  box-sizing: border-box;
+}
+
+.passeios-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.passeios-card-title {
+  margin: 0 0 4px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.passeios-status {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.passeios-status.status-futuro {
+  background: #e4ffef;
+  color: #157b4c;
+}
+
+.passeios-status.status-passado {
+  background: #e5ecff;
+  color: #2748b5;
+}
+
+.passeios-status.status-cancelado {
+  background: #ffe4e4;
+  color: #b51f1f;
+}
+
+/* delete button */
+.passeios-delete {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 4px;
+  color: #d8664f;
+  flex-shrink: 0;
+}
+
+/* rows (date, pet, walker, local) */
+.passeios-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #6b4a26;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+/* observações */
+.passeios-obs {
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px dashed #f0d6b3;
+}
+
+.passeios-obs-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #a78b6b;
+  letter-spacing: 0.06em;
+}
+
+.passeios-obs-text {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: #4b2e10;
+}
+
+/* HOME BUTTON */
+.passeios-home-btn {
+  width: 100%;
+  margin-top: 22px;
+  padding: 14px;
+  background: var(--accent);
+  border: none;
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 15px;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.2s;
+  box-shadow: 0 8px 18px rgba(255, 184, 76, 0.35);
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.passeios-home-btn:hover {
+  background: var(--accent-dark);
+  transform: translateY(-1px);
+}
+
+/* FOOTER */
+.passeios-footer {
+  text-align: center;
+  font-size: 12px;
+  margin-top: 20px;
+  color: #a1876b;
+}
+
+/* RESPONSIVE */
+@media (max-width: 560px) {
+  .passeios-content {
     padding-left: 12px;
     padding-right: 12px;
-    gap: 12px;
     max-width: 100%;
   }
 
-  .psa-title { font-size:20px; }
+  .passeios-title {
+    font-size: 20px;
+  }
+
+  .passeios-card {
+    flex-direction: row;
+  }
+
+  .passeios-card-main {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 420px) {
+  .passeios-card {
+    flex-direction: column;
+  }
+
+  .passeios-card-bar {
+    width: 100%;
+    height: 6px;
+  }
 }

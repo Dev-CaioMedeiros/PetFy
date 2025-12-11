@@ -1,21 +1,33 @@
+/* ================= HISTÓRICO (padronizado) ================= */
+:root {
+  --bg: #fff7ec;
+  --card: #ffffff;
+  --text: #3d2c2c;
+  --muted: #9b8064;
+  --accent: #ffb84c;
+  --accent-dark: #ff9907;
+}
+
 /* ===== PAGE ===== */
 .historico-container {
   min-height: 100vh;
   width: 100%;
-  background: #fff7ec;
+  background: var(--bg);
   padding: 20px 18px 28px;
   font-family: "Poppins", sans-serif;
   color: #4e2c00;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  box-sizing: border-box;
 }
 
 .historico-content {
   width: 100%;
-  max-width: 540px;
+  max-width: 640px; /* padronizado */
   margin: 0 auto;
+  box-sizing: border-box;
+  padding-bottom: 24px;
 }
 
 /* ===== HEADER ===== */
@@ -36,14 +48,14 @@
   font-weight: 600;
   cursor: pointer;
   font-size: 14px;
-  padding: 4px 0;
+  padding: 6px 0;
 }
 
 .historico-title {
   margin: 0;
   font-size: 24px;
   font-weight: 800;
-  color: #3d2c2c;
+  color: var(--text);
 }
 
 /* ===== FILTERS ===== */
@@ -66,8 +78,8 @@
 }
 
 .historico-filter-chip.active {
-  background: #ffb84c;
-  border-color: #ffb84c;
+  background: var(--accent);
+  border-color: var(--accent);
   color: white;
   box-shadow: 0 4px 10px rgba(255, 184, 76, 0.35);
 }
@@ -83,7 +95,7 @@
 .historico-loading,
 .historico-empty {
   font-size: 14px;
-  color: #9b8064;
+  color: var(--muted);
   margin-top: 12px;
 }
 
@@ -103,33 +115,28 @@
 .historico-card {
   display: flex;
   border-radius: 18px;
-  background: #ffffff;
+  background: var(--card);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
   overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* barrinha lateral de status */
 .historico-card-status-bar {
-  width: 4px;
+  width: 6px;
 }
 
 /* cores de status */
-.status-futuro {
-  background: #2fb67c;
-}
-
-.status-passado {
-  background: #4d7cff;
-}
-
-.status-cancelado {
-  background: #ff6b6b;
-}
+.status-futuro { background: #2fb67c; }
+.status-passado { background: #4d7cff; }
+.status-cancelado { background: #ff6b6b; }
 
 /* conteúdo principal do card */
 .historico-card-main {
   flex: 1;
   padding: 14px 16px 14px 14px;
+  box-sizing: border-box;
 }
 
 /* header do card */
@@ -145,7 +152,7 @@
   margin: 0 0 4px;
   font-size: 15px;
   font-weight: 700;
-  color: #3d2c2c;
+  color: var(--text);
 }
 
 /* badge de status */
@@ -157,20 +164,9 @@
   font-weight: 600;
 }
 
-.historico-status-chip.status-futuro {
-  background: #e4ffef;
-  color: #157b4c;
-}
-
-.historico-status-chip.status-passado {
-  background: #e5ecff;
-  color: #2748b5;
-}
-
-.historico-status-chip.status-cancelado {
-  background: #ffe4e4;
-  color: #b51f1f;
-}
+.historico-status-chip.status-futuro { background: #e4ffef; color: #157b4c; }
+.historico-status-chip.status-passado { background: #e5ecff; color: #2748b5; }
+.historico-status-chip.status-cancelado { background: #ffe4e4; color: #b51f1f; }
 
 /* botão delete */
 .historico-delete-btn {
@@ -221,7 +217,7 @@
   width: 100%;
   margin-top: 22px;
   padding: 14px;
-  background: #ffb84c;
+  background: var(--accent);
   border: none;
   border-radius: 16px;
   font-weight: 700;
@@ -233,7 +229,7 @@
 }
 
 .historico-home-btn:hover {
-  background: #ff9907;
+  background: var(--accent-dark);
   transform: translateY(-1px);
 }
 
@@ -243,4 +239,36 @@
   font-size: 12px;
   margin-top: 20px;
   color: #a1876b;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 560px) {
+  .historico-content {
+    padding-left: 12px;
+    padding-right: 12px;
+    max-width: 100%;
+  }
+
+  .historico-title {
+    font-size: 20px;
+  }
+
+  .historico-card {
+    flex-direction: row;
+  }
+
+  .historico-card-main {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 420px) {
+  .historico-card {
+    flex-direction: column;
+  }
+
+  .historico-card-status-bar {
+    width: 100%;
+    height: 6px;
+  }
 }
