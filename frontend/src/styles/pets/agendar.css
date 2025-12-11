@@ -2,14 +2,23 @@
 .agendar-container {
   min-height: 100vh;
   background: #fff7ec;
-  padding: 22px;
+  padding: 22px 22px 32px;
   font-family: "Poppins", sans-serif;
   color: #4e2c00;
+  max-width: 480px;
+  margin: 0 auto;
 }
 
-/* ===== BACK BTN ===== */
-.agendar-back {
+/* ===== HEADER ===== */
+.agendar-header {
   display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.agendar-back {
+  display: inline-flex;
   align-items: center;
   gap: 6px;
   background: none;
@@ -17,104 +26,290 @@
   color: #c0841c;
   font-weight: 600;
   cursor: pointer;
-  font-size: 15px;
+  font-size: 14px;
+  padding: 6px 0;
 }
 
-/* ===== TITLE ===== */
+.agendar-header-texts {
+  flex: 1;
+}
+
 .agendar-title {
-  text-align: center;
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 800;
-  margin: 18px 0 30px;
+  margin: 0 0 4px;
   color: #3d2c2c;
 }
 
-/* ===== CARD ===== */
-.agendar-card {
-  background: #ffffff;
-  border-radius: 20px;
-  padding: 22px;
-  box-shadow: 0 12px 28px rgba(0,0,0,0.07);
-  margin-bottom: 26px;
-}
-
-.agendar-row {
-  margin-bottom: 16px;
-}
-
-.agendar-row:last-child {
-  margin-bottom: 0;
-}
-
-.agendar-row p {
-  margin: 0;
+.agendar-subtitle {
   font-size: 13px;
-  color: #7a6346;
+  color: #9b8064;
 }
 
-.agendar-row h3 {
-  margin: 4px 0 0;
-  font-size: 18px;
+/* ===== SECTIONS ===== */
+.agendar-section {
+  margin-top: 18px;
+}
+
+.agendar-section-header {
+  margin-bottom: 10px;
+}
+
+.agendar-section-title {
+  margin: 0;
+  font-size: 16px;
   font-weight: 700;
   color: #3d2c2c;
 }
 
-/* ===== LABEL ===== */
-.agendar-label {
+.agendar-section-sub {
+  font-size: 12px;
+  color: #9b8064;
+}
+
+/* ===== PET CARD ===== */
+.agendar-pet-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 18px 16px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.agendar-pet-left {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.agendar-pet-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  background: #ffe3b3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 20px;
+  color: #5a3810;
+}
+
+.agendar-pet-label {
+  margin: 0;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #a78b6b;
+}
+
+.agendar-pet-name {
+  margin: 2px 0 4px;
+  font-size: 17px;
+  font-weight: 700;
+  color: #3d2c2c;
+}
+
+.agendar-pet-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.agendar-tag {
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #fff5db;
+  color: #8b5a18;
+  border: 1px solid #ffe0a8;
+}
+
+.agendar-pet-right {
+  text-align: right;
+  align-self: center;
+}
+
+.agendar-service-name {
+  margin: 0;
   font-size: 15px;
-  margin-bottom: 10px;
-  display: block;
+  font-weight: 700;
+  color: #3d2c2c;
+}
+
+.agendar-service-chip {
+  margin-top: 4px;
+  display: inline-block;
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #fff1f0;
+  color: #c6533f;
+}
+
+/* ===== INFO GRID (CLÍNICA / HORÁRIOS) ===== */
+.agendar-info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.agendar-info-card {
+  background: #fffdf8;
+  border-radius: 14px;
+  padding: 10px 9px;
+  border: 1px solid #ffe1b5;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.agendar-info-card svg {
+  opacity: 0.9;
+}
+
+.agendar-info-label {
+  margin: 0;
+  color: #a78b6b;
+  font-size: 11px;
+}
+
+.agendar-info-value {
+  margin: 0;
   font-weight: 600;
+  color: #4b2e10;
+  font-size: 12px;
 }
 
 /* ===== INPUT BOX ===== */
 .agendar-input-box {
   display: flex;
   align-items: center;
-  background: #fff;
+  background: #ffffff;
   border-radius: 16px;
-  border: 1.8px solid #ff9e9e;
-  padding: 12px 16px;
-  margin-bottom: 22px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.05);
-  transition: .2s;
+  border: 1.6px solid #ffe0c2;
+  padding: 12px 14px;
+  margin-top: 8px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
+  transition: 0.2s;
+}
+
+.agendar-input-box:focus-within {
+  border-color: #ffb84c;
+  box-shadow: 0 0 0 3px rgba(255, 184, 76, 0.28);
 }
 
 /* INPUT ERROR */
 .agendar-input-error {
-  border: 2px solid #ff5b5b !important;
+  border: 1.8px solid #ff5b5b !important;
   background: #fff0f0;
-  box-shadow: 0 0 0 4px rgba(255, 90, 90, 0.2);
+  box-shadow: 0 0 0 3px rgba(255, 90, 90, 0.22);
 }
 
-/* ===== ICON ===== */
+/* ICON */
 .agendar-icon {
   margin-right: 12px;
   color: #c0841c;
+  flex-shrink: 0;
 }
 
-/* ===== INPUT FIELD ===== */
+/* INPUT WRAPPER */
+.agendar-input-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.agendar-input-label {
+  font-size: 11px;
+  color: #a78b6b;
+  margin-bottom: 2px;
+}
+
+/* INPUT FIELD */
 .agendar-input {
   border: none;
   outline: none;
   width: 100%;
-  font-size: 15px;
+  font-size: 14px;
   background: none;
   color: #3d2c2c;
+}
+
+/* ===== TIME CHIPS ===== */
+.agendar-times {
+  margin-top: 12px;
+}
+
+.agendar-times-label {
+  font-size: 12px;
+  color: #9b8064;
+}
+
+.agendar-times-list {
+  margin-top: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.agendar-time-chip {
+  border-radius: 999px;
+  padding: 6px 12px;
+  border: 1px solid #ffd6a3;
+  background: #fffdf8;
+  font-size: 12px;
+  color: #5a3810;
+  cursor: pointer;
+  transition: 0.18s;
+}
+
+.agendar-time-chip:hover {
+  background: #ffe7bf;
+}
+
+/* ===== TEXTAREA (OBSERVAÇÕES) ===== */
+.agendar-textarea-wrapper {
+  margin-top: 6px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1.4px solid #ffe0c2;
+  padding: 10px 12px;
+  display: flex;
+  gap: 8px;
+}
+
+.agendar-textarea-icon {
+  margin-top: 4px;
+  color: #c0841c;
+}
+
+.agendar-textarea {
+  border: none;
+  outline: none;
+  width: 100%;
+  resize: vertical;
+  font-size: 13px;
+  color: #4b2e10;
+  background: transparent;
 }
 
 /* ===== BUTTON ===== */
 .agendar-btn {
   width: 100%;
-  padding: 16px;
+  margin-top: 22px;
+  padding: 15px;
   background: #ffb84c;
   border: none;
   border-radius: 16px;
   font-weight: 700;
-  font-size: 17px;
+  font-size: 16px;
   color: #fff;
   cursor: pointer;
-  transition: .25s ease;
+  transition: 0.22s ease;
   box-shadow: 0 8px 18px rgba(255, 184, 76, 0.35);
 }
 
@@ -129,52 +324,47 @@
   transform: none;
 }
 
-/* ===== SUCCESS BOX ===== */
-.msg-success {
-  width: 100%;
-  text-align: center;
-  padding: 14px;
-  margin-top: 20px;
-  border-radius: 14px;
-
-  background: #d8ffd1;
-  border: 2px solid #6fc463;
-  color: #2f6f00;
-
-  font-size: 15px;
-  font-weight: 600;
-
-  animation: fadeInUp .3s ease forwards;
-}
-
-/* ===== ERROR BOX ===== */
+/* ===== SUCCESS / ERROR ===== */
+.msg-success,
 .msg-error {
   width: 100%;
   text-align: center;
-  padding: 14px;
-  margin-top: 20px;
+  padding: 13px;
+  margin-top: 16px;
   border-radius: 14px;
+  font-size: 14px;
+  font-weight: 600;
+  animation: fadeInUp 0.2s ease forwards;
+}
 
+.msg-success {
+  background: #d8ffd1;
+  border: 2px solid #6fc463;
+  color: #2f6f00;
+}
+
+.msg-error {
   background: #ffe1e1;
   border: 2px solid #ff7b7b;
   color: #a60000;
-
-  font-size: 15px;
-  font-weight: 600;
-
-  animation: fadeInUp .3s ease forwards;
 }
 
 /* ===== ANIMATION ===== */
 @keyframes fadeInUp {
-  0% { opacity: 0; transform: translateY(8px); }
-  100% { opacity: 1; transform: translateY(0); }
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ===== FOOTER ===== */
 .home-footer-text {
   text-align: center;
-  font-size: 13px;
-  margin-top: 40px;
+  font-size: 12px;
+  margin-top: 26px;
   color: #a1876b;
 }
