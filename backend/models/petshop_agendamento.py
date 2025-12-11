@@ -1,17 +1,20 @@
 from config import db
 from datetime import datetime
 
-class PasseioAgendamento(db.Model):
-    __tablename__ = "passeios_agendamentos"
+class PetShopAgendamento(db.Model):
+    __tablename__ = "petshop_agendamentos"
 
     id = db.Column(db.Integer, primary_key=True)
     pet_id = db.Column(db.Integer, db.ForeignKey("pets.id"), nullable=False)
     servico = db.Column(db.String(120), nullable=False)
     data = db.Column(db.DateTime, nullable=False)
-    observacoes = db.Column(db.Text, nullable=True)  # novo campo
+
+    observacoes = db.Column(db.Text, nullable=True)  # 🔹 novo campo
+    
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-    pet = db.relationship("Pet", backref="passeios_agendamentos")
+    # relação com Pet
+    pet = db.relationship("Pet", backref="petshop_agendamentos")
 
     def to_dict(self):
         return {
