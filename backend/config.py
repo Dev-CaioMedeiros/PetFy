@@ -30,6 +30,22 @@ def init_app():
     # Inicializações
     db.init_app(app)
     bcrypt.init_app(app)
-    CORS(app)
+
+    # CORS: configurável por env var FRONTEND_ORIGINS (comma-separated).
+    # Default permite o frontend de produção e localhosts comuns para dev.
+    origins_env = os.getenv(
+        "FRONTEND_ORIGINS",
+        "https://pet-fy.vercel.app,http://localhost:5173,http://localhost:3000"
+    )
+    origins = [o.strip() for o in origins_env.split(",") if o.strip()]
+
+    CORS(
+        app,
+        resources={r"/api/*": {"origins": origins}},
+        supports_credentials=True,
+        allow_headers=["Content-Type", "Authorization", "X-Requested-With", "Accept"],
+        expose_headers=["Authorization"],
+        methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+    )
 
     return app
