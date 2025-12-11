@@ -48,25 +48,27 @@ with app.app_context():
     try:
         insp = inspect(db.engine)
 
-        # lista de (tabela, coluna) que queremos garantir
+        # lista de (tabela, coluna, tipo_sql) que queremos garantir
+        # tipo_sql será usado quando precisarmos adicionar a coluna
         tabelas_checar = [
-            ("agendamentos", "observacoes"),
-            ("petshop_agendamentos", "observacoes"),
-            ("passeios_agendamentos", "observacoes"),
-            ("vacinas_agendamentos", "observacoes"),
+            ("agendamentos", "observacoes", "TEXT NULL"),
+            ("petshop_agendamentos", "observacoes", "TEXT NULL"),
+            ("passeios_agendamentos", "observacoes", "TEXT NULL"),
+            ("vacinas_agendamentos", "observacoes", "TEXT NULL"),
+            ("petshop_agendamentos", "clinica_id", "INT NULL"),
+            ("petshop_agendamentos", "clinica_nome", "VARCHAR(255) NULL"),
         ]
 
-        for table_name, coluna in tabelas_checar:
+        for table_name, coluna, tipo_sql in tabelas_checar:
             try:
                 if table_name in insp.get_table_names():
                     colunas = [c["name"] for c in insp.get_columns(table_name)]
                     if coluna not in colunas:
                         try:
-                            db.session.execute(
-                                text(f"ALTER TABLE {table_name} ADD COLUMN {coluna} TEXT NULL")
-                            )
+                            sql = f"ALTER TABLE {table_name} ADD COLUMN {coluna} {tipo_sql}"
+                            db.session.execute(text(sql))
                             db.session.commit()
-                            print(f"✅ Coluna '{coluna}' adicionada em {table_name}")
+                            print(f"✅ Coluna '{coluna}' adicionada em {table_name} ({tipo_sql})")
                         except Exception as e:
                             db.session.rollback()
                             print(f"⚠️ Erro ao adicionar coluna '{coluna}' em {table_name}: {e}")
