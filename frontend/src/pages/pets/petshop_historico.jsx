@@ -8,7 +8,7 @@ import "../../styles/pets/petshop_historico.css";
 export default function PetShopHistorico() {
   const navigate = useNavigate();
   const [agendamentos, setAgendamentos] = useState([]);
-  const [filtro, setFiltro] = useState("todos"); // todos | futuro | passado
+  const [filtro, setFiltro] = useState("todos"); 
   const [loading, setLoading] = useState(false);
   const [msg, setMsg] = useState("");
 
