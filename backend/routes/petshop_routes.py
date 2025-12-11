@@ -8,6 +8,17 @@ import traceback
 
 petshop_routes = Blueprint("petshop_routes", __name__)
 
+from flask import Blueprint, request, jsonify, current_app
+from config import db
+from models.petshop_agendamento import PetShopAgendamento
+from models.pet import Pet
+from models.clinica import Clinica
+from utils.jwt_helper import token_required
+from datetime import datetime
+import traceback
+
+petshop_routes = Blueprint("petshop_routes", __name__)
+
 # -------------------------------------------------
 # CRIAR AGENDAMENTO
 # -------------------------------------------------
@@ -20,6 +31,7 @@ def criar_agendamento(usuario_id):
     servico = data.get("servico")
     data_agendamento = data.get("data")
     observacoes = data.get("observacoes")
+    clinica_id = data.get("clinica_id")  # opcional
 
     if not pet_id:
         return jsonify({"mensagem": "pet_id é obrigatório"}), 400
@@ -40,12 +52,26 @@ def criar_agendamento(usuario_id):
     if not pet:
         return jsonify({"mensagem": "Pet não encontrado ou não pertence ao usuário"}), 404
 
+    # tenta obter nome da clínica (se foi enviado clinica_id)
+    clinica_nome = None
+    if clinica_id:
+        c = Clinica.query.get(clinica_id)
+        if c:
+            clinica_nome = c.nome
+
+    # se nenhum clinica_nome e tiver uma clinica default no banco, tenta pegar
+    if not clinica_nome:
+        c_first = Clinica.query.first()
+        clinica_nome = c_first.nome if c_first else None
+
     try:
         novo = PetShopAgendamento(
             pet_id=pet_id,
             servico=servico,
             data=data_agendamento,
-            observacoes=observacoes
+            observacoes=observacoes,
+            clinica_id=clinica_id,
+            clinica_nome=clinica_nome
         )
 
         db.session.add(novo)
@@ -86,7 +112,6 @@ def listar_petshop(usuario_id):
     except Exception as e:
         current_app.logger.error("Erro listar_petshop: %s\n%s", str(e), traceback.format_exc())
         return jsonify({"mensagem": "Erro ao listar agendamentos", "erro": str(e)}), 500
-
 
 # -------------------------------------------------
 # DELETAR MEU AGENDAMENTO
