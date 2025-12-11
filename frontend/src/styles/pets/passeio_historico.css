@@ -1,43 +1,96 @@
-/* HISTÓRICO - layout unificado para cards */
-.historico-container {
+/* passeios_historico.css
+   Mesmo visual do petshop_historico (mesmas larguras, fontes e comportamento responsivo)
+*/
+
+/* container geral - mesma estrutura do psh */
+.psa-container {
   min-height: 100vh;
   width: 100%;
   background: #fff7ec;
-  padding: 18px;
+  padding: 20px 18px 28px;
   font-family: "Poppins", sans-serif;
   color: #4e2c00;
+
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
+  align-items: center; /* centraliza conteúdo horizontalmente */
   box-sizing: border-box;
 }
 
-.historico-content {
+/* conteúdo central com limite */
+.psa-content {
   width: 100%;
-  max-width: 640px;
+  max-width: 640px; /* mesmo limite do petshop/agendar */
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+  box-sizing: border-box;
+  padding-bottom: 24px;
 }
 
 /* header */
-.historico-header { display:flex; gap:12px; align-items:center; margin-bottom:8px; width:100%; }
-.historico-back { background:none; border:none; color:#c0841c; font-weight:600; cursor:pointer; }
-.historico-title { margin:0; font-size:24px; font-weight:800; color:#3d2c2c; }
+.psa-header {
+  display:flex;
+  gap:12px;
+  align-items:center;
+  margin-bottom:16px;
+  width:100%;
+}
+.psa-back {
+  background:none;
+  border:none;
+  color:#c0841c;
+  font-weight:600;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+.psa-title {
+  margin:0;
+  font-size:24px; /* igual ao agendar e petshop */
+  font-weight:800;
+  color:#3d2c2c;
+}
 
-/* filtros */
-.historico-filters { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px; width:100%; }
-.historico-filter-chip { padding:6px 12px; border-radius:999px; border:1px solid #ffd9a7; background:#fffdf8; color:#7a5732; cursor:pointer; }
-.historico-filter-chip.active { background:#ffb84c; border-color:#ffb84c; color:#fff; box-shadow:0 4px 10px rgba(255,184,76,0.25); }
+/* filtros (chips) */
+.psa-filters {
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:12px;
+  width:100%;
+}
+.psa-chip {
+  padding:6px 12px;
+  border-radius:999px;
+  border:1px solid #ffd9a7;
+  background:#fffdf8;
+  color:#7a5732;
+  cursor:pointer;
+  font-size:14px;
+}
+.psa-chip.active {
+  background:#ffb84c;
+  border-color:#ffb84c;
+  color:#fff;
+  box-shadow:0 4px 10px rgba(255,184,76,0.25);
+}
 
 /* lista */
-.historico-list { display:flex; flex-direction:column; gap:12px; margin-top:8px; width:100%; }
-.historico-empty, .historico-loading { color:#9b8064; }
+.psa-list {
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  margin-top:8px;
+  width:100%;
+}
+.psa-empty, .psa-loading {
+  color:#9b8064;
+  font-size:14px;
+}
 
 /* card */
-.historico-card {
-  position: relative;
+.psa-card {
   display:flex;
   border-radius:14px;
   background:#fff;
@@ -46,33 +99,79 @@
   width:100%;
   box-sizing:border-box;
 }
+.psa-bar {
+  width:6px;
+}
+.psa-bar.futuro { background:#2fb67c; }
+.psa-bar.passado { background:#4d7cff; }
+.psa-bar.cancelado { background:#ff6b6b; }
 
-.historico-card-status-bar { width:6px; }
-.historico-card-status-bar.status-futuro, .status-futuro { background:#2fb67c; }
-.historico-card-status-bar.status-passado, .status-passado { background:#4d7cff; }
-.historico-card-status-bar.status-cancelado, .status-cancelado { background:#ff6b6b; }
+.psa-main {
+  flex:1;
+  padding:12px 14px;
+}
+.psa-card-header {
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:8px;
+  margin-bottom:6px;
+}
+.psa-card-title {
+  margin:0 0 4px;
+  font-size:15px; /* idêntico ao petshop/consulta */
+  font-weight:700;
+  color:#3d2c2c;
+}
+.psa-status {
+  padding:4px 8px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:600;
+}
+.psa-status.futuro { background:#e4ffef; color:#157b4c; }
+.psa-status.passado { background:#e5ecff; color:#2748b5; }
+.psa-status.cancelado { background:#ffe4e4; color:#b51f1f; }
 
-.historico-card-main { flex:1; padding:12px 14px; }
-.historico-card-header { display:flex; justify-content:space-between; align-items:flex-start; gap:8px; margin-bottom:6px; }
-.historico-card-title { margin:0 0 4px; font-size:15px; font-weight:700; color:#3d2c2c; }
-.historico-status-chip { padding:4px 8px; border-radius:999px; font-size:11px; font-weight:600; }
-.historico-status-chip.status-futuro { background:#e4ffef; color:#157b4c; }
-.historico-status-chip.status-passado { background:#e5ecff; color:#2748b5; }
-.historico-status-chip.status-cancelado { background:#ffe4e4; color:#b51f1f; }
+.psa-delete {
+  background:none;
+  border:none;
+  cursor:pointer;
+  color:#d8664f;
+}
 
-.historico-delete-btn { background:none; border:none; cursor:pointer; color:#d8664f; }
+/* linhas de info (data, pet, walker, local) */
+.psa-row {
+  display:flex;
+  gap:8px;
+  align-items:center;
+  color:#6b4a26;
+  font-size:13px; /* igual ao petshop */
+  margin-top:6px;
+}
 
-.historico-card-info-row { display:flex; gap:8px; align-items:center; color:#6b4a26; font-size:13px; margin-top:6px; }
-.historico-card-info-row svg { opacity:0.9; }
+/* observações */
+.psa-obs {
+  margin-top:8px;
+  border-top:1px dashed #f0d6b3;
+  padding-top:6px;
+}
+.psa-obs-label {
+  display:block;
+  font-size:11px;
+  color:#a78b6b;
+  text-transform:uppercase;
+}
+.psa-obs-text {
+  margin:4px 0 0;
+  color:#4b2e10;
+  font-size:13px;
+}
 
-.historico-card-observacoes { margin-top:8px; border-top:1px dashed #f0d6b3; padding-top:8px; }
-.historico-observacoes-label { display:block; font-size:11px; color:#a78b6b; text-transform:uppercase; }
-.historico-observacoes-text { margin:4px 0 0; color:#4b2e10; font-size:13px; }
-
-/* botão voltar ao início */
-.historico-home-btn {
+/* botão voltar ao início - alinhado e largura limitada */
+.psa-home {
   width:100%;
-  margin-top:18px;
+  margin-top:20px;
   padding:14px;
   background:#ffb84c;
   color:#fff;
@@ -81,17 +180,33 @@
   font-weight:700;
   cursor:pointer;
   box-shadow:0 8px 18px rgba(255,184,76,0.35);
-  max-width:640px;
-  margin-left:auto;
-  margin-right:auto;
+
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.psa-home:hover { background:#ff9907; transform:translateY(-1px); }
+
+/* footer */
+.psa-footer { text-align:center; color:#a1876b; margin-top:20px; font-size:12px; }
+
+/* pequenas melhorias: limite de largura para cards (consistência) */
+.psa-card, .psa-list {
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.historico-home-btn:hover { background:#ff9907; transform:translateY(-1px); }
-
-.historico-footer { text-align:center; color:#a1876b; margin-top:20px; font-size:12px; }
-
-/* responsividade */
+/* MOBILE */
 @media (max-width: 520px) {
-  .historico-content { padding-left:12px; padding-right:12px; max-width:100%; }
-  .historico-title { font-size:20px; }
+  .psa-content {
+    padding-left: 12px;
+    padding-right: 12px;
+    gap: 12px;
+    max-width: 100%;
+  }
+
+  .psa-title { font-size:20px; }
 }
