@@ -20,6 +20,7 @@ def criar_agendamento(usuario_id):
     pet_id = data.get("pet_id")
     data_agendamento = data.get("data")
     descricao = data.get("descricao", "")
+    observacoes = data.get("observacoes")  # 🔹 NOVO
 
     if not clinica_id:
         return jsonify({"mensagem": "clinica_id é obrigatório"}), 400
@@ -32,7 +33,7 @@ def criar_agendamento(usuario_id):
         
     try:
         data_agendamento = datetime.fromisoformat(data_agendamento)
-    except:
+    except Exception:
         return jsonify({"mensagem": "Formato de data inválido"}), 400
 
     try:
@@ -40,7 +41,8 @@ def criar_agendamento(usuario_id):
             clinica_id=clinica_id,
             pet_id=pet_id,
             data_agendamento=data_agendamento,
-            descricao=descricao
+            descricao=descricao,
+            observacoes=observacoes  # 🔹 NOVO
         )
 
         db.session.add(novo)
@@ -72,7 +74,9 @@ def listar_consultas(usuario_id):
             "id": a.id,
             "descricao": a.descricao,
             "data": a.data_agendamento.isoformat(),
-            "pet_nome": a.pet.nome
+            "pet_nome": a.pet.nome if a.pet else None,
+            "clinica_nome": a.clinica.nome if a.clinica else "Clínica PetFy",
+            "observacoes": a.observacoes,  # 🔹 NOVO
         }
         for a in agendamentos
     ]), 200
