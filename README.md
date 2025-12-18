@@ -46,7 +46,6 @@ PetFy/
 │   ├── utils/             
 │   ├── app.py             
 │   ├── config.py           
-
 │
 ├── frontend/
 │   ├── dist/               
