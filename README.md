@@ -51,7 +51,7 @@ PetFy/
 │   ├── Procfile
 │   ├── requirements.txt
 │   └── sitecustomize.py
-│
+
 ├── frontend/
 │   ├── dist/
 │   ├── node_modules/
