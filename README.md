@@ -40,47 +40,32 @@ O projeto segue o padrão de separação de responsabilidades:
 
 PetFy/
 ├── backend/
-│   ├── uploads/            # Arquivos e imagens enviados
-│   ├── utils/              # Funções utilitárias
-│   ├── .env                # Variáveis de ambiente
-│   ├── .gitignore          # Arquivos ignorados pelo Git
-│   ├── app.py              # Arquivo principal da aplicação Flask
-│   ├── config.py           # Configurações gerais do projeto
-│   ├── package.json        # Dependências (caso use scripts auxiliares)
-│   ├── package-lock.json   # Controle de versões das dependências
-│   ├── Procfile            # Configuração para deploy (ex: Heroku)
-│   ├── requirements.txt    # Dependências Python
-│   └── sitecustomize.py    # Configurações adicionais do ambiente Python
+│   ├── models/
+│   ├── routes/      
+│   ├── uploads/            
+│   ├── utils/             
+│   ├── app.py             
+│   ├── config.py           
+
 │
 ├── frontend/
-│   ├── dist/               # Build final do frontend
-│   ├── node_modules/       # Dependências do frontend
-│   ├── public/             # Arquivos públicos
+│   ├── dist/               
+│   ├── node_modules/       
+│   ├── public/         
 │   ├── src/
-│   │   ├── assets/         # Imagens e recursos estáticos
-│   │   ├── components/     # Componentes reutilizáveis
-│   │   ├── pages/          # Páginas da aplicação
-│   │   │   ├── home/       # Página inicial
-│   │   │   ├── pets/       # Páginas relacionadas aos pets
-│   │   │   └── user/       # Páginas relacionadas ao usuário
-│   │   ├── services/       # Serviços de comunicação com a API
-│   │   ├── styles/         # Estilos globais e específicos
-│   │   ├── App.jsx         # Componente raiz da aplicação
-│   │   ├── main.jsx        # Ponto de entrada do React
-│   │   └── index.css       # Estilos globais
-│   │
-│   ├── .env                # Variáveis de ambiente do frontend
-│   ├── .gitignore          # Arquivos ignorados pelo Git
-│   ├── eslint.config.js    # Configuração do ESLint
-│   ├── index.html          # Template HTML principal
-│   ├── package.json        # Dependências do frontend
-│   ├── package-lock.json   # Controle de versões
-│   ├── postcss.config.js   # Configuração do PostCSS
-│   ├── tailwind.config.js  # Configuração do Tailwind CSS
-│   ├── vercel.json         # Configuração de deploy (Vercel)
-│   └── vite.config.js      # Configuração do Vite
-│
-└── README.md               # Documentação do projeto
+│   │   ├── assets/        
+│   │   ├── components/     
+│   │   ├── pages/          
+│   │   │   ├── home/     
+│   │   │   ├── pets/       
+│   │   │   └── user/      
+│   │   ├── services/       
+│   │   ├── styles/         
+│   │   ├── App.jsx         
+│   │   ├── main.jsx        
+│   │   └── index.css       
+│   |    
+└── README.md               
 
 ---
 
