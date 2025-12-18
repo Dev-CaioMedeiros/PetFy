@@ -40,31 +40,49 @@ O projeto segue o padrão de separação de responsabilidades:
 
 PetFy/
 ├── backend/
-│   ├── models/
-│   ├── routes/      
-│   ├── uploads/            
-│   ├── utils/             
-│   ├── app.py             
-│   ├── config.py           
+│   ├── uploads/
+│   ├── utils/
+│   ├── .env
+│   ├── .gitignore
+│   ├── app.py
+│   ├── config.py
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── Procfile
+│   ├── requirements.txt
+│   └── sitecustomize.py
 │
 ├── frontend/
-│   ├── dist/               
-│   ├── node_modules/       
-│   ├── public/         
+│   ├── dist/
+│   ├── node_modules/
+│   ├── public/
 │   ├── src/
-│   │   ├── assets/        
-│   │   ├── components/     
-│   │   ├── pages/          
-│   │   │   ├── home/     
-│   │   │   ├── pets/       
-│   │   │   └── user/      
-│   │   ├── services/       
-│   │   ├── styles/         
-│   │   ├── App.jsx         
-│   │   ├── main.jsx        
-│   │   └── index.css       
-│   |    
-└── README.md               
+│   │   ├── assets/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   │   ├── home/
+│   │   │   ├── pets/
+│   │   │   └── user/
+│   │   ├── services/
+│   │   ├── styles/
+│   │   ├── App.jsx
+│   │   ├── main.jsx
+│   │   └── index.css
+│   │
+│   ├── .env
+│   ├── .gitignore
+│   ├── eslint.config.js
+│   ├── index.html
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── postcss.config.js
+│   ├── README.md
+│   ├── tailwind.config.js
+│   ├── vercel.json
+│   └── vite.config.js
+│
+└── README.md
+      
 
 ---
 
