@@ -39,6 +39,7 @@ O projeto foi desenvolvido com foco em consolidar conhecimentos em desenvolvimen
 O projeto segue o padrão de separação de responsabilidades:
 
 PetFy/
+
 ├── backend/
 │   ├── uploads/
 │   ├── utils/
